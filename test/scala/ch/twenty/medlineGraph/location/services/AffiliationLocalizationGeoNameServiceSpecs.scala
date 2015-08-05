@@ -28,15 +28,18 @@ class AffiliationLocalizationGeoNameServiceSpecs extends Specification with Loca
 
 
     """College of Physicians and Surgeons, Columbia University, Shīnḏanḏ, Lebanon.""" in {
-        val tLoc = service.locate(AffiliationInfoParser("College of Physicians and Surgeons, Columbia University, Shīnḏanḏ, Lebanon").get)
-        tLoc must beAFailedTry
-    }
-
-    """unparsable""" in {
-      val tLoc = service.locate(AffiliationInfoParser("unparsable").get)
+      val tLoc = service.locate(AffiliationInfoParser("College of Physicians and Surgeons, Columbia University, Shīnḏanḏ, Lebanon").get)
       tLoc must beAFailedTry
     }
 
+
+
+    """locate a list""" in {
+      val affs = List("College of Physicians and Surgeons, Columbia University, Shīnḏanḏ, Lebanon", "College of Physicians and Surgeons, Columbia University, New York City, NY, USA.")
+      .map(x => AffiliationInfoParser(x).get)
+      val locations = service.locate(affs)
+      locations.map(_.isSuccess) must beEqualTo(List(false, true))
+    }
 
   }
 }

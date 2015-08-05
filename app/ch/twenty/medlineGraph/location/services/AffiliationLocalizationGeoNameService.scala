@@ -13,7 +13,7 @@ import scala.util.{Failure, Try}
  * @author Alexandre Masselot.
  */
 
-case class UnavailableCityCountryExcpetion(affiliationInfo: AffiliationInfo) extends Exception(affiliationInfo.orig)
+case class UnavailableCityCountryException(affiliationInfo: AffiliationInfo) extends Exception(affiliationInfo.orig)
 
 /**
  *
@@ -21,7 +21,9 @@ case class UnavailableCityCountryExcpetion(affiliationInfo: AffiliationInfo) ext
  * @param coutryFilename
  * @param alternatenamesFilename
  */
-class AffiliationLocalizationGeoNameService(cityFilename: String = "resources/cities15000.txt", coutryFilename: String = "resources/countryInfo.txt", alternatenamesFilename: String = "resources/alternateNames.txt") {
+class AffiliationLocalizationGeoNameService(cityFilename: String = "resources/cities15000.txt",
+                                            coutryFilename: String = "resources/countryInfo.txt",
+                                            alternatenamesFilename: String = "resources/alternateNames.txt") extends AffiliationLocalizationService {
   val alternateNameDirectory = AlternateNameDirectory.load(alternatenamesFilename)
   val countryDir = CountryDirectory.load(coutryFilename, alternateNameDirectory)
   val cityDir = CityDirectory.load(cityFilename, countryDir)
@@ -33,6 +35,6 @@ class AffiliationLocalizationGeoNameService(cityFilename: String = "resources/ci
    */
   def locate(affiliationInfo: AffiliationInfo): Try[Location] = (affiliationInfo.city, affiliationInfo.country) match {
     case (Some(city), Some(country)) => cityDir(city, country)
-    case _ => Failure(UnavailableCityCountryExcpetion(affiliationInfo))
+    case _ => Failure(UnavailableCityCountryException(affiliationInfo))
   }
 }
