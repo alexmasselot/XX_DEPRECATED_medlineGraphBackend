@@ -50,6 +50,8 @@ object AffiliationInfoParser {
     reHeadNumber.replaceFirstIn(strB, "")
   }
 
+  def firstSentence(affiliationInfo: AffiliationInfo):String = firstSentence(affiliationInfo.orig)
+
   def cleanName(name:String):String ={
     val reSuffix = """[\-\s\d]+(\-[A-Z]{1,2})?$""".r
     val rePrefix = """^([A-Z]{1,2})?[\-\s\d]+""".r
