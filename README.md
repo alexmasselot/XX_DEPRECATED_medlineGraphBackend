@@ -12,14 +12,22 @@ Distant collaborations can therefore be tagged when authors are not affiliated t
 ftp://ftp.nlm.nih.gov/nlmdata/.medlease/gz
 
 ## Geo location
-Several solutions do exist. 
+Several solutions do exist. We used two of them:
 
- * Google [Geocoding API](https://developers.google.com/maps/documentation/geocoding/intro) might certainly be the most comfortable way to link textual adress to coordinates. Unfortunately, some limit on the API prevented its direct use for the project.
- * [www.findlatitudeandlongitude.com/batch-geocode](http://www.findlatitudeandlongitude.com/batch-geocode/) is free but not really batch oriented
- * [mapquest](https://developer.mapquest.com/products/geocoding/) offers a batch possibility, but I cannot activate a key
+ * [Geonames](http://www.geonames.org/) project provides a *"geographical database covers all countries and contains over eight million placenames that are available for download free of charge"*, under a Creative Commons 3 License.
+ * [mapquest](https://developer.mapquest.com/products/geocoding/) offers a batch possibility with a textual fields. It is used for affiliation not resolved by the first method
 
-The [Geonames](http://www.geonames.org/) project provides a *"geographical database covers all countries and contains over eight million placenames that are available for download free of charge"*, under a Creative Commons 3 License.
+#Setting up the application
+
+
 
 #Authors
 
 Alexandre Masselot
+
+
+#LICENSE
+
+##Third parties
+
+  * data provided by www.geonames.org is license under Collective Commons v3. Thanks to them

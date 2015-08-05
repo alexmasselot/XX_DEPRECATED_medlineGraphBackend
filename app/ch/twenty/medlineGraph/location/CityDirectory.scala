@@ -15,9 +15,6 @@ case class NoCityLocationException(city: City, country: Country) extends Excepti
 
 case class MultipleCityLocationException(city: City, country: Country, n: Int) extends Exception(s"[${city.value}], [${country.value}] ($n matches)")
 
-case class CityLocation(city: City, country: Country, coordinates: GeoCoordinates) {
-
-}
 
 case class CityRecord(id: GeoNameId, city: City, countryCode: CountryInfoIso, coordinates: GeoCoordinates)
 
@@ -35,23 +32,23 @@ class CityDirectory(records: Seq[CityRecord], countryDirectory: CountryDirectory
 
   def exists(city: City) = cityDict.get(CityDirectory.projectCity(city)).isDefined
 
-  def getUniqueFromCityAndUnknownCountry(city: City, country: Country): Try[CityLocation] = {
+  def getUniqueFromCityAndUnknownCountry(city: City, country: Country): Try[Location] = {
     (cityDict.get(CityDirectory.projectCity(city)), countryDirectory.countryExists(country)) match {
       case (Some(rec :: Nil), false) =>
-        Success(CityLocation(rec.city, naCountry, rec.coordinates))
+        Success(Location(rec.city, naCountry, rec.coordinates))
       case _ => Failure(new Exception())
     }
   }
 
-  def getDirectFromCityCountryDirect(city: City, country: Country): Try[CityLocation] = cityDict.get(CityDirectory.projectCity(city)) match {
+  def getDirectFromCityCountryDirect(city: City, country: Country): Try[Location] = cityDict.get(CityDirectory.projectCity(city)) match {
     case Some(records) => records.filter(r => countryDirectory.get(r.countryCode).map(_.country == country).getOrElse(false)) match {
-      case (rec :: Nil) => Success(CityLocation(rec.city, country, rec.coordinates))
+      case (rec :: Nil) => Success(Location(rec.city, country, rec.coordinates))
       case _ => Failure(new Exception())
     }
     case _ => Failure(new Exception())
   }
 
-  def getDirectFromCityIsCountry(city: City, country: Country): Try[CityLocation] = {
+  def getDirectFromCityIsCountry(city: City, country: Country): Try[Location] = {
     val cityCountry = City(country.value)
     if (exists(cityCountry)) {
       getDirectFromCityCountryDirect(cityCountry, country)
@@ -60,7 +57,7 @@ class CityDirectory(records: Seq[CityRecord], countryDirectory: CountryDirectory
     }
   }
 
-  def getDirectFromCityCountrySynonymous(city: City, country: Country): Try[CityLocation] = {
+  def getDirectFromCityCountrySynonymous(city: City, country: Country): Try[Location] = {
     val matchCity = CityDirectory.projectCity(city)
 
     val potentialRecords = cityDict.get(matchCity) match {
@@ -77,15 +74,15 @@ class CityDirectory(records: Seq[CityRecord], countryDirectory: CountryDirectory
 
     potentialCityRecords match {
       case Nil => Failure(NoCityLocationException(city, country))
-      case (x :: Nil) => Success(CityLocation(x._1.city, country, x._1.coordinates))
+      case (x :: Nil) => Success(Location(x._1.city, country, x._1.coordinates))
       case (x :: xs) => Failure(MultipleCityLocationException(x._1.city, country, xs.size + 1))
     }
   }
 
-  def getFromCityCountry(city: City, country: Country): Try[CityLocation] = {
+  def getFromCityCountry(city: City, country: Country): Try[Location] = {
     val lFunct = List(getUniqueFromCityAndUnknownCountry _, getDirectFromCityCountryDirect _, getDirectFromCityIsCountry _, getDirectFromCityCountrySynonymous _)
 
-    def getFromCityCountryHandler(fStill: List[(City, Country) => Try[CityLocation]]): Try[CityLocation] = fStill match {
+    def getFromCityCountryHandler(fStill: List[(City, Country) => Try[Location]]): Try[Location] = fStill match {
       case f :: Nil => f(city, country)
       case f :: fs => f(city, country) match {
         case Success(r) => Success(r)
@@ -104,7 +101,7 @@ class CityDirectory(records: Seq[CityRecord], countryDirectory: CountryDirectory
    * @param country the target country
    * @return Failure will carry info about no or multi matches
    */
-  def apply(city: City, country: Country): Try[CityLocation] = {
+  def apply(city: City, country: Country): Try[Location] = {
     getFromCityCountry(city, country) match {
       case Success(loc) => Success(loc)
       case Failure(e) => {
