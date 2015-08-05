@@ -13,7 +13,8 @@ import scala.xml.{XML, Node}
  */
 
 
-class MedlineXMLLoader(filename:String) {
+class MedlineXMLLoader(filename: String) {
+
 
   /**
    * get a dtd parser without relying on the DTD file. If no network is available, the default one cannot proceed
@@ -23,27 +24,41 @@ class MedlineXMLLoader(filename:String) {
     val f = javax.xml.parsers.SAXParserFactory.newInstance()
     f.setValidating(false)
     f.newSAXParser()
-
   }
 
-  def getDoc = {
-    if(filename.endsWith(".gz")){
-      XML.load(new GZIPInputStream(new BufferedInputStream(new FileInputStream(filename))))
-    }else {
-      XML.loadFile(filename)
+  def getInputSteam = {
+    if (filename.endsWith(".gz")) {
+      new GZIPInputStream(new BufferedInputStream(new FileInputStream(filename)))
+    } else {
+      new FileInputStream(filename)
     }
   }
+
+  def getDoc =
+    xml.XML.withSAXParser(dtdLessParser).load(getInputSteam)
+//
+//
+//  try {
+//    XML.load(getInputSteam)
+//  } catch {
+//    case _:Throwable => try {
+//      xml.XML.withSAXParser(dtdLessParser).load(getInputSteam)
+//    } catch {
+//      case e: java.net.UnknownHostException => xml.XML.withSAXParser(dtdLessParser).load(getInputSteam)
+//      case e:Throwable => throw e
+//    }
+//  }
 
   /**
    * get the list of MedlineCitation xml nodes
    * @return
    */
-  def iteratorCitation:Iterator[Node]={
+  def iteratorCitation: Iterator[Node] = {
     val doc = getDoc
 
     //val doc = xml.XML.withSAXParser(dtdLessParser).load(filename)
 
-    val it = (doc \ "PubmedArticle" \ "MedlineCitation")  ++ (doc \ "MedlineCitation")
+    val it = (doc \ "PubmedArticle" \ "MedlineCitation") ++ (doc \ "MedlineCitation")
     it.iterator
   }
 }

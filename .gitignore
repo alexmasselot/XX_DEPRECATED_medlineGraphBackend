@@ -90,5 +90,5 @@ project/boot/
 .cache
 
 
-
+resources/*.txt
 tmp

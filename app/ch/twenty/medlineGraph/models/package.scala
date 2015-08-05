@@ -6,6 +6,7 @@ package ch.twenty.medlineGraph
  * Created by amasselo on 7/24/15.
  */
 package object models {
+
   case class PubmedId(value:String) extends AnyVal
 
   case class LastName(value:String) extends AnyVal
@@ -18,7 +19,7 @@ package object models {
 
   case class Author(lastName:LastName, foreName:ForeName, initials:Initials, affiliation:Option[AffiliationInfo])
 
-  case class AffiliationInfo(institution: Option[Institution], city: Option[City], country: Option[Country])
+  case class AffiliationInfo(orig:String, institution: Option[Institution], city: Option[City], country: Option[Country])
 
   case class Citation(pubmedId: PubmedId, authors:Seq[Author])
 }

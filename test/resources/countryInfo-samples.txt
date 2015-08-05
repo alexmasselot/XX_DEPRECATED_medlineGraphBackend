@@ -1,0 +1,106 @@
+# GeoNames.org Country Information																		
+# ================================																		
+#																		
+#																		
+# CountryCodes:																		
+# ============																		
+#																		
+# The official ISO country code for the United Kingdom is 'GB'. The code 'UK' is reserved.																		
+# 																		
+# A list of dependent countries is available here:																		
+# https://spreadsheets.google.com/ccc?key=pJpyPy-J5JSNhe7F_KxwiCA&hl=en 																		
+#																		
+#																		
+# The countrycode XK temporarily stands for Kosvo:																		
+# http://geonames.wordpress.com/2010/03/08/xk-country-code-for-kosovo/																		
+#																		
+#																		
+# CS (Serbia and Montenegro) with geonameId = 863038 no longer exists.																		
+# AN (the Netherlands Antilles) with geonameId = 3513447  was dissolved on 10 October 2010.																		
+#																		
+#																		
+# Currencies :																		
+# ============																		
+#																		
+# A number of territories are not included in ISO 4217, because their currencies are not per se an independent currency, 																		
+# but a variant of another currency. These currencies are:																		
+#																		
+# 1. FO : Faroese krona (1:1 pegged to the Danish krone)																		
+# 2. GG : Guernsey pound (1:1 pegged to the pound sterling)																		
+# 3. JE : Jersey pound (1:1 pegged to the pound sterling)																		
+# 4. IM : Isle of Man pound (1:1 pegged to the pound sterling)																		
+# 5. TV : Tuvaluan dollar (1:1 pegged to the Australian dollar).																		
+# 6. CK : Cook Islands dollar (1:1 pegged to the New Zealand dollar).																		
+#																		
+# The following non-ISO codes are, however, sometimes used: GGP for the Guernsey pound, 																		
+# JEP for the Jersey pound and IMP for the Isle of Man pound (http://en.wikipedia.org/wiki/ISO_4217)																		
+#																		
+#																		
+# A list of currency symbols is available here : http://forum.geonames.org/gforum/posts/list/437.page																		
+# another list with fractional units is here: http://forum.geonames.org/gforum/posts/list/1961.page																		
+#																		
+#																		
+# Languages :																		
+# ===========																		
+#																		
+# The column 'languages' lists the languages spoken in a country ordered by the number of speakers. The language code is a 'locale' 																		
+# where any two-letter primary-tag is an ISO-639 language abbreviation and any two-letter initial subtag is an ISO-3166 country code.																		
+#																		
+# Example : es-AR is the Spanish variant spoken in Argentina.																		
+#																		
+#ISO	ISO3	ISO-Numeric	fips	Country	Capital	Area(in sq km)	Population	Continent	tld	CurrencyCode	CurrencyName	Phone	Postal Code Format	Postal Code Regex	Languages	geonameid	neighbours	EquivalentFipsCode
+AD	AND	020	AN	Andorra	Andorra la Vella	468	84000	EU	.ad	EUR	Euro	376	AD###	^(?:AD)*(\d{3})$	ca	3041565	ES,FR	
+AE	ARE	784	AE	United Arab Emirates	Abu Dhabi	82880	4975593	AS	.ae	AED	Dirham	971			ar-AE,fa,en,hi,ur	290557	SA,OM	
+AF	AFG	004	AF	Afghanistan	Kabul	647500	29121286	AS	.af	AFN	Afghani	93			fa-AF,ps,uz-AF,tk	1149361	TM,CN,IR,TJ,PK,UZ	
+AG	ATG	028	AC	Antigua and Barbuda	St. John's	443	86754	NA	.ag	XCD	Dollar	+1-268			en-AG	3576396		
+AI	AIA	660	AV	Anguilla	The Valley	102	13254	NA	.ai	XCD	Dollar	+1-264			en-AI	3573511		
+AL	ALB	008	AL	Albania	Tirana	28748	2986952	EU	.al	ALL	Lek	355			sq,el	783754	MK,GR,ME,RS,XK	
+AM	ARM	051	AM	Armenia	Yerevan	29800	2968000	AS	.am	AMD	Dram	374	######	^(\d{6})$	hy	174982	GE,IR,AZ,TR	
+AO	AGO	024	AO	Angola	Luanda	1246700	13068161	AF	.ao	AOA	Kwanza	244			pt-AO	3351879	CD,NA,ZM,CG	
+AQ	ATA	010	AY	Antarctica		14000000	0	AN	.aq							6697173		
+AR	ARG	032	AR	Argentina	Buenos Aires	2766890	41343201	SA	.ar	ARS	Peso	54	@####@@@	^([A-Z]\d{4}[A-Z]{3})$	es-AR,en,it,de,fr,gn	3865483	CL,BO,UY,PY,BR	
+AS	ASM	016	AQ	American Samoa	Pago Pago	199	57881	OC	.as	USD	Dollar	+1-684			en-AS,sm,to	5880801		
+AT	AUT	040	AU	Austria	Vienna	83858	8205000	EU	.at	EUR	Euro	43	####	^(\d{4})$	de-AT,hr,hu,sl	2782113	CH,DE,HU,SK,CZ,IT,SI,LI	
+AU	AUS	036	AS	Australia	Canberra	7686850	21515754	OC	.au	AUD	Dollar	61	####	^(\d{4})$	en-AU	2077456		
+AW	ABW	533	AA	Aruba	Oranjestad	193	71566	NA	.aw	AWG	Guilder	297			nl-AW,es,en	3577279		
+AX	ALA	248		Aland Islands	Mariehamn	1580	26711	EU	.ax	EUR	Euro	+358-18	#####	^(?:FI)*(\d{5})$	sv-AX	661882		FI
+AZ	AZE	031	AJ	Azerbaijan	Baku	86600	8303512	AS	.az	AZN	Manat	994	AZ ####	^(?:AZ)*(\d{4})$	az,ru,hy	587116	GE,IR,AM,TR,RU	
+BA	BIH	070	BK	Bosnia and Herzegovina	Sarajevo	51129	4590000	EU	.ba	BAM	Marka	387	#####	^(\d{5})$	bs,hr-BA,sr-BA	3277605	HR,ME,RS	
+BB	BRB	052	BB	Barbados	Bridgetown	431	285653	NA	.bb	BBD	Dollar	+1-246	BB#####	^(?:BB)*(\d{5})$	en-BB	3374084		
+BD	BGD	050	BG	Bangladesh	Dhaka	144000	156118464	AS	.bd	BDT	Taka	880	####	^(\d{4})$	bn-BD,en	1210997	MM,IN	
+BE	BEL	056	BE	Belgium	Brussels	30510	10403000	EU	.be	EUR	Euro	32	####	^(\d{4})$	nl-BE,fr-BE,de-BE	2802361	DE,NL,LU,FR	
+BF	BFA	854	UV	Burkina Faso	Ouagadougou	274200	16241811	AF	.bf	XOF	Franc	226			fr-BF	2361809	NE,BJ,GH,CI,TG,ML	
+BG	BGR	100	BU	Bulgaria	Sofia	110910	7148785	EU	.bg	BGN	Lev	359	####	^(\d{4})$	bg,tr-BG,rom	732800	MK,GR,RO,TR,RS	
+BH	BHR	048	BA	Bahrain	Manama	665	738004	AS	.bh	BHD	Dinar	973	####|###	^(\d{3}\d?)$	ar-BH,en,fa,ur	290291		
+BI	BDI	108	BY	Burundi	Bujumbura	27830	9863117	AF	.bi	BIF	Franc	257			fr-BI,rn	433561	TZ,CD,RW	
+BJ	BEN	204	BN	Benin	Porto-Novo	112620	9056010	AF	.bj	XOF	Franc	229			fr-BJ	2395170	NE,TG,BF,NG	
+BL	BLM	652	TB	Saint Barthelemy	Gustavia	21	8450	NA	.gp	EUR	Euro	590	### ###		fr	3578476		
+BM	BMU	060	BD	Bermuda	Hamilton	53	65365	NA	.bm	BMD	Dollar	+1-441	@@ ##	^([A-Z]{2}\d{2})$	en-BM,pt	3573345		
+BN	BRN	096	BX	Brunei	Bandar Seri Begawan	5770	395027	AS	.bn	BND	Dollar	673	@@####	^([A-Z]{2}\d{4})$	ms-BN,en-BN	1820814	MY	
+BO	BOL	068	BL	Bolivia	Sucre	1098580	9947418	SA	.bo	BOB	Boliviano	591			es-BO,qu,ay	3923057	PE,CL,PY,BR,AR	
+BQ	BES	535		Bonaire, Saint Eustatius and Saba 		328	18012	NA	.bq	USD	Dollar	599			nl,pap,en	7626844		
+BR	BRA	076	BR	Brazil	Brasilia	8511965	201103330	SA	.br	BRL	Real	55	#####-###	^(\d{8})$	pt-BR,es,en,fr	3469034	SR,PE,BO,UY,GY,PY,GF,VE,CO,AR	
+BS	BHS	044	BF	Bahamas	Nassau	13940	301790	NA	.bs	BSD	Dollar	+1-242			en-BS	3572887		
+BT	BTN	064	BT	Bhutan	Thimphu	47000	699847	AS	.bt	BTN	Ngultrum	975			dz	1252634	CN,IN	
+BV	BVT	074	BV	Bouvet Island		49	0	AN	.bv	NOK	Krone					3371123		
+BW	BWA	072	BC	Botswana	Gaborone	600370	2029307	AF	.bw	BWP	Pula	267			en-BW,tn-BW	933860	ZW,ZA,NA	
+BY	BLR	112	BO	Belarus	Minsk	207600	9685000	EU	.by	BYR	Ruble	375	######	^(\d{6})$	be,ru	630336	PL,LT,UA,RU,LV	
+BZ	BLZ	084	BH	Belize	Belmopan	22966	314522	NA	.bz	BZD	Dollar	501			en-BZ,es	3582678	GT,MX	
+CA	CAN	124	CA	Canada	Ottawa	9984670	33679000	NA	.ca	CAD	Dollar	1	@#@ #@#	^([ABCEGHJKLMNPRSTVXY]\d[ABCEGHJKLMNPRSTVWXYZ]) ?(\d[ABCEGHJKLMNPRSTVWXYZ]\d)$ 	en-CA,fr-CA,iu	6251999	US	
+CC	CCK	166	CK	Cocos Islands	West Island	14	628	AS	.cc	AUD	Dollar	61			ms-CC,en	1547376		
+CD	COD	180	CG	Democratic Republic of the Congo	Kinshasa	2345410	70916439	AF	.cd	CDF	Franc	243			fr-CD,ln,kg	203312	TZ,CF,SS,RW,ZM,BI,UG,CG,AO	
+CF	CAF	140	CT	Central African Republic	Bangui	622984	4844927	AF	.cf	XAF	Franc	236			fr-CF,sg,ln,kg	239880	TD,SD,CD,SS,CM,CG	
+CG	COG	178	CF	Republic of the Congo	Brazzaville	342000	3039126	AF	.cg	XAF	Franc	242			fr-CG,kg,ln-CG	2260494	CF,GA,CD,CM,AO	
+CH	CHE	756	SZ	Switzerland	Berne	41290	7581000	EU	.ch	CHF	Franc	41	####	^(\d{4})$	de-CH,fr-CH,it-CH,rm	2658434	DE,IT,LI,FR,AT	
+CI	CIV	384	IV	Ivory Coast	Yamoussoukro	322460	21058798	AF	.ci	XOF	Franc	225			fr-CI	2287781	LR,GH,GN,BF,ML	
+CK	COK	184	CW	Cook Islands	Avarua	240	21388	OC	.ck	NZD	Dollar	682			en-CK,mi	1899402		
+CL	CHL	152	CI	Chile	Santiago	756950	16746491	SA	.cl	CLP	Peso	56	#######	^(\d{7})$	es-CL	3895114	PE,BO,AR	
+CM	CMR	120	CM	Cameroon	Yaounde	475440	19294149	AF	.cm	XAF	Franc	237			en-CM,fr-CM	2233387	TD,CF,GA,GQ,CG,NG	
+CN	CHN	156	CH	China	Beijing	9596960	1330044000	AS	.cn	CNY	Yuan Renminbi	86	######	^(\d{6})$	zh-CN,yue,wuu,dta,ug,za	1814991	LA,BT,TJ,KZ,MN,AF,NP,MM,KG,PK,KP,RU,VN,IN	
+CO	COL	170	CO	Colombia	Bogota	1138910	47790000	SA	.co	COP	Peso	57			es-CO	3686110	EC,PE,PA,BR,VE	
+GR	GRC	300	GR	Greece	Athens	131940	11000000	EU	.gr	EUR	Euro	30	### ##	^(\d{5})$	el-GR,en,fr	390903	AL,MK,TR,BG
+LB	LBN	422	LE	Lebanon	Beirut	10400	4125247	AS	.lb	LBP	Pound	961	#### ####|####	^(\d{4}(\d{4})?)$	ar-LB,fr-LB,en,hy	272103	SY,IL
+LY	LBY	434	LY	Libya	Tripolis	1759540	6461454	AF	.ly	LYD	Dinar	218			ar-LY,it,en	2215636	TD,NE,DZ,SD,TN,EG
+US	USA	840	US	United States	Washington	9629091	310232863	NA	.us	USD	Dollar	1	#####-####	^\d{5}(-\d{4})?$	en-US,es-US,haw,fr	6252001	CA,MX,CU
+HK	HKG	344	HK	Hong Kong	Hong Kong	1092	6898686	AS	.hk	HKD	Dollar	852			zh-HK,yue,zh,en	1819730
+IT	ITA	380	IT	Italy	Rome	301230	60340328	EU	.it	EUR	Euro	39	#####	^(\d{5})$	it-IT,de-IT,fr-IT,sc,ca,co,sl	3175395	CH,VA,SI,SM,FR,AT
