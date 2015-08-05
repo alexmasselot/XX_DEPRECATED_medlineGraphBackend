@@ -1,0 +1,1114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE MedlineCitationSet PUBLIC "-//NLM//DTD Medline Citation, 1st January, 2015//EN"
+        "http://www.nlm.nih.gov/databases/dtd/nlmmedlinecitationset_150101.dtd">
+<MedlineCitationSet>
+    <MedlineCitation Owner="NLM" Status="MEDLINE">
+        <PMID Version="1">25087474</PMID>
+        <DateCreated>
+            <Year>2014</Year>
+            <Month>09</Month>
+            <Day>15</Day>
+        </DateCreated>
+        <DateCompleted>
+            <Year>2014</Year>
+            <Month>11</Month>
+            <Day>03</Day>
+        </DateCompleted>
+        <Article PubModel="Print-Electronic">
+            <Journal>
+                <ISSN IssnType="Electronic">1874-9968</ISSN>
+                <JournalIssue CitedMedium="Internet">
+                    <Volume>55</Volume>
+                    <PubDate>
+                        <Year>2015</Year>
+                        <Month>Jan</Month>
+                    </PubDate>
+                </JournalIssue>
+                <Title>Ultrasonics</Title>
+                <ISOAbbreviation>Ultrasonics</ISOAbbreviation>
+            </Journal>
+            <ArticleTitle>Studies on thermo-elastic heating of horns used in ultrasonic plastic welding.</ArticleTitle>
+            <Pagination>
+                <MedlinePgn>123-32</MedlinePgn>
+            </Pagination>
+            <ELocationID EIdType="doi" ValidYN="Y">10.1016/j.ultras.2014.07.005</ELocationID>
+            <ELocationID EIdType="pii" ValidYN="Y">S0041-624X(14)00196-6</ELocationID>
+            <Abstract>
+                <AbstractText>Ultrasonic welding horn is half wavelength section or tool used to focus the ultrasonic
+                    vibrations to the components being welded. The horn is designed in such a way that it maximizes the
+                    amplitude of the sound wave passing through it. The ends of the horn represent the displacement
+                    anti-nodes and the center the 'node' of the wave. As the horns perform 20,000 cycles of expansion
+                    and contraction per second, they are highly stressed at the nodes and are heated owing to
+                    thermo-elastic effects. Considerable temperature rise may be observed in the horn, at the nodal
+                    region when working at high amplitudes indicating high stress levels leading to failure of horns due
+                    to cyclic loading. The limits for amplitude must therefore be evaluated for the safe working of the
+                    horn. Horns made of different materials have different thermo-elastic behaviors and hence different
+                    temperatures at the nodes and antinodes. This temperature field can be used as a control mechanism
+                    for setting the amplitude/weld parameters. Safe stress levels can be predicted using modal and
+                    harmonic analyses followed by a stress analysis to study the effect of cyclic loads. These are
+                    achieved using 'Ansys'. The maximum amplitude level obtained from the stress analysis is used as
+                    input for 'Comsol' to predict the temperature field. The actual temperature developed in the horn
+                    during operation is measured using infrared camera and compared with the simulated temperature. From
+                    experiments, it is observed that horn made of titanium had the lowest temperature rise at the
+                    critical region and can be expected to operate at amplitudes up to 77 μm without suffering failure
+                    due to cyclic loading. The method of predicting thermo-elastic stresses and temperature may be
+                    adopted by the industry for operating the horn within the safe stress limits thereby extending the
+                    life of the horn.
+                </AbstractText>
+                <CopyrightInformation>Copyright © 2014 Elsevier B.V. All rights reserved.</CopyrightInformation>
+            </Abstract>
+            <AuthorList CompleteYN="Y">
+                <Author ValidYN="Y">
+                    <LastName>Roopa Rani</LastName>
+                    <ForeName>M</ForeName>
+                    <Initials>M</Initials>
+                    <AffiliationInfo>
+                        <Affiliation>Department of Production Engineering, PSG College of Technology, Peelamedu,
+                            Coimbatore 641004, India. Electronic address: rroopa_11@yahoo.com.
+                        </Affiliation>
+                    </AffiliationInfo>
+                </Author>
+                <Author ValidYN="Y">
+                    <LastName>Prakasan</LastName>
+                    <ForeName>K</ForeName>
+                    <Initials>K</Initials>
+                    <AffiliationInfo>
+                        <Affiliation>Department of Production Engineering, PSG College of Technology, Peelamedu,
+                            Coimbatore 641004, India.
+                        </Affiliation>
+                    </AffiliationInfo>
+                </Author>
+                <Author ValidYN="Y">
+                    <LastName>Rudramoorthy</LastName>
+                    <ForeName>R</ForeName>
+                    <Initials>R</Initials>
+                    <AffiliationInfo>
+                        <Affiliation>Department of Production Engineering, PSG College of Technology, Peelamedu,
+                            Coimbatore 641004, India.
+                        </Affiliation>
+                    </AffiliationInfo>
+                </Author>
+            </AuthorList>
+            <Language>eng</Language>
+            <PublicationTypeList>
+                <PublicationType UI="D016428">Journal Article</PublicationType>
+                <PublicationType UI="D013485">Research Support, Non-U.S. Gov't</PublicationType>
+            </PublicationTypeList>
+            <ArticleDate DateType="Electronic">
+                <Year>2014</Year>
+                <Month>07</Month>
+                <Day>18</Day>
+            </ArticleDate>
+        </Article>
+        <MedlineJournalInfo>
+            <Country>Netherlands</Country>
+            <MedlineTA>Ultrasonics</MedlineTA>
+            <NlmUniqueID>0050452</NlmUniqueID>
+            <ISSNLinking>0041-624X</ISSNLinking>
+        </MedlineJournalInfo>
+        <CitationSubset>IM</CitationSubset>
+        <MeshHeadingList>
+            <MeshHeading>
+                <DescriptorName MajorTopicYN="N" UI="D004548">Elasticity</DescriptorName>
+            </MeshHeading>
+            <MeshHeading>
+                <DescriptorName MajorTopicYN="Y" UI="D006361">Heating</DescriptorName>
+            </MeshHeading>
+            <MeshHeading>
+                <DescriptorName MajorTopicYN="N" UI="D013314">Stress, Mechanical</DescriptorName>
+            </MeshHeading>
+            <MeshHeading>
+                <DescriptorName MajorTopicYN="N" UI="D013696">Temperature</DescriptorName>
+            </MeshHeading>
+            <MeshHeading>
+                <DescriptorName MajorTopicYN="N" UI="D014465">Ultrasonics</DescriptorName>
+                <QualifierName MajorTopicYN="Y" UI="Q000295">instrumentation</QualifierName>
+            </MeshHeading>
+            <MeshHeading>
+                <DescriptorName MajorTopicYN="N" UI="D014896">Welding</DescriptorName>
+                <QualifierName MajorTopicYN="Y" UI="Q000295">instrumentation</QualifierName>
+            </MeshHeading>
+        </MeshHeadingList>
+        <KeywordList Owner="NOTNLM">
+            <Keyword MajorTopicYN="N">Cyclic loading</Keyword>
+            <Keyword MajorTopicYN="N">Harmonic</Keyword>
+            <Keyword MajorTopicYN="N">Hot spots</Keyword>
+            <Keyword MajorTopicYN="N">Thermo-elastic heating</Keyword>
+            <Keyword MajorTopicYN="N">Ultrasonic horn</Keyword>
+        </KeywordList>
+    </MedlineCitation>
+    <MedlineCitation Owner="NLM" Status="PubMed-not-MEDLINE">
+        <PMID Version="1">25096851</PMID>
+        <DateCreated>
+            <Year>2014</Year>
+            <Month>09</Month>
+            <Day>15</Day>
+        </DateCreated>
+        <DateCompleted>
+            <Year>2014</Year>
+            <Month>11</Month>
+            <Day>03</Day>
+        </DateCompleted>
+        <Article PubModel="Print-Electronic">
+            <Journal>
+                <ISSN IssnType="Electronic">1874-9968</ISSN>
+                <JournalIssue CitedMedium="Internet">
+                    <Volume>55</Volume>
+                    <PubDate>
+                        <Year>2015</Year>
+                        <Month>Jan</Month>
+                    </PubDate>
+                </JournalIssue>
+                <Title>Ultrasonics</Title>
+                <ISOAbbreviation>Ultrasonics</ISOAbbreviation>
+            </Journal>
+            <ArticleTitle>Using the pressure transmission coefficient of a transmitted wave to evaluate some of the
+                mechanical properties of refractory metals.
+            </ArticleTitle>
+            <Pagination>
+                <MedlinePgn>133-40</MedlinePgn>
+            </Pagination>
+            <ELocationID EIdType="doi" ValidYN="Y">10.1016/j.ultras.2014.07.001</ELocationID>
+            <ELocationID EIdType="pii" ValidYN="Y">S0041-624X(14)00171-1</ELocationID>
+            <Abstract>
+                <AbstractText>Refractory metals have attracted increasing interest in recent years because of their use
+                    in many high-temperature applications. However, the characteristics of these metals calculated using
+                    loaded tests (such as tensile strength tests) differ considerably from those calculated using one of
+                    the most famous methods in NDT which is called time of flying of the wave (TOF).The present study
+                    presents two solutions based on calculating the pressure transmission coefficient (PTC) of the
+                    transmitted wave between the test sample and magnesium metal. The first is based on the development
+                    of a highly accurate algorithm that lowers the cost by determining the acoustic impedance of the
+                    test specimen to calculating mechanical properties. Up to 26 theoretical tests were done (10 of
+                    these tests for refractory materials) according to their known mechanical properties to verify the
+                    accuracy of the algorithm. The convergence in results ranged from 92% to 99%. The second solution
+                    was designed to solve the same problem for specimens with a thickness of less than 1mm. Eight
+                    experimental tests were done (five using refractory materials) to verify the accuracy of the second
+                    solution, with the convergence in the results ranging from 94% to 97%. The relationships of the Vrms
+                    measured from the oscilloscope with the PTC and with the Fourier transform spectrum were derived.
+                    The results of this research were closer to the standard mechanical properties for refractory metals
+                    compared with several recent acoustic tests.
+                </AbstractText>
+                <CopyrightInformation>Copyright © 2014 Elsevier B.V. All rights reserved.</CopyrightInformation>
+            </Abstract>
+            <AuthorList CompleteYN="Y">
+                <Author ValidYN="Y">
+                    <LastName>Mohammed</LastName>
+                    <ForeName>Arshed Abdulhamed</ForeName>
+                    <Initials>AA</Initials>
+                    <AffiliationInfo>
+                        <Affiliation>Electronic Department, College of Engineering, Diyala University, Iraq; Department
+                            of Mechanical and Materials Engineering, Faculty of Engineering and Built Environment,
+                            University Kebangsaan Malaysia, UKM, 43600 UKM Bangi, Selangor Darul Ehsan, Malaysia.
+                            Electronic address: arshad_ald@yahoo.com.
+                        </Affiliation>
+                    </AffiliationInfo>
+                </Author>
+                <Author ValidYN="Y">
+                    <LastName>Haris</LastName>
+                    <ForeName>Sallehuddin Mohamed</ForeName>
+                    <Initials>SM</Initials>
+                    <AffiliationInfo>
+                        <Affiliation>Department of Mechanical and Materials Engineering, Faculty of Engineering and
+                            Built Environment, University Kebangsaan Malaysia, UKM, 43600 UKM Bangi, Selangor Darul
+                            Ehsan, Malaysia.
+                        </Affiliation>
+                    </AffiliationInfo>
+                </Author>
+                <Author ValidYN="Y">
+                    <LastName>Nuawi</LastName>
+                    <ForeName>Mohd Zaki</ForeName>
+                    <Initials>MZ</Initials>
+                    <AffiliationInfo>
+                        <Affiliation>Department of Mechanical and Materials Engineering, Faculty of Engineering and
+                            Built Environment, University Kebangsaan Malaysia, UKM, 43600 UKM Bangi, Selangor Darul
+                            Ehsan, Malaysia.
+                        </Affiliation>
+                    </AffiliationInfo>
+                </Author>
+            </AuthorList>
+            <Language>eng</Language>
+            <PublicationTypeList>
+                <PublicationType UI="D016428">Journal Article</PublicationType>
+            </PublicationTypeList>
+            <ArticleDate DateType="Electronic">
+                <Year>2014</Year>
+                <Month>07</Month>
+                <Day>17</Day>
+            </ArticleDate>
+        </Article>
+        <MedlineJournalInfo>
+            <Country>Netherlands</Country>
+            <MedlineTA>Ultrasonics</MedlineTA>
+            <NlmUniqueID>0050452</NlmUniqueID>
+            <ISSNLinking>0041-624X</ISSNLinking>
+        </MedlineJournalInfo>
+        <KeywordList Owner="NOTNLM">
+            <Keyword MajorTopicYN="N">Elastic modulus</Keyword>
+            <Keyword MajorTopicYN="N">Pressure transmission coefficient</Keyword>
+            <Keyword MajorTopicYN="N">Refractory metals and their alloys</Keyword>
+        </KeywordList>
+    </MedlineCitation>
+    <MedlineCitation Owner="NLM" Status="MEDLINE">
+        <PMID Version="1">25106110</PMID>
+        <DateCreated>
+            <Year>2014</Year>
+            <Month>09</Month>
+            <Day>15</Day>
+        </DateCreated>
+        <DateCompleted>
+            <Year>2014</Year>
+            <Month>11</Month>
+            <Day>03</Day>
+        </DateCompleted>
+        <Article PubModel="Print-Electronic">
+            <Journal>
+                <ISSN IssnType="Electronic">1874-9968</ISSN>
+                <JournalIssue CitedMedium="Internet">
+                    <Volume>55</Volume>
+                    <PubDate>
+                        <Year>2015</Year>
+                        <Month>Jan</Month>
+                    </PubDate>
+                </JournalIssue>
+                <Title>Ultrasonics</Title>
+                <ISOAbbreviation>Ultrasonics</ISOAbbreviation>
+            </Journal>
+            <ArticleTitle>The analysis of the effect of homogeneous mechanical stress on the acoustic wave propagation
+                in the "La3Ga5SiO14/fused silica" piezoelectric layered structure.
+            </ArticleTitle>
+            <Pagination>
+                <MedlinePgn>104-12</MedlinePgn>
+            </Pagination>
+            <ELocationID EIdType="doi" ValidYN="Y">10.1016/j.ultras.2014.07.007</ELocationID>
+            <ELocationID EIdType="pii" ValidYN="Y">S0041-624X(14)00198-X</ELocationID>
+            <Abstract>
+                <AbstractText>The results of computer simulation taking into account the linear and nonlinear material
+                    constants have been presented. Study of the influence of external uniaxial mechanical stress on the
+                    dispersive characteristics of elastic waves in piezoelectric structures as "La3Ga5SiO14/fused
+                    silica" has been executed. The comparison of elastic wave velocity changes under the influence of an
+                    uniaxial stress while a full set of nonlinear material constants of crystalline layer+geometric
+                    nonlinearity, or only geometric nonlinearity of the layer induced by the static deformation of a
+                    substrate, has been fulfilled.
+                </AbstractText>
+                <CopyrightInformation>Copyright © 2014 Elsevier B.V. All rights reserved.</CopyrightInformation>
+            </Abstract>
+            <AuthorList CompleteYN="Y">
+                <Author ValidYN="Y">
+                    <LastName>Burkov</LastName>
+                    <ForeName>S I</ForeName>
+                    <Initials>SI</Initials>
+                    <AffiliationInfo>
+                        <Affiliation>Siberian Federal University, 79 Svobodny ave., 660041 Krasnoyarsk, Russian
+                            Federation. Electronic address: sburkov@sfu-kras.ru.
+                        </Affiliation>
+                    </AffiliationInfo>
+                </Author>
+                <Author ValidYN="Y">
+                    <LastName>Zolotova</LastName>
+                    <ForeName>O P</ForeName>
+                    <Initials>OP</Initials>
+                    <AffiliationInfo>
+                        <Affiliation>Siberian State Aerospace University, 31 Krasnoyarsky Rabochy ave., 660014
+                            Krasnoyarsk, Russian Federation.
+                        </Affiliation>
+                    </AffiliationInfo>
+                </Author>
+                <Author ValidYN="Y">
+                    <LastName>Sorokin</LastName>
+                    <ForeName>B P</ForeName>
+                    <Initials>BP</Initials>
+                    <AffiliationInfo>
+                        <Affiliation>Technological Institute for Superhard and Novel Carbon Materials, 7a Central'naya
+                            str., 142190 Moscow, Troitsk, Russian Federation; Moscow Institute of Physics and
+                            Technology, 9 Institutskiy lane, 141700 Dolgoprudny, Moscow Region, Russian Federation.
+                            Electronic address: bpsorokin2@rambler.ru.
+                        </Affiliation>
+                    </AffiliationInfo>
+                </Author>
+                <Author ValidYN="Y">
+                    <LastName>Turchin</LastName>
+                    <ForeName>P P</ForeName>
+                    <Initials>PP</Initials>
+                    <AffiliationInfo>
+                        <Affiliation>Siberian Federal University, 79 Svobodny ave., 660041 Krasnoyarsk, Russian
+                            Federation.
+                        </Affiliation>
+                    </AffiliationInfo>
+                </Author>
+            </AuthorList>
+            <Language>eng</Language>
+            <PublicationTypeList>
+                <PublicationType UI="D016428">Journal Article</PublicationType>
+                <PublicationType UI="D013485">Research Support, Non-U.S. Gov't</PublicationType>
+            </PublicationTypeList>
+            <ArticleDate DateType="Electronic">
+                <Year>2014</Year>
+                <Month>07</Month>
+                <Day>30</Day>
+            </ArticleDate>
+        </Article>
+        <MedlineJournalInfo>
+            <Country>Netherlands</Country>
+            <MedlineTA>Ultrasonics</MedlineTA>
+            <NlmUniqueID>0050452</NlmUniqueID>
+            <ISSNLinking>0041-624X</ISSNLinking>
+        </MedlineJournalInfo>
+        <ChemicalList>
+            <Chemical>
+                <RegistryNumber>0</RegistryNumber>
+                <NameOfSubstance UI="C470742">La3Ga5SiO14</NameOfSubstance>
+            </Chemical>
+            <Chemical>
+                <RegistryNumber>0</RegistryNumber>
+                <NameOfSubstance UI="D017640">Silicates</NameOfSubstance>
+            </Chemical>
+            <Chemical>
+                <RegistryNumber>7631-86-9</RegistryNumber>
+                <NameOfSubstance UI="D012822">Silicon Dioxide</NameOfSubstance>
+            </Chemical>
+        </ChemicalList>
+        <CitationSubset>IM</CitationSubset>
+        <MeshHeadingList>
+            <MeshHeading>
+                <DescriptorName MajorTopicYN="N" UI="D003198">Computer Simulation</DescriptorName>
+            </MeshHeading>
+            <MeshHeading>
+                <DescriptorName MajorTopicYN="N" UI="D008962">Models, Theoretical</DescriptorName>
+            </MeshHeading>
+            <MeshHeading>
+                <DescriptorName MajorTopicYN="N" UI="D017640">Silicates</DescriptorName>
+            </MeshHeading>
+            <MeshHeading>
+                <DescriptorName MajorTopicYN="N" UI="D012822">Silicon Dioxide</DescriptorName>
+            </MeshHeading>
+            <MeshHeading>
+                <DescriptorName MajorTopicYN="Y" UI="D013016">Sound</DescriptorName>
+            </MeshHeading>
+            <MeshHeading>
+                <DescriptorName MajorTopicYN="N" UI="D013314">Stress, Mechanical</DescriptorName>
+            </MeshHeading>
+        </MeshHeadingList>
+        <KeywordList Owner="NOTNLM">
+            <Keyword MajorTopicYN="N">Initial stress influence</Keyword>
+            <Keyword MajorTopicYN="N">Love wave</Keyword>
+            <Keyword MajorTopicYN="N">Piezoelectric layered structure</Keyword>
+            <Keyword MajorTopicYN="N">Rayleigh wave</Keyword>
+        </KeywordList>
+    </MedlineCitation>
+    <MedlineCitation Owner="NLM" Status="MEDLINE">
+        <PMID Version="1">25109827</PMID>
+        <DateCreated>
+            <Year>2014</Year>
+            <Month>09</Month>
+            <Day>15</Day>
+        </DateCreated>
+        <DateCompleted>
+            <Year>2014</Year>
+            <Month>11</Month>
+            <Day>03</Day>
+        </DateCompleted>
+        <Article PubModel="Print-Electronic">
+            <Journal>
+                <ISSN IssnType="Electronic">1874-9968</ISSN>
+                <JournalIssue CitedMedium="Internet">
+                    <Volume>55</Volume>
+                    <PubDate>
+                        <Year>2015</Year>
+                        <Month>Jan</Month>
+                    </PubDate>
+                </JournalIssue>
+                <Title>Ultrasonics</Title>
+                <ISOAbbreviation>Ultrasonics</ISOAbbreviation>
+            </Journal>
+            <ArticleTitle>Modeling of three-dimensional Lamb wave propagation excited by laser pulses.</ArticleTitle>
+            <Pagination>
+                <MedlinePgn>113-22</MedlinePgn>
+            </Pagination>
+            <ELocationID EIdType="doi" ValidYN="Y">10.1016/j.ultras.2014.07.006</ELocationID>
+            <ELocationID EIdType="pii" ValidYN="Y">S0041-624X(14)00197-8</ELocationID>
+            <Abstract>
+                <AbstractText>As a type of broadband source of ultrasonic guided waves, laser pulses can be used to
+                    launch all modes of interests. In this paper, Lamb waves are excited by imposing heat flux mimicking
+                    the supply of the heat from laser pulses, and effects by defects on the received Lamb waves in a
+                    plate are investigated by means of the finite element method. In order to alleviate the heavy
+                    computational cost in solving the coupled finite element equations, a sub-regioning scheme is
+                    employed, and it reduces the computational cost significantly. A comparison of Lamb waves generated
+                    by unfocused and line-focused laser sources is conducted. To validate numerical simulations, the
+                    group velocity of A0 mode is calculated based on the received signal by using the wavelet transform.
+                    The result of A0 mode group velocity is compared with the solution of Rayleigh-Lamb equations, and
+                    close agreement is observed. Lamb waves in a plate with defects of different lengths are examined
+                    next. The out-of-plane displacement in the plate with a defect is compared with the displacement in
+                    the plate without defects, and the wavelet transform is used to determine the arrival times of Lamb
+                    waves traveling at the A0 mode group velocity. A strong correlation is observed between the extent
+                    of defects and the magnitude of wavelet coefficients.
+                </AbstractText>
+                <CopyrightInformation>Copyright © 2014 Elsevier B.V. All rights reserved.</CopyrightInformation>
+            </Abstract>
+            <AuthorList CompleteYN="Y">
+                <Author ValidYN="Y">
+                    <LastName>Liu</LastName>
+                    <ForeName>Wenyang</ForeName>
+                    <Initials>W</Initials>
+                    <AffiliationInfo>
+                        <Affiliation>Third Wave Systems, Minneapolis, United States.</Affiliation>
+                    </AffiliationInfo>
+                </Author>
+                <Author ValidYN="Y">
+                    <LastName>Hong</LastName>
+                    <ForeName>Jung-Wuk</ForeName>
+                    <Initials>JW</Initials>
+                    <AffiliationInfo>
+                        <Affiliation>Korea Advanced Institute of Science and Technology, Daejeon, Republic of Korea.
+                            Electronic address: jwhong@alum.mit.edu.
+                        </Affiliation>
+                    </AffiliationInfo>
+                </Author>
+            </AuthorList>
+            <Language>eng</Language>
+            <PublicationTypeList>
+                <PublicationType UI="D003160">Comparative Study</PublicationType>
+                <PublicationType UI="D016428">Journal Article</PublicationType>
+                <PublicationType UI="D013485">Research Support, Non-U.S. Gov't</PublicationType>
+            </PublicationTypeList>
+            <ArticleDate DateType="Electronic">
+                <Year>2014</Year>
+                <Month>07</Month>
+                <Day>18</Day>
+            </ArticleDate>
+        </Article>
+        <MedlineJournalInfo>
+            <Country>Netherlands</Country>
+            <MedlineTA>Ultrasonics</MedlineTA>
+            <NlmUniqueID>0050452</NlmUniqueID>
+            <ISSNLinking>0041-624X</ISSNLinking>
+        </MedlineJournalInfo>
+        <CitationSubset>IM</CitationSubset>
+        <MeshHeadingList>
+            <MeshHeading>
+                <DescriptorName MajorTopicYN="Y" UI="D007834">Lasers</DescriptorName>
+            </MeshHeading>
+            <MeshHeading>
+                <DescriptorName MajorTopicYN="N" UI="D008433">Mathematics</DescriptorName>
+            </MeshHeading>
+            <MeshHeading>
+                <DescriptorName MajorTopicYN="N" UI="D008962">Models, Theoretical</DescriptorName>
+            </MeshHeading>
+            <MeshHeading>
+                <DescriptorName MajorTopicYN="Y" UI="D013016">Sound</DescriptorName>
+            </MeshHeading>
+        </MeshHeadingList>
+        <KeywordList Owner="NOTNLM">
+            <Keyword MajorTopicYN="N">Finite element methods</Keyword>
+            <Keyword MajorTopicYN="N">Lamb waves</Keyword>
+            <Keyword MajorTopicYN="N">Lasers</Keyword>
+            <Keyword MajorTopicYN="N">Simulations</Keyword>
+            <Keyword MajorTopicYN="N">Wavelet transforms</Keyword>
+        </KeywordList>
+    </MedlineCitation>
+    <MedlineCitation Owner="NLM" Status="PubMed-not-MEDLINE">
+        <PMID Version="1">25113776</PMID>
+        <DateCreated>
+            <Year>2014</Year>
+            <Month>09</Month>
+            <Day>15</Day>
+        </DateCreated>
+        <DateCompleted>
+            <Year>2014</Year>
+            <Month>11</Month>
+            <Day>03</Day>
+        </DateCompleted>
+        <Article PubModel="Print-Electronic">
+            <Journal>
+                <ISSN IssnType="Electronic">1874-9968</ISSN>
+                <JournalIssue CitedMedium="Internet">
+                    <Volume>55</Volume>
+                    <PubDate>
+                        <Year>2015</Year>
+                        <Month>Jan</Month>
+                    </PubDate>
+                </JournalIssue>
+                <Title>Ultrasonics</Title>
+                <ISOAbbreviation>Ultrasonics</ISOAbbreviation>
+            </Journal>
+            <ArticleTitle>Electrical resistivity behaviors of liquid Pb-Sn binary alloy in the presence of ultrasonic
+                field.
+            </ArticleTitle>
+            <Pagination>
+                <MedlinePgn>6-9</MedlinePgn>
+            </Pagination>
+            <ELocationID EIdType="doi" ValidYN="Y">10.1016/j.ultras.2014.07.008</ELocationID>
+            <ELocationID EIdType="pii" ValidYN="Y">S0041-624X(14)00199-1</ELocationID>
+            <Abstract>
+                <AbstractText>Electrical resistivity behaviors of liquid Pb-Sn alloys have been investigated in the
+                    presence of ultrasonic field. The process demonstrated significantly that electrical resistivity
+                    could reveal the precise influence caused by ultrasound. Details revealed by applying the
+                    resistivity measuring approach to the liquid Pb-Sn alloy show that the short ordered structures in
+                    the liquid could be modified by ultrasonic irradiation, and the resistivity approach could have
+                    application value in the ultrasonic irradiation process on the specific liquid metals and alloys.
+                </AbstractText>
+                <CopyrightInformation>Copyright © 2014 Elsevier B.V. All rights reserved.</CopyrightInformation>
+            </Abstract>
+            <AuthorList CompleteYN="Y">
+                <Author ValidYN="Y">
+                    <LastName>Liu</LastName>
+                    <ForeName>Xuan</ForeName>
+                    <Initials>X</Initials>
+                    <AffiliationInfo>
+                        <Affiliation>Key Lab of Electromagnetic Processing of Materials, Ministry of Education,
+                            Northeastern University, 314 Mailbox, Shenyang 110819, People's Republic of China.
+                        </Affiliation>
+                    </AffiliationInfo>
+                </Author>
+                <Author ValidYN="Y">
+                    <LastName>Zhang</LastName>
+                    <ForeName>Jianfeng</ForeName>
+                    <Initials>J</Initials>
+                    <AffiliationInfo>
+                        <Affiliation>Key Lab of Electromagnetic Processing of Materials, Ministry of Education,
+                            Northeastern University, 314 Mailbox, Shenyang 110819, People's Republic of China.
+                        </Affiliation>
+                    </AffiliationInfo>
+                </Author>
+                <Author ValidYN="Y">
+                    <LastName>Li</LastName>
+                    <ForeName>Haoyu</ForeName>
+                    <Initials>H</Initials>
+                    <AffiliationInfo>
+                        <Affiliation>Key Lab of Electromagnetic Processing of Materials, Ministry of Education,
+                            Northeastern University, 314 Mailbox, Shenyang 110819, People's Republic of China.
+                        </Affiliation>
+                    </AffiliationInfo>
+                </Author>
+                <Author ValidYN="Y">
+                    <LastName>Le</LastName>
+                    <ForeName>Qichi</ForeName>
+                    <Initials>Q</Initials>
+                    <AffiliationInfo>
+                        <Affiliation>Key Lab of Electromagnetic Processing of Materials, Ministry of Education,
+                            Northeastern University, 314 Mailbox, Shenyang 110819, People's Republic of China.
+                            Electronic address: qichil@mail.neu.edu.cn.
+                        </Affiliation>
+                    </AffiliationInfo>
+                </Author>
+                <Author ValidYN="Y">
+                    <LastName>Zhang</LastName>
+                    <ForeName>Zhiqiang</ForeName>
+                    <Initials>Z</Initials>
+                    <AffiliationInfo>
+                        <Affiliation>Key Lab of Electromagnetic Processing of Materials, Ministry of Education,
+                            Northeastern University, 314 Mailbox, Shenyang 110819, People's Republic of China.
+                        </Affiliation>
+                    </AffiliationInfo>
+                </Author>
+                <Author ValidYN="Y">
+                    <LastName>Hu</LastName>
+                    <ForeName>Wenyi</ForeName>
+                    <Initials>W</Initials>
+                    <AffiliationInfo>
+                        <Affiliation>Key Lab of Electromagnetic Processing of Materials, Ministry of Education,
+                            Northeastern University, 314 Mailbox, Shenyang 110819, People's Republic of China.
+                        </Affiliation>
+                    </AffiliationInfo>
+                </Author>
+                <Author ValidYN="Y">
+                    <LastName>Bao</LastName>
+                    <ForeName>Lei</ForeName>
+                    <Initials>L</Initials>
+                    <AffiliationInfo>
+                        <Affiliation>Key Lab of Electromagnetic Processing of Materials, Ministry of Education,
+                            Northeastern University, 314 Mailbox, Shenyang 110819, People's Republic of China.
+                        </Affiliation>
+                    </AffiliationInfo>
+                </Author>
+            </AuthorList>
+            <Language>eng</Language>
+            <PublicationTypeList>
+                <PublicationType UI="D016428">Journal Article</PublicationType>
+                <PublicationType UI="D013485">Research Support, Non-U.S. Gov't</PublicationType>
+            </PublicationTypeList>
+            <ArticleDate DateType="Electronic">
+                <Year>2014</Year>
+                <Month>07</Month>
+                <Day>22</Day>
+            </ArticleDate>
+        </Article>
+        <MedlineJournalInfo>
+            <Country>Netherlands</Country>
+            <MedlineTA>Ultrasonics</MedlineTA>
+            <NlmUniqueID>0050452</NlmUniqueID>
+            <ISSNLinking>0041-624X</ISSNLinking>
+        </MedlineJournalInfo>
+        <KeywordList Owner="NOTNLM">
+            <Keyword MajorTopicYN="N">Electrical resistivity</Keyword>
+            <Keyword MajorTopicYN="N">Liquid alloys</Keyword>
+            <Keyword MajorTopicYN="N">Pb–Sn</Keyword>
+            <Keyword MajorTopicYN="N">Ultrasonic irradiation</Keyword>
+        </KeywordList>
+    </MedlineCitation>
+    <MedlineCitation Owner="NLM" Status="MEDLINE">
+        <PMID Version="1">25130135</PMID>
+        <DateCreated>
+            <Year>2014</Year>
+            <Month>09</Month>
+            <Day>15</Day>
+        </DateCreated>
+        <DateCompleted>
+            <Year>2014</Year>
+            <Month>11</Month>
+            <Day>03</Day>
+        </DateCompleted>
+        <Article PubModel="Print-Electronic">
+            <Journal>
+                <ISSN IssnType="Electronic">1874-9968</ISSN>
+                <JournalIssue CitedMedium="Internet">
+                    <Volume>55</Volume>
+                    <PubDate>
+                        <Year>2015</Year>
+                        <Month>Jan</Month>
+                    </PubDate>
+                </JournalIssue>
+                <Title>Ultrasonics</Title>
+                <ISOAbbreviation>Ultrasonics</ISOAbbreviation>
+            </Journal>
+            <ArticleTitle>Temporal effect of inertial cavitation with and without microbubbles on surface deformation of
+                agarose S gel in the presence of 1-MHz focused ultrasound.
+            </ArticleTitle>
+            <Pagination>
+                <MedlinePgn>1-5</MedlinePgn>
+            </Pagination>
+            <ELocationID EIdType="doi" ValidYN="Y">10.1016/j.ultras.2014.07.017</ELocationID>
+            <ELocationID EIdType="pii" ValidYN="Y">S0041-624X(14)00208-X</ELocationID>
+            <Abstract>
+                <AbstractText>Sonoporation has the potential to deliver extraneous molecules into a target tissue
+                    non-invasively. There have been numerous investigations of cell membrane permeabilization induced by
+                    microbubbles, but very few studies have been carried out to investigate sonoporation by inertial
+                    cavitation, especially from a temporal perspective. In the present paper, we show the temporal
+                    variations in nano/micro-pit formations following the collapse of inertial cavitation bubbles, with
+                    and without Sonazoid® microbubbles. Using agarose S gel as a target material, erosion experiments
+                    were conducted in the presence of 1-MHz focused ultrasound applied for various exposure times, Tex
+                    (0.002-60 s). Conventional microscopy was used to measure temporal variations in micrometer-scale
+                    pit numbers, and atomic force microscopy utilized to detect surface roughness on a nanometer scale.
+                    The results demonstrated that nanometer-scale erosion was predominantly caused by Sonazoid®
+                    microbubbles and C4F10 gas bubbles for 0.002 s&lt;Tex&lt;1 s, while the number of micrometer-scale
+                    pits, caused mainly by inertial cavitation bubbles such as C4F10 gas bubbles and vapor bubbles,
+                    increased exponentially with increasing Tex in the range 0.1 s&lt;Tex&lt;10 s. The results of the
+                    present study suggest that cavitation-induced sonoporation can produce various pore sizes in
+                    membranes, enabling the delivery of external molecules of differing sizes into cells or tissues.
+                </AbstractText>
+                <CopyrightInformation>Copyright © 2014 Elsevier B.V. All rights reserved.</CopyrightInformation>
+            </Abstract>
+            <AuthorList CompleteYN="Y">
+                <Author ValidYN="Y">
+                    <LastName>Tomita</LastName>
+                    <ForeName>Y</ForeName>
+                    <Initials>Y</Initials>
+                    <AffiliationInfo>
+                        <Affiliation>Faculty of Education, Hokkaido University of Education, Hakodate, Hokkaido
+                            040-8567, Japan. Electronic address: tomita.yukio@h.hokkyodai.ac.jp.
+                        </Affiliation>
+                    </AffiliationInfo>
+                </Author>
+                <Author ValidYN="Y">
+                    <LastName>Matsuura</LastName>
+                    <ForeName>T</ForeName>
+                    <Initials>T</Initials>
+                    <AffiliationInfo>
+                        <Affiliation>Faculty of Education, Hokkaido University of Education, Hakodate, Hokkaido
+                            040-8567, Japan. Electronic address: matsuura.toshihiko@h.hokkyodai.ac.jp.
+                        </Affiliation>
+                    </AffiliationInfo>
+                </Author>
+                <Author ValidYN="Y">
+                    <LastName>Kodama</LastName>
+                    <ForeName>T</ForeName>
+                    <Initials>T</Initials>
+                    <AffiliationInfo>
+                        <Affiliation>Graduate School of Biomedical Engineering, Tohoku University, 4-1 Seiryo, Aoba-ku,
+                            Sendai 980-8575, Japan. Electronic address: kodama@bme.tohoku.ac.jp.
+                        </Affiliation>
+                    </AffiliationInfo>
+                </Author>
+            </AuthorList>
+            <Language>eng</Language>
+            <PublicationTypeList>
+                <PublicationType UI="D016428">Journal Article</PublicationType>
+                <PublicationType UI="D013485">Research Support, Non-U.S. Gov't</PublicationType>
+            </PublicationTypeList>
+            <ArticleDate DateType="Electronic">
+                <Year>2014</Year>
+                <Month>08</Month>
+                <Day>04</Day>
+            </ArticleDate>
+        </Article>
+        <MedlineJournalInfo>
+            <Country>Netherlands</Country>
+            <MedlineTA>Ultrasonics</MedlineTA>
+            <NlmUniqueID>0050452</NlmUniqueID>
+            <ISSNLinking>0041-624X</ISSNLinking>
+        </MedlineJournalInfo>
+        <ChemicalList>
+            <Chemical>
+                <RegistryNumber>0</RegistryNumber>
+                <NameOfSubstance UI="D005782">Gels</NameOfSubstance>
+            </Chemical>
+            <Chemical>
+                <RegistryNumber>9012-36-6</RegistryNumber>
+                <NameOfSubstance UI="D012685">Sepharose</NameOfSubstance>
+            </Chemical>
+        </ChemicalList>
+        <CitationSubset>IM</CitationSubset>
+        <MeshHeadingList>
+            <MeshHeading>
+                <DescriptorName MajorTopicYN="N" UI="D002462">Cell Membrane</DescriptorName>
+            </MeshHeading>
+            <MeshHeading>
+                <DescriptorName MajorTopicYN="Y" UI="D005782">Gels</DescriptorName>
+            </MeshHeading>
+            <MeshHeading>
+                <DescriptorName MajorTopicYN="Y" UI="D045423">Microbubbles</DescriptorName>
+            </MeshHeading>
+            <MeshHeading>
+                <DescriptorName MajorTopicYN="Y" UI="D012685">Sepharose</DescriptorName>
+            </MeshHeading>
+            <MeshHeading>
+                <DescriptorName MajorTopicYN="N" UI="D013010">Sonication</DescriptorName>
+            </MeshHeading>
+            <MeshHeading>
+                <DescriptorName MajorTopicYN="N" UI="D013499">Surface Properties</DescriptorName>
+            </MeshHeading>
+            <MeshHeading>
+                <DescriptorName MajorTopicYN="Y" UI="D014465">Ultrasonics</DescriptorName>
+            </MeshHeading>
+        </MeshHeadingList>
+        <KeywordList Owner="NOTNLM">
+            <Keyword MajorTopicYN="N">Inertial cavitation</Keyword>
+            <Keyword MajorTopicYN="N">Microbubbles</Keyword>
+            <Keyword MajorTopicYN="N">Sonoporation</Keyword>
+            <Keyword MajorTopicYN="N">Surface roughness</Keyword>
+            <Keyword MajorTopicYN="N">Ultrasound</Keyword>
+        </KeywordList>
+    </MedlineCitation>
+    <MedlineCitation Owner="NLM" Status="MEDLINE">
+        <PMID Version="1">25149195</PMID>
+        <DateCreated>
+            <Year>2014</Year>
+            <Month>09</Month>
+            <Day>15</Day>
+        </DateCreated>
+        <DateCompleted>
+            <Year>2014</Year>
+            <Month>11</Month>
+            <Day>03</Day>
+        </DateCompleted>
+        <Article PubModel="Print-Electronic">
+            <Journal>
+                <ISSN IssnType="Electronic">1874-9968</ISSN>
+                <JournalIssue CitedMedium="Internet">
+                    <Volume>55</Volume>
+                    <PubDate>
+                        <Year>2015</Year>
+                        <Month>Jan</Month>
+                    </PubDate>
+                </JournalIssue>
+                <Title>Ultrasonics</Title>
+                <ISOAbbreviation>Ultrasonics</ISOAbbreviation>
+            </Journal>
+            <ArticleTitle>Resonance frequency and mass identification of zeptogram-scale nanosensor based on the
+                nonlocal beam theory.
+            </ArticleTitle>
+            <Pagination>
+                <MedlinePgn>75-84</MedlinePgn>
+            </Pagination>
+            <ELocationID EIdType="doi" ValidYN="Y">10.1016/j.ultras.2014.08.002</ELocationID>
+            <ELocationID EIdType="pii" ValidYN="Y">S0041-624X(14)00224-8</ELocationID>
+            <Abstract>
+                <AbstractText>Free vibration and mass detection of carbon nanotube-based sensors are studied in this
+                    paper. Since the mechanical properties of carbon nanotubes possess a size effect, the nonlocal beam
+                    model is used to characterize flexural vibration of nanosensors carrying a concentrated
+                    nanoparticle, where the size effect is reflected by a nonlocal parameter. For nanocantilever or
+                    bridged sensor, frequency equations are derived when a nanoparticle is carried at the free end or
+                    the middle, respectively. Exact resonance frequencies are numerically determined for clamped-free,
+                    simply-supported, and clamped-clamped resonators. Alternative approximations of fundamental
+                    frequency are given in closed form within the relative error less than 0.4%, 0.6%, and 1.4% for
+                    cantilever, simply-supported, and bridged sensors, respectively. Mass identification formulae are
+                    derived in terms of the frequency shift. Identified masses via the present approach coincide with
+                    those using the molecular mechanics approach and reach as low as 10(-24)kg. The obtained results
+                    indicate that the nonlocal effect decreases the resonance frequency except for the fundamental
+                    frequency of nanocantilever sensor. These results are helpful to the design of micro/nanomechanical
+                    zeptogram-scale biosensor.
+                </AbstractText>
+                <CopyrightInformation>Copyright © 2014 Elsevier B.V. All rights reserved.</CopyrightInformation>
+            </Abstract>
+            <AuthorList CompleteYN="Y">
+                <Author ValidYN="Y">
+                    <LastName>Li</LastName>
+                    <ForeName>Xian-Fang</ForeName>
+                    <Initials>XF</Initials>
+                    <AffiliationInfo>
+                        <Affiliation>School of Civil Engineering, Central South University, Changsha 410075, PR China;
+                            State Key Laboratory of Structural Analysis for Industrial Equipment, Dalian University of
+                            Technology, Dalian 116024, PR China. Electronic address: xfli@csu.edu.cn.
+                        </Affiliation>
+                    </AffiliationInfo>
+                </Author>
+                <Author ValidYN="Y">
+                    <LastName>Tang</LastName>
+                    <ForeName>Guo-Jin</ForeName>
+                    <Initials>GJ</Initials>
+                    <AffiliationInfo>
+                        <Affiliation>College of Aerospace Science and Engineering, National University of Defense
+                            Technology, Changsha 410073, PR China.
+                        </Affiliation>
+                    </AffiliationInfo>
+                </Author>
+                <Author ValidYN="Y">
+                    <LastName>Shen</LastName>
+                    <ForeName>Zhi-Bin</ForeName>
+                    <Initials>ZB</Initials>
+                    <AffiliationInfo>
+                        <Affiliation>College of Aerospace Science and Engineering, National University of Defense
+                            Technology, Changsha 410073, PR China.
+                        </Affiliation>
+                    </AffiliationInfo>
+                </Author>
+                <Author ValidYN="Y">
+                    <LastName>Lee</LastName>
+                    <ForeName>Kang Yong</ForeName>
+                    <Initials>KY</Initials>
+                    <AffiliationInfo>
+                        <Affiliation>State Key Laboratory of Structural Analysis for Industrial Equipment, Dalian
+                            University of Technology, Dalian 116024, PR China.
+                        </Affiliation>
+                    </AffiliationInfo>
+                </Author>
+            </AuthorList>
+            <Language>eng</Language>
+            <PublicationTypeList>
+                <PublicationType UI="D016428">Journal Article</PublicationType>
+                <PublicationType UI="D013485">Research Support, Non-U.S. Gov't</PublicationType>
+            </PublicationTypeList>
+            <ArticleDate DateType="Electronic">
+                <Year>2014</Year>
+                <Month>08</Month>
+                <Day>10</Day>
+            </ArticleDate>
+        </Article>
+        <MedlineJournalInfo>
+            <Country>Netherlands</Country>
+            <MedlineTA>Ultrasonics</MedlineTA>
+            <NlmUniqueID>0050452</NlmUniqueID>
+            <ISSNLinking>0041-624X</ISSNLinking>
+        </MedlineJournalInfo>
+        <ChemicalList>
+            <Chemical>
+                <RegistryNumber>0</RegistryNumber>
+                <NameOfSubstance UI="D037742">Nanotubes, Carbon</NameOfSubstance>
+            </Chemical>
+        </ChemicalList>
+        <CitationSubset>IM</CitationSubset>
+        <MeshHeadingList>
+            <MeshHeading>
+                <DescriptorName MajorTopicYN="Y" UI="D053758">Nanoparticles</DescriptorName>
+            </MeshHeading>
+            <MeshHeading>
+                <DescriptorName MajorTopicYN="Y" UI="D037742">Nanotubes, Carbon</DescriptorName>
+            </MeshHeading>
+            <MeshHeading>
+                <DescriptorName MajorTopicYN="Y" UI="D014732">Vibration</DescriptorName>
+            </MeshHeading>
+        </MeshHeadingList>
+        <KeywordList Owner="NOTNLM">
+            <Keyword MajorTopicYN="N">Carbon nanotube-based sensor</Keyword>
+            <Keyword MajorTopicYN="N">Frequency shift</Keyword>
+            <Keyword MajorTopicYN="N">Mass identification</Keyword>
+            <Keyword MajorTopicYN="N">Nonlocal elasticity</Keyword>
+            <Keyword MajorTopicYN="N">Resonance frequency</Keyword>
+        </KeywordList>
+    </MedlineCitation>
+    <MedlineCitation Owner="NLM" Status="MEDLINE">
+        <PMID Version="1">25152379</PMID>
+        <DateCreated>
+            <Year>2014</Year>
+            <Month>09</Month>
+            <Day>15</Day>
+        </DateCreated>
+        <DateCompleted>
+            <Year>2014</Year>
+            <Month>11</Month>
+            <Day>03</Day>
+        </DateCompleted>
+        <DateRevised>
+            <Year>2014</Year>
+            <Month>11</Month>
+            <Day>20</Day>
+        </DateRevised>
+        <Article PubModel="Print-Electronic">
+            <Journal>
+                <ISSN IssnType="Electronic">1874-9968</ISSN>
+                <JournalIssue CitedMedium="Internet">
+                    <Volume>55</Volume>
+                    <PubDate>
+                        <Year>2015</Year>
+                        <Month>Jan</Month>
+                    </PubDate>
+                </JournalIssue>
+                <Title>Ultrasonics</Title>
+                <ISOAbbreviation>Ultrasonics</ISOAbbreviation>
+            </Journal>
+            <ArticleTitle>Measurement of regional pulse-wave velocity using spatial compound imaging of the common
+                carotid artery in vivo.
+            </ArticleTitle>
+            <Pagination>
+                <MedlinePgn>92-103</MedlinePgn>
+            </Pagination>
+            <ELocationID EIdType="doi" ValidYN="Y">10.1016/j.ultras.2014.07.018</ELocationID>
+            <ELocationID EIdType="pii" ValidYN="Y">S0041-624X(14)00222-4</ELocationID>
+            <Abstract>
+                <AbstractText>Pulse-wave velocity (PWV) is an important index for diagnosing cardiovascular diseases.
+                    The pulse wave is volumetric change induced by heartbeat or inflowing blood, and significantly
+                    depends on the propagating path and stiffness of the artery. In this study, PWV of the propagating
+                    wave was visualized using spatial compound imaging with high temporal resolution. The frame rate was
+                    1000 Hz, or a time interval of 1 ms. Subjects were four young healthy males and one young healthy
+                    female (n=5, age: 23.8±1.17 years old), and the measurement area was the right common carotid
+                    artery. PWVs in four phases (the four phases of heart valve opening and closing) were investigated
+                    during a cardiac cycle. In phase I, the heart pulsates. In phase II, the tricuspid and mitral valves
+                    close, and the aortic and pulmonic valves open. In phase III, the tricuspid and mitral valves open,
+                    and the aortic and pulmonic valves close. In phase IV, the propagating wave is reflected. PWVs in
+                    phases II and III were easily observed. PWVs were 3.52±1.11 m/s in phase I, 5.62±0.30 m/s in phase
+                    II, 7.94±0.85 m/s in phase III, and -4.60±0.99 m/s for the reflective wave. PWV was measured using
+                    Spatial Compound Imaging with high temporal resolution, and the PWV in each phase may be used as the
+                    index for diagnosing stages of arteriosclerosis progression.
+                </AbstractText>
+                <CopyrightInformation>Copyright © 2014 Elsevier B.V. All rights reserved.</CopyrightInformation>
+            </Abstract>
+            <AuthorList CompleteYN="Y">
+                <Author ValidYN="Y">
+                    <LastName>Nagaoka</LastName>
+                    <ForeName>Ryo</ForeName>
+                    <Initials>R</Initials>
+                    <AffiliationInfo>
+                        <Affiliation>Department of Biomedical Imaging, Graduate School of Biomedical Engineering, Tohoku
+                            University, 6-6-05 Aramaki Aza Aoba, Aobaku, Sendai 980-8579, Japan. Electronic address:
+                            ryo@ecei.tohoku.ac.jp.
+                        </Affiliation>
+                    </AffiliationInfo>
+                </Author>
+                <Author ValidYN="Y">
+                    <LastName>Masuno</LastName>
+                    <ForeName>Genta</ForeName>
+                    <Initials>G</Initials>
+                    <AffiliationInfo>
+                        <Affiliation>Department of Biomedical Imaging, Graduate School of Biomedical Engineering, Tohoku
+                            University, 6-6-05 Aramaki Aza Aoba, Aobaku, Sendai 980-8579, Japan.
+                        </Affiliation>
+                    </AffiliationInfo>
+                </Author>
+                <Author ValidYN="Y">
+                    <LastName>Kobayashi</LastName>
+                    <ForeName>Kazuto</ForeName>
+                    <Initials>K</Initials>
+                    <AffiliationInfo>
+                        <Affiliation>Division of Research and Development, Honda Electronics Co., Ltd., 20 Oyamazuka,
+                            Oiwa-cho, Toyohashi 411-3193, Japan.
+                        </Affiliation>
+                    </AffiliationInfo>
+                </Author>
+                <Author ValidYN="Y">
+                    <LastName>Yoshizawa</LastName>
+                    <ForeName>Shin</ForeName>
+                    <Initials>S</Initials>
+                    <AffiliationInfo>
+                        <Affiliation>Department of Wave-Triggered Nanomedicine, Graduate School of Engineering, Tohoku
+                            University, 6-6-05 Aramaki Aza Aoba, Aobaku, Sendai 980-8579, Japan.
+                        </Affiliation>
+                    </AffiliationInfo>
+                </Author>
+                <Author ValidYN="Y">
+                    <LastName>Umemura</LastName>
+                    <ForeName>Shin-ichiro</ForeName>
+                    <Initials>S</Initials>
+                    <AffiliationInfo>
+                        <Affiliation>Department of Wave-Triggered Nanomedicine, Graduate School of Engineering, Tohoku
+                            University, 6-6-05 Aramaki Aza Aoba, Aobaku, Sendai 980-8579, Japan.
+                        </Affiliation>
+                    </AffiliationInfo>
+                </Author>
+                <Author ValidYN="Y">
+                    <LastName>Saijo</LastName>
+                    <ForeName>Yoshifumi</ForeName>
+                    <Initials>Y</Initials>
+                    <AffiliationInfo>
+                        <Affiliation>Department of Biomedical Imaging, Graduate School of Biomedical Engineering, Tohoku
+                            University, 6-6-05 Aramaki Aza Aoba, Aobaku, Sendai 980-8579, Japan.
+                        </Affiliation>
+                    </AffiliationInfo>
+                </Author>
+            </AuthorList>
+            <Language>eng</Language>
+            <PublicationTypeList>
+                <PublicationType UI="D016428">Journal Article</PublicationType>
+                <PublicationType UI="D013485">Research Support, Non-U.S. Gov't</PublicationType>
+            </PublicationTypeList>
+            <ArticleDate DateType="Electronic">
+                <Year>2014</Year>
+                <Month>08</Month>
+                <Day>09</Day>
+            </ArticleDate>
+        </Article>
+        <MedlineJournalInfo>
+            <Country>Netherlands</Country>
+            <MedlineTA>Ultrasonics</MedlineTA>
+            <NlmUniqueID>0050452</NlmUniqueID>
+            <ISSNLinking>0041-624X</ISSNLinking>
+        </MedlineJournalInfo>
+        <CitationSubset>IM</CitationSubset>
+        <MeshHeadingList>
+            <MeshHeading>
+                <DescriptorName MajorTopicYN="N" UI="D001021">Aortic Valve</DescriptorName>
+                <QualifierName MajorTopicYN="N" UI="Q000502">physiology</QualifierName>
+            </MeshHeading>
+            <MeshHeading>
+                <DescriptorName MajorTopicYN="N" UI="D017536">Carotid Artery, Common</DescriptorName>
+                <QualifierName MajorTopicYN="Y" UI="Q000736">ultrasonography</QualifierName>
+            </MeshHeading>
+            <MeshHeading>
+                <DescriptorName MajorTopicYN="N" UI="D005260">Female</DescriptorName>
+            </MeshHeading>
+            <MeshHeading>
+                <DescriptorName MajorTopicYN="N" UI="D006801">Humans</DescriptorName>
+            </MeshHeading>
+            <MeshHeading>
+                <DescriptorName MajorTopicYN="N" UI="D066298">In Vitro Techniques</DescriptorName>
+            </MeshHeading>
+            <MeshHeading>
+                <DescriptorName MajorTopicYN="N" UI="D008297">Male</DescriptorName>
+            </MeshHeading>
+            <MeshHeading>
+                <DescriptorName MajorTopicYN="N" UI="D008943">Mitral Valve</DescriptorName>
+                <QualifierName MajorTopicYN="N" UI="Q000502">physiology</QualifierName>
+            </MeshHeading>
+            <MeshHeading>
+                <DescriptorName MajorTopicYN="N" UI="D011664">Pulmonary Valve</DescriptorName>
+                <QualifierName MajorTopicYN="N" UI="Q000502">physiology</QualifierName>
+            </MeshHeading>
+            <MeshHeading>
+                <DescriptorName MajorTopicYN="N" UI="D063177">Pulse Wave Analysis</DescriptorName>
+                <QualifierName MajorTopicYN="Y" UI="Q000379">methods</QualifierName>
+            </MeshHeading>
+            <MeshHeading>
+                <DescriptorName MajorTopicYN="N" UI="D014261">Tricuspid Valve</DescriptorName>
+                <QualifierName MajorTopicYN="N" UI="Q000502">physiology</QualifierName>
+            </MeshHeading>
+            <MeshHeading>
+                <DescriptorName MajorTopicYN="N" UI="D055815">Young Adult</DescriptorName>
+            </MeshHeading>
+        </MeshHeadingList>
+        <KeywordList Owner="NOTNLM">
+            <Keyword MajorTopicYN="N">Arterial Stiffness</Keyword>
+            <Keyword MajorTopicYN="N">High frame rate imaging</Keyword>
+            <Keyword MajorTopicYN="N">Pulse-wave velocity</Keyword>
+            <Keyword MajorTopicYN="N">Spatial compound imaging</Keyword>
+            <Keyword MajorTopicYN="N">Ultrasound</Keyword>
+        </KeywordList>
+    </MedlineCitation>
+</MedlineCitationSet>
