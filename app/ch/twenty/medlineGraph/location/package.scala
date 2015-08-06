@@ -11,6 +11,8 @@ package object location {
   case class CountryInfoIso(value:String) extends AnyVal
   case class CountryInfoIso3(value:String) extends AnyVal
 
-  case class GeoCoordinates(latitude:Double, longitude:Double)
+  case class GeoCoordinates(latitude:Double, longitude:Double){
+    override def toString = s"($latitude, $longitude)"
+  }
   case class Location(city: City, country: Country, coordinates: GeoCoordinates)
 }

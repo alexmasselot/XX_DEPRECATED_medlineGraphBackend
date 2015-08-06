@@ -1,4 +1,4 @@
-package scala.ch.twenty.medlineGraph.location
+package ch.twenty.medlineGraph.location
 
 import ch.twenty.medlineGraph.location.AlternateNameDirectory
 import ch.twenty.medlineGraph.models.Country

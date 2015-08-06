@@ -45,4 +45,3 @@ class AffiliationLocalizationCacheService extends AffiliationLocalizationService
     cache.put(key, location)
   }
 }
-
