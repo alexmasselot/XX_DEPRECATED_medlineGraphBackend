@@ -19,6 +19,10 @@ package object models {
   case class City(value:String) extends AnyVal
   case class Country(value:String) extends AnyVal
 
+  case class AbstractText(val value:String) {
+    override def toString = value
+  }
+
   case class Author(lastName:LastName, foreName:ForeName, initials:Initials, affiliation:Option[AffiliationInfo])
 
   case class AffiliationInfo(orig:String, institution: Option[Institution], city: Option[City], country: Option[Country])
