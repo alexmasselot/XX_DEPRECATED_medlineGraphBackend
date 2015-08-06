@@ -5,6 +5,9 @@ import ch.twenty.medlineGraph.models._
 import ch.twenty.medlineGraph.parsers.AffiliationInfoParser
 import org.specs2.mutable._
 
+import scala.io.Source
+import scala.util.Try
+
 /**
  * @author Alexandre Masselot.
  */
@@ -46,7 +49,7 @@ class AffiliationLocalizationMapQuestServiceSpecs extends Specification with Loc
                   "lng": 76.627252
                   }
                   }"""
-      val tloc = AffiliationLocalizationMapQuestService.parse(str)
+      val tloc = AffiliationLocalizationMapQuestService.parseOneLocation(str)
       tloc must beASuccessfulTry
       val loc = tloc.get
       loc.city must beEqualTo(City("Rohtak"))
@@ -69,5 +72,35 @@ class AffiliationLocalizationMapQuestServiceSpecs extends Specification with Loc
   checkDistance(-38.898556, -77.037852, 38.897147, -77.043934, 8650487)
   checkDistance(38.897147, -77.043934, -38.898556, -77.037852, 8650487)
 
+
+
+  "parse output count " in {
+    val lmap: Map[String, Try[Location]] = sampleLocationMap
+    lmap must haveSize(3)
+
+  }
+  "parse output cannot find " in {
+    val tLoc = sampleLocationMap("Department of Mechanical and Materials Engineering, Faculty of Engineering and Built Environment, University Kebangsaan Malaysia, UKM, 43600 UKM Bangi, Selangor Darul Ehsan, Malaysia")
+    tLoc must beAFailedTry
+  }
+
+  "parse output ambivalet " in {
+    val tLoc = sampleLocationMap("Red Lion")
+    tLoc must beAFailedTry
+  }
+
+  "parse output gotcha " in {
+    val tLoc = sampleLocationMap("Electronic Department, College of Engineering, Diyala University, Iraq")
+    tLoc must beASuccessfulTry
+
+    val loc =tLoc.get
+    loc must beEqualTo(Location(City("Rohtak"), Country("IN"), GeoCoordinates(28.83878, 76.627252)))
+  }
+
+  def sampleLocationMap: Map[String, Try[Location]] = {
+    val str = Source.fromFile("test/resources/mapquest-sample.json").getLines().mkString("\n")
+    val lmap = AffiliationLocalizationMapQuestService.parseMapQuestBatch(str)
+    lmap
+  }
 }
 

@@ -11,6 +11,11 @@ import scala.xml.Node
  * @author Alexandre Masselot.
  */
 object MedlineCitationXMLParser {
+  val reMultiLine = """\s*\n\s*""".r
+  def lineSinglify(str:String) = {
+    reMultiLine.replaceAllIn(str," ").trim
+  }
+  
   /**
    * one XML node into a potential Citation
    * @param node
@@ -19,10 +24,20 @@ object MedlineCitationXMLParser {
   def apply(node: Node): Try[Citation] = {
     try {
       val pmid = node \ "PMID" text
+      val nArticle = node \ "Article"
+      val abstractText = lineSinglify(nArticle \ "Abstract" \ "AbstractText" text)
+      val title = lineSinglify(nArticle \ "ArticleTitle" text)
+
+      val nPubDate = nArticle \ "Journal" \ "JournalIssue" \ "PubDate"
+      val pubDate = Date(nPubDate \ "Year" text,
+        nPubDate \ "Month" text,
+        nPubDate \ "Day" text
+      )
+
       val authors = for {
-        e <- node \ "Article" \ "AuthorList" \ "Author"
+        e <- nArticle \ "AuthorList" \ "Author"
       } yield {
-          val affiliation = (e \ "AffiliationInfo" \ "Affiliation").map(x => AffiliationInfoParser(x.text)).map(_.get).headOption
+          val affiliation = (e \ "AffiliationInfo" \ "Affiliation").map(x => AffiliationInfoParser(lineSinglify(x.text))).map(_.get).headOption
           Author(
             LastName(e \ "LastName" text),
             ForeName(e \ "ForeName" text),
@@ -30,7 +45,7 @@ object MedlineCitationXMLParser {
             affiliation
           )
         }
-      Success(Citation(PubmedId(pmid), authors))
+      Success(Citation(PubmedId(pmid), pubDate, Title(title), AbstractText(abstractText), authors))
     } catch {
       case e: Throwable => Failure(e)
     }

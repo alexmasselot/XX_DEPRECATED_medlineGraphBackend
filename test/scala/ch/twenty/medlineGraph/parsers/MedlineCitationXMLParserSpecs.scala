@@ -1,5 +1,6 @@
 package ch.twenty.medlineGraph.parsers
 
+import ch.twenty.medlineGraph.models.{AbstractText, Title}
 import org.specs2.mutable._
 
 /**
@@ -11,11 +12,27 @@ class MedlineCitationXMLParserSpecs extends Specification {
 
 
   "parsing citations" should {
-    "go through them" in {
+    "go through pubmed" in {
       val loader = new MedlineXMLLoader(fnamePubmedFred)
       val (itCitations, itExceptions)  = MedlineCitationXMLParser.iteratorsCitationFailures(loader.iteratorCitation)
       itExceptions must haveLength(1)
       itCitations must haveLength(175)
+    }
+    "go through medline" in {
+      val loader = new MedlineXMLLoader(fnameMedlineRnd)
+      val (itCitations, itExceptions)  = MedlineCitationXMLParser.iteratorsCitationFailures(loader.iteratorCitation)
+      itExceptions must haveLength(0)
+      itCitations must haveLength(8)
+    }
+
+    "check first" in {
+      val loader = new MedlineXMLLoader(fnameMedlineRnd)
+      val (itCitations, itExceptions)  = MedlineCitationXMLParser.iteratorsCitationFailures(loader.iteratorCitation)
+
+      val citation = itCitations.take(1).toList.head
+      citation.title must beEqualTo(Title("Studies on thermo-elastic heating of horns used in ultrasonic plastic welding."))
+      citation.abstractText.value must startingWith("Ultrasonic welding horn is half wavelength section or tool used to focus the ultrasonic vibrations to the components being welded. The horn is designed in such a way that it maximizes the amplitude")
+
     }
   }
 }

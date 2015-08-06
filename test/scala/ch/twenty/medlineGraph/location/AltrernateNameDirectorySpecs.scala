@@ -1,7 +1,5 @@
 package ch.twenty.medlineGraph.location
 
-import ch.twenty.medlineGraph.location.AlternateNameDirectory
-import ch.twenty.medlineGraph.models.Country
 import org.specs2.mutable._
 
 /**

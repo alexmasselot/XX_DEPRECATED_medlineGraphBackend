@@ -23,8 +23,7 @@ Several solutions do exist. We used two of them:
 
 #Authors
 
-Alexandre Masselot
-
+alexandre.masselot@gmail.com & martial.sankar@gmail.com 
 
 #LICENSE
 

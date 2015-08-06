@@ -13,6 +13,8 @@ package object models {
   case class ForeName(value:String) extends AnyVal
   case class Initials(value:String) extends AnyVal
 
+  case class Title(value:String) extends AnyVal
+
   case class Institution(value:String) extends AnyVal
   case class City(value:String) extends AnyVal
   case class Country(value:String) extends AnyVal
@@ -21,5 +23,5 @@ package object models {
 
   case class AffiliationInfo(orig:String, institution: Option[Institution], city: Option[City], country: Option[Country])
 
-  case class Citation(pubmedId: PubmedId, authors:Seq[Author])
+  case class Citation(pubmedId: PubmedId, pubDate:Date, title:Title, abstractText: AbstractText, authors:Seq[Author])
 }
