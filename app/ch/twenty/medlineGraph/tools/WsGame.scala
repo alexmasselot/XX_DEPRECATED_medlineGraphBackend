@@ -1,4 +1,4 @@
-package ch.twenty.medlineGraph.utils
+package ch.twenty.medlineGraph.tools
 
 import com.ning.http.client.AsyncHttpClientConfig
 import play.api.libs.json.{JsValue, Json}

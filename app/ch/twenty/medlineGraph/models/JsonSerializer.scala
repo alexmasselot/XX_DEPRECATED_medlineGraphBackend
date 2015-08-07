@@ -1,6 +1,8 @@
 package ch.twenty.medlineGraph.models
 
 import play.api.libs.json._
+import play.api.libs.json.Reads._
+import play.api.libs.functional.syntax._
 
 /**
  * serialize object to/from Json
@@ -60,11 +62,28 @@ object JsonSerializer {
   //    override def reads(json: JsValue): JsResult[XXX] = JsSuccess(XXX(json.as[String]))
   //  }
 
-  implicit val formatAuthor = Json.format[Author]
+  implicit val formatDate: Format[Date] = {
+    val dateReads: Reads[Date] =
+      (
+        (JsPath \ "year").readNullable[Int] and
+          (JsPath \ "month").readNullable[Int] and
+          (JsPath \ "day").readNullable[Int]
+        )(Date.apply _)
+
+    val dateWrites: Writes[Date] = (
+      (JsPath \ "year").writeNullable[Int] and
+        (JsPath \ "month").writeNullable[Int] and
+        (JsPath \ "rodayle").writeNullable[Int]
+      )(unlift(Date.unapply))
+
+    Format(dateReads, dateWrites)
+  }
 
   implicit val formatAffiliationInfo = Json.format[AffiliationInfo]
+  implicit val formatAuthor = Json.format[Author]
 
-  implicit val formatXXX = Json.format[Citation]
+
+  implicit val formatCitation = Json.format[Citation]
 
 
 }

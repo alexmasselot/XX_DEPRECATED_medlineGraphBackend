@@ -8,7 +8,7 @@ case class Date(year: Option[Int], month: Option[Int], day: Option[Int]) {
   //override def toString = s"""${year.getOrElse("-")}/${month.getOrElse("-")}/${day.getOrElse("-")}"""
 }
 
-object Date {
+object DateParser {
   val reNumber_2 = """(\d{1,2})""".r
   val reNumber_4 = """(\d\d\d\d)""".r
 
@@ -26,7 +26,7 @@ object Date {
     "dec" -> 12
   )
 
-  def apply(year: String, month: String, day: String): Date = {
+  def parse(year: String, month: String, day: String): Date = {
     Date(
       year match {
         case reNumber_4(i) => Some(i.toInt)

@@ -29,11 +29,10 @@ object MedlineCitationXMLParser {
       val title = lineSinglify(nArticle \ "ArticleTitle" text)
 
       val nPubDate = nArticle \ "Journal" \ "JournalIssue" \ "PubDate"
-      val pubDate = Date(nPubDate \ "Year" text,
+      val pubDate = DateParser.parse(nPubDate \ "Year" text,
         nPubDate \ "Month" text,
         nPubDate \ "Day" text
       )
-
       val authors = for {
         e <- nArticle \ "AuthorList" \ "Author"
       } yield {
