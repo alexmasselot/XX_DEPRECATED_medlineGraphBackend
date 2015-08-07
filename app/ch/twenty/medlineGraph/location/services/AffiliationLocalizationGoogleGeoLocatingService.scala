@@ -3,6 +3,7 @@ package ch.twenty.medlineGraph.location.services
 import java.io.File
 import java.util.Date
 
+import ch.twenty.medlineGraph.WithPrivateConfig
 import ch.twenty.medlineGraph.location._
 import ch.twenty.medlineGraph.models.{Country, City, AffiliationInfo}
 import ch.twenty.medlineGraph.parsers.{AffiliationInfoParser, CannotParseAffiliationInfo}
@@ -52,6 +53,13 @@ object AffiliationLocalizationGoogleGeoLocatingService extends AffiliationLocali
    * @return
    */
   def locate(affiliationInfo: AffiliationInfo): Try[Location] = {
+    val t = getTimeMillis
+    if(t-tThrottleLast< deltaThrottle){
+      val w = deltaThrottle - (t-tThrottleLast)
+      println(s"pausing for $w")
+      Thread.sleep(w)
+    }
+
     val results: List[GeoCoordinates] = GeocodingApi.geocode(context, AffiliationInfoParser.firstSentence(affiliationInfo)).await()
       .toList
       .map(x => GeoCoordinates(x.geometry.location.lat, x.geometry.location.lng))

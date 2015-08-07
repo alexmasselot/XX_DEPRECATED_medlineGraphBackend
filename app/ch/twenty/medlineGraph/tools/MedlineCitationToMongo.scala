@@ -5,6 +5,7 @@ import java.io.File
 
 import akka.event.Logging
 import akka.routing.{Broadcast, RoundRobinPool}
+import ch.twenty.medlineGraph.WithPrivateConfig
 import ch.twenty.medlineGraph.mongodb.MongoDbCitations
 import ch.twenty.medlineGraph.parsers.{MedlineXMLLoader, MedlineCitationXMLParser}
 import play.api.Logger
@@ -58,12 +59,15 @@ class MedlineLoaderOneDirectoryActor extends Actor with ActorLogging {
 
 
   def receive = {
-    case dirName: String => val dir = new File(dirName)
+    case dirName: String =>
+      log.info(s"loading all files from $dirName")
+      val dir = new File(dirName)
       val files = dir.listFiles.filter(_.getName endsWith ".gz")
       for {file <- files} {
         router ! file
       }
       router ! Broadcast(ThatsAllFolks)
+
     case ThatsAllFolks =>
       iFinishedWorkers = iFinishedWorkers +1
       if(iFinishedWorkers == nWorkers){
@@ -73,14 +77,11 @@ class MedlineLoaderOneDirectoryActor extends Actor with ActorLogging {
 
 }
 
-object MedlineCitationToMongo extends App {
+object MedlineCitationToMongo extends App with WithPrivateConfig{
   val system = ActorSystem("medline-batch-loader")
 
   // Create the 'greeter' actor
   val dirLoader = system.actorOf(Props[MedlineLoaderOneDirectoryActor], "medline-dir-loader")
-
-
-  dirLoader ! "/Users/amasselo/private/dev/medline-graph/data/medleasebaseline"
-
+  dirLoader ! config.getString("dir.resources.thirdparties")+ "/medleasebaseline"
 
 }

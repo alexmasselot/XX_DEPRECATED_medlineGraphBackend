@@ -1,4 +1,4 @@
-package ch.twenty.medlineGraph.location.services
+package ch.twenty.medlineGraph
 
 import java.io.File
 

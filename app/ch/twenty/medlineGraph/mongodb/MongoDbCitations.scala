@@ -14,19 +14,8 @@ import ch.twenty.medlineGraph.models.JsonSerializer._
 /**
  * @author Alexandre Masselot.
  */
-object MongoDbCitations {
-  val databaseName = "medline_graph"
+object MongoDbCitations extends MongoDbCommons{
   val collectionName = "citations"
-
-  lazy val collection: JSONCollection = {
-    val driver = new MongoDriver
-    val connection: MongoConnection = driver.connection(List("localhost:27017"), MongoConnectionOptions())
-
-    val database: DefaultDB = connection(databaseName)
-    Await.ready(database.collectionNames, 2 seconds)
-    database.collection[JSONCollection](collectionName)
-  }
-
 
   def insert(entries: Seq[Citation]): Future[Int] = {
     val bulkDocs = entries.map(implicitly[collection.ImplicitlyDocumentProducer](_))

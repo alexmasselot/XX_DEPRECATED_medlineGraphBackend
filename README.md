@@ -9,19 +9,24 @@ Distant collaborations can therefore be tagged when authors are not affiliated t
 
 ## Publications
  
-ftp://ftp.nlm.nih.gov/nlmdata/.medlease/gz
+ftp://ftp.nlm.nih.gov/nlmdata/.medleasebaseline/gz (& ftp://ftp.nlm.nih.gov/nlmdata/.medlease/gz - what is the difference?) 
 
 ## Geo location
 Several solutions do exist. We used two of them:
 
  * [Geonames](http://www.geonames.org/) project provides a *"geographical database covers all countries and contains over eight million placenames that are available for download free of charge"*, under a Creative Commons 3 License.
  * [mapquest](https://developer.mapquest.com/products/geocoding/) offers a batch possibility with a textual fields. It is used for affiliation not resolved by the first method
+ * [Google map Geocoding API](https://developers.google.com/maps/documentation/geocoding/intro) offers the possibility to have free text geo localiosation. A [Java API](https://github.com/googlemaps/google-maps-services-java) doe exists for more comfort. 
 
 # Methods
 
 ## Crunching the data
 
 ### Download
+
+#### medline
+    
+    lftp -e 'o ftp://ftp.nlm.nih.gov/nlmdata/.medleasebaseline/gz && mirror --verbose && quit'
 
 ### parse medline into mongodb
 
