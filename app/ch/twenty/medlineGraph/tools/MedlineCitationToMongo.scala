@@ -3,21 +3,13 @@ package ch.twenty.medlineGraph.tools
 
 import java.io.File
 
-import akka.event.Logging
-import akka.routing.{Broadcast, RoundRobinPool}
+import akka.actor._
+import akka.routing.RoundRobinPool
 import ch.twenty.medlineGraph.WithPrivateConfig
 import ch.twenty.medlineGraph.mongodb.MongoDbCitations
-import ch.twenty.medlineGraph.parsers.{MedlineXMLLoader, MedlineCitationXMLParser}
-import play.api.Logger
+import ch.twenty.medlineGraph.parsers.{MedlineCitationXMLParser, MedlineXMLLoader}
 
-import scala.concurrent._
-
-import play.api.Play.current
 import scala.concurrent.ExecutionContext.Implicits.global
-import scala.collection.JavaConversions._
-import scala.concurrent.duration._
-import akka.actor._
-
 import scala.util.{Failure, Success}
 
 /**
@@ -33,6 +25,10 @@ case class LoadSucceeded(n: Int)
 
 /**
  * takes one file and load it into mongo
+ * receive =>
+ * case File => load the file
+ *  - if it worked, send back LoadSucceeded
+ *  - if failed, send back LoadFailed with the file
  */
 class MedlineLoaderOneFileActor extends Actor with ActorLogging {
 
@@ -53,11 +49,18 @@ class MedlineLoaderOneFileActor extends Actor with ActorLogging {
 
 /**
  * get all .gz files from a directory and send them individually to a MedlineLoaderOneFileActor
+ * receive :
+ * case dirname: File =>
+ * - list all files with .gz
+ * - set the file to be processesd counter nSubmitedTask
+ * - send the file to  actual mongodb loader MedlineLoaderOneFileActor (well, the router of them)
+ * case LoadSucceeded(n) => decrease nSubmitedTask by 1; if zero, shutdown
+ * case LoadFailed(file, exc) => resend the failed file (mainly because of mongo timeout
  */
 class MedlineLoaderOneDirectoryActor extends Actor with ActorLogging {
   val nWorkers = 3
   var iFinishedWorkers = 0
-  var nSubmitedTask = 0
+  var nSubmitedFiles = 0
 
   val router: ActorRef =
     context.actorOf(RoundRobinPool(nWorkers).props(Props[MedlineLoaderOneFileActor]), "router")
@@ -67,13 +70,13 @@ class MedlineLoaderOneDirectoryActor extends Actor with ActorLogging {
       log.info(s"loading all files from $dirName")
       val dir = new File(dirName)
       val files = dir.listFiles.filter(_.getName endsWith ".gz")
-      nSubmitedTask =files.size
+      nSubmitedFiles =files.size
       for {file <- files} {
         router ! file
       }
     case LoadSucceeded(n) =>
-      nSubmitedTask= nSubmitedTask-1
-      if(nSubmitedTask==0){
+      nSubmitedFiles= nSubmitedFiles-1
+      if(nSubmitedFiles==0){
         context.system.shutdown()
       }
     case LoadFailed(file, e) =>
