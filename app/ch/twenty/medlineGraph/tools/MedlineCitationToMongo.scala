@@ -18,14 +18,18 @@ import scala.collection.JavaConversions._
 import scala.concurrent.duration._
 import akka.actor._
 
+import scala.util.{Failure, Success}
+
 /**
  * @author Alexandre Masselot.
  */
 
 
-object ThatsAllFolks
-
 object Go
+
+case class LoadFailed(file: File, e: Throwable)
+
+case class LoadSucceeded(n: Int)
 
 /**
  * takes one file and load it into mongo
@@ -36,14 +40,14 @@ class MedlineLoaderOneFileActor extends Actor with ActorLogging {
     case file: File =>
       val loader = new MedlineXMLLoader(file.getAbsolutePath)
       val (itCitations, itExceptions) = MedlineCitationXMLParser.iteratorsCitationFailures(loader.iteratorCitation)
-      val n = Await.result({
-        MongoDbCitations.insert(itCitations.toSeq)
-      }, 20 seconds)
       val nbErrors = itExceptions.size
-      log.info(s"$n\t$nbErrors\t${file.getName()}")
-      (n, nbErrors)
 
-    case ThatsAllFolks => sender ! ThatsAllFolks
+      MongoDbCitations.insert(itCitations.toSeq).onComplete {
+        case Success(n) =>
+          log.info(s"$n\t$nbErrors\t${file.getName()}")
+          sender ! LoadSucceeded(n)
+        case Failure(e) => sender ! LoadFailed(file, e)
+      }
   }
 }
 
@@ -52,36 +56,38 @@ class MedlineLoaderOneFileActor extends Actor with ActorLogging {
  */
 class MedlineLoaderOneDirectoryActor extends Actor with ActorLogging {
   val nWorkers = 3
-  var iFinishedWorkers = 0;
+  var iFinishedWorkers = 0
+  var nSubmitedTask = 0
 
   val router: ActorRef =
     context.actorOf(RoundRobinPool(nWorkers).props(Props[MedlineLoaderOneFileActor]), "router")
-
 
   def receive = {
     case dirName: String =>
       log.info(s"loading all files from $dirName")
       val dir = new File(dirName)
       val files = dir.listFiles.filter(_.getName endsWith ".gz")
+      nSubmitedTask =files.size
       for {file <- files} {
         router ! file
       }
-      router ! Broadcast(ThatsAllFolks)
-
-    case ThatsAllFolks =>
-      iFinishedWorkers = iFinishedWorkers +1
-      if(iFinishedWorkers == nWorkers){
+    case LoadSucceeded(n) =>
+      nSubmitedTask= nSubmitedTask-1
+      if(nSubmitedTask==0){
         context.system.shutdown()
       }
+    case LoadFailed(file, e) =>
+      log.warning(s"failed\t$file\t${e.getMessage}")
+      router ! file
   }
 
 }
 
-object MedlineCitationToMongo extends App with WithPrivateConfig{
+object MedlineCitationToMongo extends App with WithPrivateConfig {
   val system = ActorSystem("medline-batch-loader")
 
   // Create the 'greeter' actor
   val dirLoader = system.actorOf(Props[MedlineLoaderOneDirectoryActor], "medline-dir-loader")
-  dirLoader ! config.getString("dir.resources.thirdparties")+ "/medleasebaseline"
+  dirLoader ! config.getString("dir.resources.thirdparties") + "/medleasebaseline"
 
 }

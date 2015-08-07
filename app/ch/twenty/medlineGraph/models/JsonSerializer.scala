@@ -1,5 +1,6 @@
 package ch.twenty.medlineGraph.models
 
+import ch.twenty.medlineGraph.location.{GeoCoordinates, Location}
 import play.api.libs.json._
 import play.api.libs.json.Reads._
 import play.api.libs.functional.syntax._
@@ -78,6 +79,9 @@ object JsonSerializer {
 
     Format(dateReads, dateWrites)
   }
+
+  implicit val formatGeoCoordinates = Json.format[GeoCoordinates]
+  implicit val formatLocation = Json.format[Location]
 
   implicit val formatAffiliationInfo = Json.format[AffiliationInfo]
   implicit val formatAuthor = Json.format[Author]
