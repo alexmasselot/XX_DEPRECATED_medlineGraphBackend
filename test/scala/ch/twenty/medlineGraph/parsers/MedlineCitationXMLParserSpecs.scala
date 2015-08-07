@@ -15,8 +15,8 @@ class MedlineCitationXMLParserSpecs extends Specification {
     "go through pubmed" in {
       val loader = new MedlineXMLLoader(fnamePubmedFred)
       val (itCitations, itExceptions)  = MedlineCitationXMLParser.iteratorsCitationFailures(loader.iteratorCitation)
-      itExceptions must haveLength(1)
-      itCitations must haveLength(175)
+      itExceptions must haveLength(0)
+      itCitations must haveLength(176)
     }
     "go through medline" in {
       val loader = new MedlineXMLLoader(fnameMedlineRnd)

@@ -22,12 +22,9 @@ class AffiliationInfoParserSpecs extends Specification {
   }
 
   def checkSuccess(text: String, expectedFirstSentence:String, expectedInstitution: String, expectedCity: String, expectedCountry: String) = {
-    val tryAff = AffiliationInfoParser(text)
-    tryAff must beASuccessfulTry
+    val aff = AffiliationInfoParser(text)
 
-    val aff = tryAff.get
-
-    AffiliationInfoParser.firstSentence(aff.orig) must beEqualTo(expectedFirstSentence)
+    aff.firstSentence must beEqualTo(expectedFirstSentence)
 
     if (expectedInstitution == "") {
       aff.institution must beNone
@@ -196,6 +193,15 @@ class AffiliationInfoParserSpecs extends Specification {
         "Division of Cardiothoracic Surgery, Department of Surgery, The Li Ka Shing Faculty of Medicine, The University of Hong Kong, Queen Mary Hospital",
         "Hong Kong",
         "China"
+      )
+    }
+
+    "with email: Department of Orthopaedics, University of California, 9500 Gilman Drive, La Jolla, San Diego, CA 92093-0412, United States. Electronic address: klpsung@eng.ucsd.edu." in {
+      checkSuccess("Department of Orthopaedics, University of California, 9500 Gilman Drive, La Jolla, San Diego, CA 92093-0412, United States. Electronic address: klpsung@eng.ucsd.edu.",
+        "Department of Orthopaedics, University of California, 9500 Gilman Drive, La Jolla, San Diego, CA 92093-0412, United States",
+        "Department of Orthopaedics, University of California, 9500 Gilman Drive, La Jolla, San Diego",
+        "CA",
+        "United States"
       )
     }
 

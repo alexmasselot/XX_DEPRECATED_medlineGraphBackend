@@ -15,6 +15,8 @@ object AffiliationInfoParser {
   val reFirstSentenceGetFirstPointMultipleSentences = """(.*?)\. .*""".r
 
   val reHeadNumber = """^\d+""".r
+  val reRemoveEmail = """(.*)\.[^\.]*\s*[\w]+(?:\.\w+)*@(?:\w+\.)+\w+""".r
+
 
   //val reMulti = """(.+?) ; .*""".r
 
@@ -40,14 +42,18 @@ object AffiliationInfoParser {
 //  }
 
   def firstSentence(text: String):String = {
-    val strA = text.split(" ; ")(0)
+    val strA = text.split("; ")(0).trim
     val strB = strA match {
       case reFirstSentenceGetFirstPointMultipleSentences(s) => s
       case reFirstSentenceGetFirstPointOneSentence(s) => s
       case s => s
     }
 
-    reHeadNumber.replaceFirstIn(strB, "")
+    val strC = reHeadNumber.replaceFirstIn(strB, "")
+    strC match {
+      case reRemoveEmail(h) => h
+      case x => x
+    }
   }
 
   def firstSentence(affiliationInfo: AffiliationInfo):String = firstSentence(affiliationInfo.orig)
@@ -58,11 +64,15 @@ object AffiliationInfoParser {
     rePrefix.replaceFirstIn(reSuffix.replaceFirstIn(name.trim(), ""), "")
   }
 
-  def apply(text: String): Try[AffiliationInfo] = removeNumericOnly(firstSentence(text)) match {
-    case reAffiliationState(in, ci, co) => Success(AffiliationInfo(text, Some(Institution(in.trim)), Some(City(cleanName(ci))), Some(Country(cleanName(co)))))
-    case reAffiliationRef(in, ci, co) => Success(AffiliationInfo(text, Some(Institution(in.trim)), Some(City(cleanName(ci))), Some(Country(cleanName(co)))))
-    case reAffiliation2(in, co) => Success(AffiliationInfo(text, Some(Institution(in.trim)), None, Some(Country(cleanName(co)))))
-    case _ => Failure(CannotParseAffiliationInfo(text))
+
+  def apply(text: String): AffiliationInfo = {
+    val fs = firstSentence(text)
+    removeNumericOnly(fs) match {
+      case reAffiliationState(in, ci, co) => AffiliationInfo(text, fs, Some(Institution(in.trim)), Some(City(cleanName(ci))), Some(Country(cleanName(co))))
+      case reAffiliationRef(in, ci, co) => AffiliationInfo(text, fs, Some(Institution(in.trim)), Some(City(cleanName(ci))), Some(Country(cleanName(co))))
+      case reAffiliation2(in, co) => AffiliationInfo(text, fs, Some(Institution(in.trim)), None, Some(Country(cleanName(co))))
+      case _ => AffiliationInfo(text, fs, None, None, None)
+    }
   }
 }
 

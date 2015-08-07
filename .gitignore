@@ -92,3 +92,4 @@ project/boot/
 
 resources/*.txt
 tmp
+conf/private.conf

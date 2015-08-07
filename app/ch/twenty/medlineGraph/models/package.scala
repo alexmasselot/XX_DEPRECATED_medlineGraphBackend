@@ -25,7 +25,7 @@ package object models {
 
   case class Author(lastName:LastName, foreName:ForeName, initials:Initials, affiliation:Option[AffiliationInfo])
 
-  case class AffiliationInfo(orig:String, institution: Option[Institution], city: Option[City], country: Option[Country])
+  case class AffiliationInfo(orig:String, firstSentence:String, institution: Option[Institution], city: Option[City], country: Option[Country])
 
   case class Citation(pubmedId: PubmedId, pubDate:Date, title:Title, abstractText: AbstractText, authors:Seq[Author])
 }

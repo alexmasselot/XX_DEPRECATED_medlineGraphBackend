@@ -15,7 +15,7 @@ class AffiliationLocalizationGeoNameServiceSpecs extends Specification with Loca
     val service = new AffiliationLocalizationGeoNameService(filenameCities, filenameCountries, filenameAlternateNames)
 
     """College of Physicians and Surgeons, Columbia University, New York, NY, USA.""" in {
-      val tLoc = service.locate(AffiliationInfoParser("College of Physicians and Surgeons, Columbia University, New York City, NY, USA.").get)
+      val tLoc = service.locate(AffiliationInfoParser("College of Physicians and Surgeons, Columbia University, New York City, NY, USA."))
       tLoc must beSuccessfulTry
 
       val loc = tLoc.get
@@ -26,13 +26,13 @@ class AffiliationLocalizationGeoNameServiceSpecs extends Specification with Loca
     }
 
     """College of Physicians and Surgeons, Columbia University, Shīnḏanḏ, Lebanon.""" in {
-      val tLoc = service.locate(AffiliationInfoParser("College of Physicians and Surgeons, Columbia University, Shīnḏanḏ, Lebanon").get)
+      val tLoc = service.locate(AffiliationInfoParser("College of Physicians and Surgeons, Columbia University, Shīnḏanḏ, Lebanon"))
       tLoc must beAFailedTry
     }
 
     """locate a list""" in {
       val affs = List("College of Physicians and Surgeons, Columbia University, Shīnḏanḏ, Lebanon", "College of Physicians and Surgeons, Columbia University, New York City, NY, USA.")
-      .map(x => AffiliationInfoParser(x).get)
+      .map(x => AffiliationInfoParser(x))
       val locations = service.locate(affs)
       locations.map(_.isSuccess) must beEqualTo(List(false, true))
     }

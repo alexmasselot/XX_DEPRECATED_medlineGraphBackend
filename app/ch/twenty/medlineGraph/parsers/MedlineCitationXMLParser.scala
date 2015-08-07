@@ -36,7 +36,7 @@ object MedlineCitationXMLParser {
       val authors = for {
         e <- nArticle \ "AuthorList" \ "Author"
       } yield {
-          val affiliation = (e \ "AffiliationInfo" \ "Affiliation").map(x => AffiliationInfoParser(lineSinglify(x.text))).map(_.get).headOption
+          val affiliation = (e \ "AffiliationInfo" \ "Affiliation").map(x => AffiliationInfoParser(lineSinglify(x.text))).headOption
           Author(
             LastName(e \ "LastName" text),
             ForeName(e \ "ForeName" text),

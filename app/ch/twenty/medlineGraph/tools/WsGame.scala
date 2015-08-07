@@ -1,6 +1,10 @@
 package ch.twenty.medlineGraph.tools
 
+import java.io.File
+
 import com.ning.http.client.AsyncHttpClientConfig
+import com.typesafe.config.ConfigFactory
+import play.api.Play
 import play.api.libs.json.{JsValue, Json}
 import play.api.libs.ws.ning.{NingAsyncHttpClientConfigBuilder, NingWSClient}
 
@@ -35,7 +39,7 @@ class WsGrabber {
 object WsGame extends App {
   def grabber = new WsGrabber
 
-  grabber.get("http://www.google.com").map(println)
+  //grabber.get("http://www.google.com").map(println)
 
   val json = Json.obj(
     "locations" -> List("Department of Mechanical and Materials Engineering, Faculty of Engineering and Built Environment, University Kebangsaan Malaysia, UKM, 43600 UKM Bangi, Selangor Darul Ehsan, Malaysia",
@@ -43,6 +47,10 @@ object WsGame extends App {
       "Red Lion").map(s => Map("street"->s)),
     "options" -> Json.obj("thumbMaps" -> false, "maxResults" -> 10)
   )
+  val config = ConfigFactory.parseFile(new File("conf/private.conf"))
 
-  grabber.post("http://www.mapquestapi.com/geocoding/v1/batch?key=sFdj3faTK2tCHWtPvLrUUxviPZUE68AR", json)
+  println(config.getString("paf"))
+
+
+  //grabber.post("http://www.mapquestapi.com/geocoding/v1/batch?key=sFdj3faTK2tCHWtPvLrUUxviPZUE68AR", json).map(println)
 }

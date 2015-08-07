@@ -17,12 +17,12 @@ class AffiliationLocalizationCacheServiceSpecs extends Specification with Locati
     def myLoc = Location(City("Saint George"), Country("Switzerland"), GeoCoordinates(-120, 90))
 
     """don't find""" in {
-      val tLoc = service.locate(AffiliationInfoParser("College of Physicians and Surgeons, Columbia University, Saint George, Switzerland.").get)
+      val tLoc = service.locate(AffiliationInfoParser("College of Physicians and Surgeons, Columbia University, Saint George, Switzerland."))
       tLoc must beAFailedTry
     }
 
     """put and find""" in {
-      val aff = AffiliationInfoParser("College of Physicians and Surgeons, Columbia University, Saint George, Switzerland.").get
+      val aff = AffiliationInfoParser("College of Physicians and Surgeons, Columbia University, Saint George, Switzerland.")
       service.put(aff, myLoc)
 
       val tLoc = service.locate(aff)

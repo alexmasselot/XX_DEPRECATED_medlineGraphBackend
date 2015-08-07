@@ -46,7 +46,7 @@ object BasicCounts extends App {
   import ch.twenty.medlineGraph.models.{Country, City}
   import ch.twenty.medlineGraph.parsers.{MedlineCitationXMLParser, MedlineXMLLoader}
 
-  val loader = new MedlineXMLLoader("/Users/amasselo/private/dev/medline-graph/data/medleasebaseline/medline15n0779.xml.gz")
+  val loader = new MedlineXMLLoader("/Users/amasselo/private/dev/medline-graph/data/medleasebaseline/medline15n0423.xml.gz")
   val (itCitations, itExceptions) = MedlineCitationXMLParser.iteratorsCitationFailures(loader.iteratorCitation)
 
   val alternateDir = AlternateNameDirectory.load("resources/alternateNames.txt")
@@ -55,6 +55,7 @@ object BasicCounts extends App {
   logger.info(s"loaded countries ${countryDir.size}")
   val cityDir = CityDirectory.load("resources/cities15000.txt", countryDir)
   logger.info(s"loaded cities ${cityDir.size}")
+
 
   logger.info(s"number of errors: ${itExceptions.size}")
   val writer = new FileWriter("/tmp/affiliations.tsv")

@@ -12,7 +12,9 @@ libraryDependencies ++= Seq(
   ws,
   specs2 % Test,
   "org.reactivemongo" %% "reactivemongo" % "0.11.5",
-  "org.reactivemongo" %% "play2-reactivemongo" % "0.11.5.play24"
+  "org.reactivemongo" %% "play2-reactivemongo" % "0.11.5.play24",
+  "com.google.maps" % "google-maps-services" % "0.1.7",
+  "com.typesafe.akka" %% "akka-actor" % "2.3.12"
 )
 
 resolvers += "scalaz-bintray" at "http://dl.bintray.com/scalaz/releases"
