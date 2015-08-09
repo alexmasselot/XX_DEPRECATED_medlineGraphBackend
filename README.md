@@ -31,6 +31,8 @@ Several solutions do exist. We used two of them:
 ### parse medline into mongodb
 
 ### create an `affiliationShort` collection with only first sentence from the AffiliationInfo fields
+
+    db.affiliations.drop()
     db.runCommand({aggregate:'citations',
                    pipeline:[{$project:{pubmedId:1, 'authors':1}}, 
                              {$unwind:'$authors'},
@@ -60,6 +62,8 @@ Start the instance
 
 
 
+#References
+Geocoding Billions of Addresses: Toward a Spatial Record Linkage System with Big Data. Sen Xu1, Soren Flexner et Vitor Carvalho http://stko.geog.ucsb.edu/gibda2012/gibda2012_submission_2.pdf 
 
 #Authors
 
