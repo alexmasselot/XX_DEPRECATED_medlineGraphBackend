@@ -2,6 +2,7 @@ package ch.twenty.medlineGraph.tools
 
 import java.io.FileWriter
 
+import ch.twenty.medlineGraph.location.services.AffiliationLocalizationGeoNameService
 import ch.twenty.medlineGraph.models.{PubmedId, Citation, AffiliationInfo}
 import ch.twenty.medlineGraph.parsers.AffiliationInfoParser
 import play.api.Logger
@@ -61,6 +62,7 @@ object BasicCounts extends App {
   val writer = new FileWriter("/tmp/affiliations.tsv")
   val errorLogger = new AffiliationErrorLogger("/tmp/affiliation-error.txt")
 
+  lazy val service = AffiliationLocalizationGeoNameService.default
   def processCitation(citation: Citation, counter: StatCounter): StatCounter = {
     val affiliations = citation.authors
       .filter(_.affiliation.isDefined)
@@ -71,9 +73,7 @@ object BasicCounts extends App {
       counter.inc
     } else {
       val locations = affiliations.map({ aff =>
-        var city = City(aff.city.map(_.value).getOrElse(no))
-        val country = Country(aff.country.map(_.value).getOrElse(no))
-        val tLoc = cityDir(city, country)
+        val tLoc = service.locate(aff)
         if (tLoc.isFailure) {
           errorLogger.log(citation.pubmedId, aff, tLoc.failed.get)
         }

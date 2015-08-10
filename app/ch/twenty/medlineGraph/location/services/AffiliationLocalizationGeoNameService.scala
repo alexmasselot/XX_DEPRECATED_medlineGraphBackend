@@ -2,8 +2,8 @@ package ch.twenty.medlineGraph.location.services
 
 import ch.twenty.medlineGraph.WithPrivateConfig
 import ch.twenty.medlineGraph.location.{AlternateNameDirectory, Location, CountryDirectory, CityDirectory}
-import ch.twenty.medlineGraph.models.AffiliationInfo
-import ch.twenty.medlineGraph.parsers.CannotParseAffiliationInfo
+import ch.twenty.medlineGraph.models.{City, Country, AffiliationInfo}
+import ch.twenty.medlineGraph.parsers.{AffiliationInfoParser, CannotParseAffiliationInfo}
 
 import scala.util.{Failure, Try}
 
@@ -37,10 +37,17 @@ class AffiliationLocalizationGeoNameService(cityFilename: String = "resources/ci
    * @param affiliationInfo
    * @return
    */
-  def locate(affiliationInfo: AffiliationInfo): Try[Location] = (affiliationInfo.city, affiliationInfo.country) match {
-    case (Some(city), Some(country)) => cityDir(city, country)
-    case _ => Failure(UnavailableCityCountryException(affiliationInfo))
+  def locate(affiliationInfo: AffiliationInfo): Try[Location] = {
+    AffiliationInfoParser.potentialCityCountries(affiliationInfo)
+      .toIterator
+      .map(cityLoc=>cityDir(cityLoc.city, cityLoc.country))
+      .find(_.isSuccess)
+      .getOrElse(Failure(UnavailableCityCountryException(affiliationInfo)))
   }
+//    {(affiliationInfo.city, affiliationInfo.country) match {
+//    case (Some(city), Some(country)) => cityDir(city, country)
+//    case _ => Failure(UnavailableCityCountryException(affiliationInfo))
+//  }
 }
 
 object AffiliationLocalizationGeoNameService extends WithPrivateConfig{

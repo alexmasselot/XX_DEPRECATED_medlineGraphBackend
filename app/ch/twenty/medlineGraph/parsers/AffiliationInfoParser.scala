@@ -24,24 +24,25 @@ object AffiliationInfoParser {
   val reAffiliation2 = """\d*(.*),\s?(.*)""".r
   val reAffiliationState = """\d*(.*),\s?(.*?, [A-Z]{2}),\s?(.+)""".r
 
-//  val rePostalCode = """(?:(?:[A-Z]{1,2}\-)?[\d\-]+ )?(.*?)(?: [\d\-]+)?""".r
-//
-//  def removePostalCode(city:String):City = city match {
-//    case rePostalCode(c)=> City(c)
-//    case c => City(c)
-//  }
+  //  val rePostalCode = """(?:(?:[A-Z]{1,2}\-)?[\d\-]+ )?(.*?)(?: [\d\-]+)?""".r
+  //
+  //  def removePostalCode(city:String):City = city match {
+  //    case rePostalCode(c)=> City(c)
+  //    case c => City(c)
+  //  }
 
-  def removeNumericOnly(aff:String) = {
+  def removeNumericOnly(aff: String) = {
     val reNum = """,\s*([A-Z]{2}\s*)?([\s\d]*)?\s*,""".r
     reNum.replaceAllIn(aff, ",")
   }
-//
-//  def firstAff(text: String) = text match {
-//    case reMulti(s) => removeNumericOnly(s)
-//    case s => removeNumericOnly(s)
-//  }
 
-  def firstSentence(text: String):String = {
+  //
+  //  def firstAff(text: String) = text match {
+  //    case reMulti(s) => removeNumericOnly(s)
+  //    case s => removeNumericOnly(s)
+  //  }
+
+  def firstSentence(text: String): String = {
     val strA = text.split("; ")(0).trim
     val strB = strA match {
       case reFirstSentenceGetFirstPointMultipleSentences(s) => s
@@ -56,9 +57,36 @@ object AffiliationInfoParser {
     }
   }
 
-  def firstSentence(affiliationInfo: AffiliationInfo):String = firstSentence(affiliationInfo.orig)
+  val reSplitComma = """\s*,\s*""".r
+  val reRemoveCommaBlock = """\d+""".r
 
-  def cleanName(name:String):String ={
+  def potentialCityCountries(affiliationInfo: AffiliationInfo): List[CityLocation] = {
+    reSplitComma.split(affiliationInfo.firstSentence)
+      .toList
+      .filter({ x =>
+      x match {
+        case reRemoveCommaBlock() => false
+        case _ => true
+      }
+    })
+    .reverse
+    .take(3)
+    .combinations(2)
+    .map(x =>x.reverse)
+    .map(p => CityLocation(City(cleanName(p(0))), Country(cleanName(p(1)))))
+    .toList
+
+//    affiliationInfo.firstSentence match {
+//      case reAffiliationState(in, ci, co) => List(CityLocation(City(cleanName(ci)), Country(cleanName(co))))
+//      case reAffiliationRef(in, ci, co) => List(CityLocation(City(cleanName(ci)), Country(cleanName(co))))
+//      case reAffiliation2(in, co) => List(CityLocation(City(""), Country(cleanName(co))))
+//      case _ => Nil
+//    }
+  }
+
+  def firstSentence(affiliationInfo: AffiliationInfo): String = firstSentence(affiliationInfo.orig)
+
+  def cleanName(name: String): String = {
     val reSuffix = """[\-\s\d]+(\-[A-Z]{1,2})?$""".r
     val rePrefix = """^([A-Z]{1,2})?[\-\s\d]+""".r
     rePrefix.replaceFirstIn(reSuffix.replaceFirstIn(name.trim(), ""), "")
@@ -67,12 +95,13 @@ object AffiliationInfoParser {
 
   def apply(text: String): AffiliationInfo = {
     val fs = firstSentence(text)
-    removeNumericOnly(fs) match {
-      case reAffiliationState(in, ci, co) => AffiliationInfo(text, fs, Some(Institution(in.trim)), Some(City(cleanName(ci))), Some(Country(cleanName(co))))
-      case reAffiliationRef(in, ci, co) => AffiliationInfo(text, fs, Some(Institution(in.trim)), Some(City(cleanName(ci))), Some(Country(cleanName(co))))
-      case reAffiliation2(in, co) => AffiliationInfo(text, fs, Some(Institution(in.trim)), None, Some(Country(cleanName(co))))
-      case _ => AffiliationInfo(text, fs, None, None, None)
-    }
+    AffiliationInfo(text, fs)
+    //    removeNumericOnly(fs) match {
+    //      case reAffiliationState(in, ci, co) => AffiliationInfo(text, fs, Some(Institution(in.trim)), Some(City(cleanName(ci))), Some(Country(cleanName(co))))
+    //      case reAffiliationRef(in, ci, co) => AffiliationInfo(text, fs, Some(Institution(in.trim)), Some(City(cleanName(ci))), Some(Country(cleanName(co))))
+    //      case reAffiliation2(in, co) => AffiliationInfo(text, fs, Some(Institution(in.trim)), None, Some(Country(cleanName(co))))
+    //      case _ => AffiliationInfo(text, fs, None, None, None)
+    //    }
   }
 }
 

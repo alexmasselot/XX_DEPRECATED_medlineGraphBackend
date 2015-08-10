@@ -23,9 +23,11 @@ package object models {
     override def toString = value
   }
 
+  case class CityLocation(city:City, country:Country)
+
   case class Author(lastName:LastName, foreName:ForeName, initials:Initials, affiliation:Option[AffiliationInfo])
 
-  case class AffiliationInfo(orig:String, firstSentence:String, institution: Option[Institution], city: Option[City], country: Option[Country])
+  case class AffiliationInfo(orig:String, firstSentence:String)
 
   case class Citation(pubmedId: PubmedId, pubDate:Date, title:Title, abstractText: AbstractText, authors:Seq[Author])
 }
