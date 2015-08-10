@@ -37,6 +37,7 @@ case class GoogleGeoLocatingAmbivalentLocationException(geoCoordinates1: GeoCoor
  *
  */
 object AffiliationLocalizationGoogleGeoLocatingService extends AffiliationLocalizationService with WithPrivateConfig {
+  val isBulkOnly=false
   def maxCloseDistance = 50 * 1000
 
   //  val backupDir = new File(config.get(""))
@@ -54,9 +55,9 @@ object AffiliationLocalizationGoogleGeoLocatingService extends AffiliationLocali
    */
   def locate(affiliationInfo: AffiliationInfo): Try[Location] = {
     val t = getTimeMillis
-    if(t-tThrottleLast< deltaThrottle){
-      val w = deltaThrottle - (t-tThrottleLast)
-      println(s"pausing for $w")
+    val deltaLast = t-tThrottleLast
+    if(deltaThrottle< deltaThrottle){
+      val w = deltaThrottle - deltaThrottle
       Thread.sleep(w)
     }
 

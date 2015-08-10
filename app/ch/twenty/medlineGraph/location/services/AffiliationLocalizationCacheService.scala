@@ -16,6 +16,7 @@ case class CacheMisMatchException(key: String) extends Exception(key)
  * caches affiliationInfo
  */
 class AffiliationLocalizationCacheService extends AffiliationLocalizationService {
+  val isBulkOnly=false
   //TODO put a real cache
   val cache = scala.collection.mutable.Map[String, Location]()
 

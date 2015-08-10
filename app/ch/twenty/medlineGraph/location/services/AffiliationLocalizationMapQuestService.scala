@@ -1,15 +1,20 @@
 package ch.twenty.medlineGraph.location.services
 
-import java.io.File
+import java.io.{FileWriter, File}
 
+import ch.twenty.medlineGraph.WithPrivateConfig
 import ch.twenty.medlineGraph.location._
 import ch.twenty.medlineGraph.models.{Country, City, AffiliationInfo}
 import ch.twenty.medlineGraph.parsers.CannotParseAffiliationInfo
 import com.ning.http.client.AsyncHttpClientConfig
+import play.api.Logger
 import play.api.libs.json._
 import play.api.libs.ws.ning.{NingWSClient, NingAsyncHttpClientConfigBuilder}
 
+import scala.concurrent.Await
 import scala.util.{Success, Failure, Try}
+import scala.concurrent.ExecutionContext.Implicits.global
+import scala.concurrent.duration._
 
 /**
  * localization service based on MapQuest
@@ -26,6 +31,8 @@ case class MapQuestAmbivalentLocationException(geoCoordinates1: GeoCoordinates, 
 
 case class MapQuestNotFoundException(str: String) extends Exception(str)
 
+case class MapQuestNoAnswerException(str: String) extends Exception(str)
+
 case class UseBatchLocationException() extends Exception
 
 /**
@@ -33,13 +40,21 @@ case class UseBatchLocationException() extends Exception
  * @param serverKey privsate key for the server
  * @param backupDirname where to store all mapquest request
  */
-class AffiliationLocalizationMapQuestService(serverKey: MapQuestServerKey, backupDirname: String) extends AffiliationLocalizationService {
-  val config = new NingAsyncHttpClientConfigBuilder().build
-  val builder = new AsyncHttpClientConfig.Builder(config)
+object AffiliationLocalizationMapQuestService extends AffiliationLocalizationService with WithPrivateConfig {
+  val isBulkOnly = true
+
+  lazy val serverKey = config.getString("mapquest.api.key");
+
+  val backupDir = new File(config.getString("dir.resources.mapquest.backup"))
+  backupDir.mkdirs()
+
+  val clientConfig = new NingAsyncHttpClientConfigBuilder().build
+  val builder = new AsyncHttpClientConfig.Builder(clientConfig)
   val client = new NingWSClient(builder.build)
 
-  val backupDir = new File(backupDirname)
-  backupDir.mkdirs()
+  lazy val urlApi = s"http://www.mapquestapi.com/geocoding/v1/batch?key=$serverKey"
+
+  val batchSize = 100
 
   /**
    *
@@ -54,19 +69,59 @@ class AffiliationLocalizationMapQuestService(serverKey: MapQuestServerKey, backu
    * @param affiliationInfos
    * @return
    */
-  override def locate(affiliationInfos: Traversable[AffiliationInfo]): Traversable[Try[Location]] = {
-    ???
+  override def locate(affiliationInfos: Iterable[AffiliationInfo]): Iterable[Try[Location]] = {
+    val x = (for {
+      slice <- affiliationInfos.sliding(batchSize, batchSize)
+    } yield {
+        val sliceAff = slice.toList
+        locateOnBatch(sliceAff)
+      }).flatten
+    x.toIterable
   }
 
-  def urlApi = s"http://www.mapquestapi.com/geocoding/v1/batch?key=$serverKey"
+  def locateOnBatch(affiliationInfos: List[AffiliationInfo]): List[Try[Location]] = {
+    val params = buildRequest(affiliationInfos)
+    Logger.info(s"searching in MapQuest (${affiliationInfos.size})")
 
-  def buildRequest(affiliationInfos: Traversable[AffiliationInfo]): Unit ={
+    val fut = {
+      client.url(urlApi).post(Json.stringify(params)).map({
+        resp =>
+          println("------------")
+          println(resp.body)
+          val jsResponse = Json.parse(resp.body).as[JsObject]
 
+          val backupFile = new File(s"${backupDir.getAbsolutePath()}/mapquest-response-${params.hashCode()}.json")
+          val writer = new FileWriter(backupFile)
+          writer.write(Json.prettyPrint(jsResponse))
+          writer.close()
+
+          val mapResp = parseMapQuestBatch(jsResponse)
+          affiliationInfos.map(_.firstSentence)
+            .map({ key =>
+            mapResp.get(key) match {
+              case Some(ans) => ans
+              case None => Failure(MapQuestNoAnswerException(key))
+            }
+          })
+      })
+    } recover({ case e =>
+      logger.warn(s"MAPQUEST GLOBAL PARSING ERROR: ${e.getMessage}\n\t"+ e.getStackTrace.toList.mkString("\n\t"))
+        Nil
+    })
+
+    Await.result(fut, 60 seconds)
   }
-}
 
-object AffiliationLocalizationMapQuestService {
-  val maxCloseDistance=10*1000
+  def buildRequest(affiliationInfos: List[AffiliationInfo]): JsObject = {
+    Json.obj(
+      "locations" -> affiliationInfos
+        .map(_.firstSentence)
+        .map(s => Map("street" -> s)),
+      "options" -> Json.obj("thumbMaps" -> false, "maxResults" -> 10)
+    )
+  }
+
+  val maxCloseDistance = 10 * 1000
 
 
   def parseMapQuestBatch(jsonString: String): Map[String, Try[Location]] =
@@ -84,16 +139,16 @@ object AffiliationLocalizationMapQuestService {
         .filterNot(j => (j \ "geocodeQuality").as[String] == "COUNTRY")
         .map(j => parseOneLocation(j))
         .filter(_.isSuccess)
-      .map (_.get)
+        .map(_.get)
 
       val tryLocation = locations match {
         case Nil => Failure(MapQuestNotFoundException(key))
-        case x1::x2::Nil if LocationDistance.distance(x1.coordinates, x2.coordinates)>maxCloseDistance => Failure(MapQuestAmbivalentLocationException(x1.coordinates, x2.coordinates))
-        case x::xs => Success(x)
+        case x1 :: x2 :: Nil if LocationDistance.distance(x1.coordinates, x2.coordinates) > maxCloseDistance => Failure(MapQuestAmbivalentLocationException(x1.coordinates, x2.coordinates))
+        case x :: xs => Success(x)
       }
       (key, tryLocation)
     })
-    .toMap
+      .toMap
   }
 
 

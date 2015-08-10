@@ -1,5 +1,6 @@
 package ch.twenty.medlineGraph.location.services
 
+import ch.twenty.medlineGraph.WithPrivateConfig
 import ch.twenty.medlineGraph.location.{AlternateNameDirectory, Location, CountryDirectory, CityDirectory}
 import ch.twenty.medlineGraph.models.AffiliationInfo
 import ch.twenty.medlineGraph.parsers.CannotParseAffiliationInfo
@@ -23,7 +24,10 @@ case class UnavailableCityCountryException(affiliationInfo: AffiliationInfo) ext
  */
 class AffiliationLocalizationGeoNameService(cityFilename: String = "resources/cities15000.txt",
                                             coutryFilename: String = "resources/countryInfo.txt",
-                                            alternatenamesFilename: String = "resources/alternateNames.txt") extends AffiliationLocalizationService {
+                                            alternatenamesFilename: String = "resources/alternateNames.txt"
+                                             ) extends AffiliationLocalizationService {
+  val isBulkOnly=false
+
   val alternateNameDirectory = AlternateNameDirectory.load(alternatenamesFilename)
   val countryDir = CountryDirectory.load(coutryFilename, alternateNameDirectory)
   val cityDir = CityDirectory.load(cityFilename, countryDir)
@@ -37,4 +41,12 @@ class AffiliationLocalizationGeoNameService(cityFilename: String = "resources/ci
     case (Some(city), Some(country)) => cityDir(city, country)
     case _ => Failure(UnavailableCityCountryException(affiliationInfo))
   }
+}
+
+object AffiliationLocalizationGeoNameService extends WithPrivateConfig{
+  def default = new AffiliationLocalizationGeoNameService(
+    config.getString("dir.resources.thirdparties") + "/geonames/cities15000.txt",
+    config.getString("dir.resources.thirdparties") + "/geonames/countryInfo.txt",
+    config.getString("dir.resources.thirdparties") + "/geonames/alternateNames.txt"
+  )
 }
