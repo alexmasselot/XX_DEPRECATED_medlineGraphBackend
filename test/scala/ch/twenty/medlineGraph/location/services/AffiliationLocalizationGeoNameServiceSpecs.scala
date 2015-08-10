@@ -14,6 +14,28 @@ class AffiliationLocalizationGeoNameServiceSpecs extends Specification with Loca
 
     val service = new AffiliationLocalizationGeoNameService(filenameCities, filenameCountries, filenameAlternateNames)
 
+    """College of Physicians and Surgeons, Columbia University, New York, USA.""" in {
+      val tLoc = service.locate(AffiliationInfoParser("College of Physicians and Surgeons, Columbia University, New York City, NY, USA."))
+      tLoc must beSuccessfulTry
+
+      val loc = tLoc.get
+      loc.city must beEqualTo(City("New York City"))
+      loc.country must beEqualTo(Country("-"))
+      loc.coordinates.latitude must beEqualTo(40.71427)
+      loc.coordinates.longitude must beEqualTo(-74.00597)
+    }
+
+    """College of Physicians and Surgeons, Columbia University, New York, badaboum, USA.""" in {
+      val tLoc = service.locate(AffiliationInfoParser("College of Physicians and Surgeons, Columbia University, New York City, badaboum, USA."))
+      tLoc must beSuccessfulTry
+
+      val loc = tLoc.get
+      loc.city must beEqualTo(City("New York City"))
+      loc.country must beEqualTo(Country("-"))
+      loc.coordinates.latitude must beEqualTo(40.71427)
+      loc.coordinates.longitude must beEqualTo(-74.00597)
+    }
+
     """College of Physicians and Surgeons, Columbia University, New York, NY, USA.""" in {
       val tLoc = service.locate(AffiliationInfoParser("College of Physicians and Surgeons, Columbia University, New York City, NY, USA."))
       tLoc must beSuccessfulTry
@@ -24,6 +46,18 @@ class AffiliationLocalizationGeoNameServiceSpecs extends Specification with Loca
       loc.coordinates.latitude must beEqualTo(40.71427)
       loc.coordinates.longitude must beEqualTo(-74.00597)
     }
+
+    """J. N. Adam Memorial Hospital, Perrysburg, N. Y.""" in {
+      val tLoc = service.locate(AffiliationInfoParser("J. N. Adam Memorial Hospital, Perrysburg, N. Y."))
+      tLoc must beSuccessfulTry
+
+      val loc = tLoc.get
+      loc.city must beEqualTo(City("Perrysburg"))
+      loc.country must beEqualTo(Country("-"))
+      loc.coordinates.latitude must beEqualTo(41.557)
+      loc.coordinates.longitude must beEqualTo(-83.62716)
+    }
+
 
     """College of Physicians and Surgeons, Columbia University, Shīnḏanḏ, Lebanon.""" in {
       val tLoc = service.locate(AffiliationInfoParser("College of Physicians and Surgeons, Columbia University, Shīnḏanḏ, Lebanon"))
@@ -38,3 +72,4 @@ class AffiliationLocalizationGeoNameServiceSpecs extends Specification with Loca
     }
   }
 }
+

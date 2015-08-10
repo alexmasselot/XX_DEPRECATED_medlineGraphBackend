@@ -9,17 +9,6 @@ import scala.util.Success
  * @author Alexandre Masselot.
  */
 class AffiliationInfoParserSpecs extends Specification {
-  "firstSentence()" should {
-    "ha haha." in {
-      AffiliationInfoParser.firstSentence("ha haha.") must beEqualTo("ha haha")
-    }
-    "ha haha" in {
-      AffiliationInfoParser.firstSentence("ha haha") must beEqualTo("ha haha")
-    }
-    "ha haha. paf le chien." in {
-      AffiliationInfoParser.firstSentence("ha haha. paf le chien.") must beEqualTo("ha haha")
-    }
-  }
 
   def checkFirstSentence(comment: String, text: String, expectedFirstSentence: String) = {
     s"firstSentence $comment: $text" in {
@@ -40,6 +29,21 @@ class AffiliationInfoParserSpecs extends Specification {
 
 
   "apply()" should {
+
+    checkFirstSentence("JohnB.",
+      "John B. Pierce Laboratory of Hygiene, New Haven.",
+      "John B. Pierce Laboratory of Hygiene, New Haven"
+    )
+
+    checkFirstSentence("dept.",
+      "Dept. of Clinical Radiology, University of Muenster, Germany.",
+      "Dept. of Clinical Radiology, University of Muenster, Germany"
+    )
+    checkFirstSentence("dot and email",
+      "St. Georges Healthcare NHS Trust, London, United Kingdom (N.F.). snick@doctors.org.uk.",
+      "St. Georges Healthcare NHS Trust, London, United Kingdom (N.F.)"
+    )
+
     checkFirstSentence("",
       "Centre for Epidemiology and Biostatistics, Melbourne School of Population and Global Health, University of Melbourne, Melbourne, Australia.",
       "Centre for Epidemiology and Biostatistics, Melbourne School of Population and Global Health, University of Melbourne, Melbourne, Australia"
@@ -82,7 +86,7 @@ class AffiliationInfoParserSpecs extends Specification {
       "The University of Texas Medical School, Department of Diagnostic and Interventional Imaging, Ultrasonics Laboratory, Houston, TX, USA"
     )
     checkCityCountries("The University of Texas Medical School, Department of Diagnostic and Interventional Imaging, Ultrasonics Laboratory, Houston, TX, USA. Electronic address: AKThittai@iitm.ac.in.",
-      List(("TX", "USA"),("Houston", "USA"))
+      List(("TX", "USA"), ("Houston", "USA"))
     )
 
     checkFirstSentence("postal code with dash",

@@ -45,7 +45,7 @@ object AffiliationInfoParser {
   def firstSentence(text: String): String = {
     val strA = text.split("; ")(0).trim
     val strB = strA match {
-      case reFirstSentenceGetFirstPointMultipleSentences(s) => s
+      //case reFirstSentenceGetFirstPointMultipleSentences(s) => s
       case reFirstSentenceGetFirstPointOneSentence(s) => s
       case s => s
     }

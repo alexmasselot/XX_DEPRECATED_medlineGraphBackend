@@ -12,7 +12,7 @@ class CityDirectorySpecs extends Specification with LocationSamples {
   "CityDirectory" should {
     "check size" in {
       val dir = loadDir
-      dir.size must beEqualTo(120)
+      dir.size must beEqualTo(121)
     }
 
     "check Rome countryCodeIso" in {

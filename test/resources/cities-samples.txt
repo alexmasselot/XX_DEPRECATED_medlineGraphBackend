@@ -118,3 +118,4 @@
 5134295	Rome	Rome	Rim,Roma,Roum,lom,luo ma,rm  nywywrk,rwmy  nywywrk,Рим,Роум,رم، نیویورک,رومي، نيويورك,羅馬,롬	43.21285	-75.45573	P	PPL	US		NY	065			33725	139	141	America/New_York	2011-05-14
 4219762	Rome	Rome	RMG,Roum,lom,Роум,롬	34.25704	-85.16467	P	PPLA2	US		GA	115			36303	187	190	America/New_York	2011-05-14
 5134295	Rome	Rome	Rim,Roma,Roum,lom,luo ma,rm  nywywrk,rwmy  nywywrk,Рим,Роум,رم، نیویورک,رومي، نيويورك,羅馬,롬	43.21285	-75.45573	P	PPL	US		NY	065			33725	139	141	America/New_York	2011-05-14
+5166516	Perrysburg	Perrysburg	Pehrrisburg,Perisburg,byrysbwrgh  awhayw,prysbwrg  awhayw,Перисбург,Пэррисбург,بيريسبورغ، أوهايو,پریسبورگ، اوهایو	41.557	-83.62716	P	PPL	US		OH	173			20623	193	195	America/New_York	2011-05-14
