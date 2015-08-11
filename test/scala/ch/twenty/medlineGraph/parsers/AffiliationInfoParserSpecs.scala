@@ -186,6 +186,10 @@ class AffiliationInfoParserSpecs extends Specification {
       List(("CA", "United States"))
     )
 
+    checkCityCountries("\"Department of Medicine, University of Washington, Seattle 98195",
+      List(("University of Washington", "Seattle"))
+    )
+
     //    "dot in the middle: Department of Nephrology, Post Graduate Institute of Medical Education and Research, Dr. Ram Manohar Lohia Hospital, New Delhi, India." in {
     //      checkSuccess("Department of Nephrology, Post Graduate Institute of Medical Education and Research, Dr. Ram Manohar Lohia Hospital, New Delhi, India.",
     //        "Department of Nephrology, Post Graduate Institute of Medical Education and Research, Dr. Ram Manohar Lohia Hospital, New Delhi, India",

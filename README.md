@@ -30,6 +30,8 @@ Several solutions do exist. We used two of them:
 
 ### parse medline into mongodb
 
+run MedlineCitationToMongo
+
 ### create an `affiliationShort` collection with only first sentence from the AffiliationInfo fields
 
     db.affiliations.drop()
@@ -39,10 +41,21 @@ Several solutions do exist. We used two of them:
                              {$match:{'authors.affiliation':{$exists:1}}},
                              {$project:{pubmedId:1, 'affiliationShort':'$authors.affiliation.firstSentence', _id:0}},
                              {$group:{_id: '$affiliationShort', pubmedIds:{$push:'$pubmedId'}}},
-                             {$project:{affiliationShort:'$_id', _id:0, pubmedIds:1}},
+                             {$project:{affiliationShort:'$_id', _id:0, pubmedIds:1, nbPumbmedIds:{$size:'$pubmedIds'}}},
+                             {$sort:{nbPumbmedIds:-1}},
                              {$out:'affiliations'}
                              ],
                   allowDiskUse:true})
+     db.affiliations.createIndex({nbPumbmedIds:1} )
+           
+### try to resolve affiliations
+                  
+run AffiliationResolverMongo
+                  
+### What has been matched 
+    
+    db.affiliations.find({resolvedLocation:{$exists:true}}).count()
+    db.affiliations.find({resolvedLocation:{$exists:false}, resolverTried:'geonames'}).count()
 
 #Setting up the application
 

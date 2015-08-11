@@ -1,7 +1,7 @@
 package ch.twenty.medlineGraph.location.services
 
 import ch.twenty.medlineGraph.WithPrivateConfig
-import ch.twenty.medlineGraph.location.{AlternateNameDirectory, Location, CountryDirectory, CityDirectory}
+import ch.twenty.medlineGraph.location._
 import ch.twenty.medlineGraph.models.{City, Country, AffiliationInfo}
 import ch.twenty.medlineGraph.parsers.{AffiliationInfoParser, CannotParseAffiliationInfo}
 
@@ -18,39 +18,45 @@ case class UnavailableCityCountryException(affiliationInfo: AffiliationInfo) ext
 
 /**
  *
- * @param cityFilename
- * @param coutryFilename
- * @param alternatenamesFilename
+ * @param cityFilename the  city repository file name
+ * @param coutryFilename the  country repository file name
+ * @param alternatenamesFilename the altername directory repository file name
  */
 class AffiliationLocalizationGeoNameService(cityFilename: String = "resources/cities15000.txt",
                                             coutryFilename: String = "resources/countryInfo.txt",
                                             alternatenamesFilename: String = "resources/alternateNames.txt"
                                              ) extends AffiliationLocalizationService {
-  val isBulkOnly=false
+  val isBulkOnly = false
 
   val alternateNameDirectory = AlternateNameDirectory.load(alternatenamesFilename)
   val countryDir = CountryDirectory.load(coutryFilename, alternateNameDirectory)
   val cityDir = CityDirectory.load(cityFilename, countryDir)
 
   /**
-   *
-   * @param affiliationInfo
+   * try a list of CityDirectory strategies to elucidate the afilliation info field
+   * @param affiliationInfo free text
    * @return
    */
   def locate(affiliationInfo: AffiliationInfo): Try[Location] = {
     AffiliationInfoParser.potentialCityCountries(affiliationInfo)
       .toIterator
-      .map(cityLoc=>cityDir(cityLoc.city, cityLoc.country))
+      .map(cityLoc => cityDir(cityLoc.city, cityLoc.country))
+      .takeWhile({
+      case Failure(e: CityCountryIncompatibilityException) =>
+        false
+      case _ => true
+    })
       .find(_.isSuccess)
       .getOrElse(Failure(UnavailableCityCountryException(affiliationInfo)))
   }
-//    {(affiliationInfo.city, affiliationInfo.country) match {
-//    case (Some(city), Some(country)) => cityDir(city, country)
-//    case _ => Failure(UnavailableCityCountryException(affiliationInfo))
-//  }
+
+  //    {(affiliationInfo.city, affiliationInfo.country) match {
+  //    case (Some(city), Some(country)) => cityDir(city, country)
+  //    case _ => Failure(UnavailableCityCountryException(affiliationInfo))
+  //  }
 }
 
-object AffiliationLocalizationGeoNameService extends WithPrivateConfig{
+object AffiliationLocalizationGeoNameService extends WithPrivateConfig {
   def default = new AffiliationLocalizationGeoNameService(
     config.getString("dir.resources.thirdparties") + "/geonames/cities15000.txt",
     config.getString("dir.resources.thirdparties") + "/geonames/countryInfo.txt",

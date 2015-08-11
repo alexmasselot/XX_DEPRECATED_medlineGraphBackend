@@ -3,12 +3,13 @@ package ch.twenty.medlineGraph.mongodb
 import ch.twenty.medlineGraph.location.Location
 import play.api.Logger
 import play.api.libs.iteratee.{Enumerator, Iteratee}
-import play.api.libs.json.{Json, JsObject}
+import play.api.libs.json.{JsArray, Json, JsObject}
 import reactivemongo.api.ReadPreference.PrimaryPreferred
 import reactivemongo.api._
 import play.api.libs.json.Reads._
 import play.modules.reactivemongo.json._
 import play.modules.reactivemongo.json.collection._
+import reactivemongo.api.commands.GetLastError
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.duration._
@@ -29,36 +30,45 @@ object MongoDbAffiliations extends MongoDbCommons {
    * @param resolverName something like 'google', 'geonames'. There is no point of trying again a resolver that has already bee attempted
    * @return a list[JsObject, String] where the string is the affiliation text and the JsObject the object to be modified and turned back into the data base)
    */
-  def findUnresolved(resolverName: String): Future[Iterator[JsObject]] = {
-    val query = Json.obj(
-      "resolvedLocation" -> Json.obj("$exists" -> 0),
-      "resolverTried" -> Json.obj("$ne" -> resolverName)
-    )
-    println(Json.stringify(query))
-    collection.find(query)
+  //  def findUnresolved(resolverName: String): Future[Iterator[JsObject]] = {
+  //    val query = Json.obj(
+  //      "resolvedLocation" -> Json.obj("$exists" -> 0),
+  //      "resolverTried" -> Json.obj("$ne" -> resolverName)
+  //    )
+  //    println(Json.stringify(query))
+  //    collection.find(query)
+  //      .cursor[JsObject]
+  //      .collect[Iterator]()
+  //
+  //  }
+
+  def cursorUnresolved(resolverName: String): Cursor[JsObject] = {
+    val queryParam = Json.obj("resolvedLocation" -> Json.obj("$exists" -> false),
+      "resolverTried" -> Json.obj("$ne" -> resolverName))
+    val sortParam = Json.obj("nbPumbmedIds" -> -1)
+    Logger.info(s"query: ${Json.stringify(queryParam)}")
+    collection.find(queryParam)
+      .sort(sortParam)
       .cursor[JsObject]
-      .collect[Iterator]()
+
   }
 
-  def cursorUnresolved: Cursor[JsObject] = {
-    val query = Json.obj("resolvedLocation" -> Json.obj("$exists" -> 0))
-    collection.find(query)
-      .cursor[JsObject]
+
+
+
+  def enumerateUnresolved(resolverName: String): Enumerator[JsObject] = {
+    cursorUnresolved(resolverName).enumerate()
   }
 
-  def enumerateUnresolved: Enumerator[JsObject] = {
-    cursorUnresolved.enumerate()
-  }
-
-  def enumerateBulksUnresolved: Enumerator[Iterator[JsObject]] = {
-    cursorUnresolved.enumerateBulks()
+  def enumerateBulksUnresolved(resolverName: String): Enumerator[Iterator[JsObject]] = {
+    cursorUnresolved(resolverName).enumerateBulks()
   }
 
   /**
    * process one json object from mongo, eventually add the match location or update the resolverTried set
-   * @param resolverName
-   * @param resolver
-   * @param jsObj
+   * @param resolverName the solver method name
+   * @param resolver the rsolving function
+   * @param jsObj the json object to eventually resolve
    * @return
    */
   def processOne(resolverName: String, resolver: ((String) => Try[Location]), jsObj: JsObject): Unit = {
@@ -72,9 +82,9 @@ object MongoDbAffiliations extends MongoDbCommons {
 
   /**
    * update object with location if success or add resolverName to resolverTried set
-   * @param jsObj
-   * @param resolverName
-   * @param tLoc
+   * @param jsObj the object to edit
+   * @param resolverName resolver name
+   * @param tLoc location success/failure
    */
   def storeAttemptInMongo(jsObj: JsObject, tLoc: Try[Location], resolverName: String, affString: String): Any = {
     tLoc match {
@@ -89,13 +99,13 @@ object MongoDbAffiliations extends MongoDbCommons {
           )
         }, 1 second)
       case Failure(e) =>
-        println(s"failed\t\t${e.getMessage}")
+        println(s"failed\t${e.getClass.getSimpleName}\t${e.getMessage}")
         Await.result({
           collection.update(jsObj, Json.obj(
             "$addToSet" -> Json.obj(
               "resolverTried" -> resolverName
             )
-          ))
+          ), writeConcern = GetLastError.Acknowledged)
         }, 1 second)
     }
   }
@@ -128,7 +138,7 @@ object MongoDbAffiliations extends MongoDbCommons {
    * @return
    */
   def resolveBulks(resolverName: String, resolverBulks: (Iterable[String]) => Iterable[Try[Location]]): Future[Unit] = {
-    enumerateBulksUnresolved.run(processBulksUnresolved(resolverName, resolverBulks))
+    enumerateBulksUnresolved(resolverName).run(processBulksUnresolved(resolverName, resolverBulks))
   }
 
   /**
@@ -138,7 +148,7 @@ object MongoDbAffiliations extends MongoDbCommons {
    * @return
    */
   def resolve(resolverName: String, resolver: ((String) => Try[Location])): Future[Unit] = {
-    enumerateUnresolved.run(processUnresolved(resolverName, resolver))
+    enumerateUnresolved(resolverName).run(processUnresolved(resolverName, resolver))
   }
 
 }

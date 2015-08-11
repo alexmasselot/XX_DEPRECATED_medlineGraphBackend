@@ -17,7 +17,7 @@ object AffiliationResolverMongo extends App with WithPrivateConfig {
 
 
   //val resolverName = "google"
-  val resolverName = "mapquest"
+  val resolverName = "geonames"
 
   def resolverService(rName: String): AffiliationLocalizationService = rName match {
     case "google" => AffiliationLocalizationGoogleGeoLocatingService
@@ -37,8 +37,12 @@ object AffiliationResolverMongo extends App with WithPrivateConfig {
     MongoDbAffiliations.resolve(resolverName, resolver)
   })
     .onComplete({
-    case Success(_) => logger.info(s"complete")
-    case Failure(e) => logger.warn(e.getMessage())
+    case Success(_) =>
+      logger.info(s"complete")
+      System.exit(0)
+    case Failure(e) =>
+      logger.warn(e.getMessage)
+      System.exit(0)
   })
 
 }

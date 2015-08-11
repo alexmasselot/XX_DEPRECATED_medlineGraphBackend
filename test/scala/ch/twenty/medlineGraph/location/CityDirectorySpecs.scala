@@ -12,7 +12,7 @@ class CityDirectorySpecs extends Specification with LocationSamples {
   "CityDirectory" should {
     "check size" in {
       val dir = loadDir
-      dir.size must beEqualTo(121)
+      dir.size must beEqualTo(124)
     }
 
     "check Rome countryCodeIso" in {
@@ -21,7 +21,7 @@ class CityDirectorySpecs extends Specification with LocationSamples {
       val lRecs = oRec.get
 
       lRecs must haveSize(4)
-      val rec = lRecs(0)
+      val rec = lRecs.head
       rec.city must beEqualTo(City("Rome"))
       rec.countryCode must beEqualTo(CountryInfoIso("IT"))
 
@@ -75,6 +75,18 @@ class CityDirectorySpecs extends Specification with LocationSamples {
     }
 
 
+    """equivocal city, missed country, but population is way bigger: ("shindand", "blablalba")""" in {
+      val dir = loadDir
+      val tCityLoc = dir(City("shindand"), Country("blabla"))
+      tCityLoc must beSuccessfulTry
+
+      val cityLoc = tCityLoc.get
+      cityLoc.city must beEqualTo(City("Shīnḏanḏ"))
+      cityLoc.coordinates.latitude must beEqualTo(33.30294)
+      cityLoc.coordinates.longitude must beEqualTo(62.1474)
+    }
+
+
     """does not exist in country ("Shīnḏanḏ", "Lebanon")""" in {
       val dir = loadDir
       val tCityLoc = dir(City("Shīnḏanḏ"), Country("Lebanon"))
@@ -102,13 +114,13 @@ class CityDirectorySpecs extends Specification with LocationSamples {
     """multiple matches ("Springfield", "USA")""" in {
       val dir = loadDir
       val tCityLoc = dir(City("Springfield"), Country("USA"))
-      tCityLoc must beAFailedTry.withThrowable[MultipleCityLocationException]
+      tCityLoc must beAFailedTry.withThrowable[NoCityLocationException]
     }
 
     """multiple matches ("Springfield", "United States")""" in {
       val dir = loadDir
       val tCityLoc = dir(City("Springfield"), Country("United States"))
-      tCityLoc must beFailedTry.withThrowable[MultipleCityLocationException]
+      tCityLoc must beFailedTry.withThrowable[NoCityLocationException]
     }
 
     """one mach USA ("Addison", "United States")""" in {
@@ -156,6 +168,16 @@ class CityDirectorySpecs extends Specification with LocationSamples {
       val cityLoc = tCityLoc.get
       cityLoc.city must beEqualTo(City("Rome"))
       cityLoc.country must beEqualTo(Country("Italy"))
+    }
+
+    """uniquivocal city labeled as country ("University of Washington", "Seattle")""" in {
+      val dir = loadDir
+      val tCityLoc = dir(City("University of Washington"), Country("Seattle"))
+      tCityLoc must beSuccessfulTry
+
+      val cityLoc = tCityLoc.get
+      cityLoc.city must beEqualTo(City("Seattle"))
+      cityLoc.country must beEqualTo(Country(""))
     }
     //    """("AF")""" in {
     //      loadDir(CountryInfoIso("AF")) must beEqualTo(CountryInfoRecord(CountryInfoIso("AF"), CountryInfoIso3("AfG"), Country("Afghanistan")))

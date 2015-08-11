@@ -13,13 +13,16 @@ import scala.util.{Success, Failure, Try}
 
 case class NoCityLocationException(city: City, country: Country) extends Exception(s"[${city.value}], [${country.value}]")
 
+
+case class CityCountryIncompatibilityException(city: City, country: Country) extends Exception(s"[${city.value}], [${country.value}]")
+
 case class MultipleCityLocationException(city: City, country: Country, n: Int) extends Exception(s"[${city.value}], [${country.value}] ($n matches)")
 
 
 case class CityRecord(id: GeoNameId, city: City, countryCode: CountryInfoIso, coordinates: GeoCoordinates)
 
 class CityDirectory(records: Seq[CityRecord], countryDirectory: CountryDirectory, alternateNameDirectory: AlternateNameDirectory) {
-  val naCountry = Country("-")
+  val naCountry = Country("")
 
   def size = records.size
 
@@ -28,7 +31,7 @@ class CityDirectory(records: Seq[CityRecord], countryDirectory: CountryDirectory
 
   lazy val idDictionary: Map[GeoNameId, CityRecord] = records.map(x => (x.id, x)).toMap
 
-  def get(city: City):Option[List[CityRecord]] = cityDict.get(CityDirectory.projectCity(city))
+  def get(city: City): Option[List[CityRecord]] = cityDict.get(CityDirectory.projectCity(city))
 
   def exists(city: City) = cityDict.get(CityDirectory.projectCity(city)).isDefined
 
@@ -36,24 +39,63 @@ class CityDirectory(records: Seq[CityRecord], countryDirectory: CountryDirectory
     (cityDict.get(CityDirectory.projectCity(city)), countryDirectory.countryExists(country)) match {
       case (Some(rec :: Nil), false) =>
         Success(Location(rec.city, naCountry, rec.coordinates))
-      case _ => Failure(new Exception())
+      case _ => Failure(NoCityLocationException(city, country))
+    }
+  }
+
+  /**
+   * city is labelled as country but yet is uniquevocal
+   * @param city target city
+   * @param country target country
+   * @return
+   */
+  def getUniqueFromCityLabeledAsCountry(city: City, country: Country): Try[Location] = {
+    val cityFromCountryVal = City(country.value)
+    (cityDict.get(CityDirectory.projectCity(cityFromCountryVal)), countryDirectory.countryExists(country)) match {
+      case (Some(rec :: Nil), false) =>
+        Success(Location(rec.city, naCountry, rec.coordinates))
+      case _ => Failure(NoCityLocationException(cityFromCountryVal, Country("")))
     }
   }
 
   def getDirectFromCityCountryDirect(city: City, country: Country): Try[Location] = cityDict.get(CityDirectory.projectCity(city)) match {
-    case Some(records) => records.filter(r => countryDirectory.get(r.countryCode).map(_.country == country).getOrElse(false)) match {
+    case Some(records) => records.filter(r => countryDirectory.get(r.countryCode).exists(_.country == country)) match {
       case (rec :: Nil) => Success(Location(rec.city, country, rec.coordinates))
-      case _ => Failure(new Exception())
+      case _ => Failure(NoCityLocationException(city, country))
     }
-    case _ => Failure(new Exception())
+    case _ => Failure(NoCityLocationException(city, country))
   }
+
+  /**
+   * does not resolve anything, but send CityCountryIncompatibilityException if both citry and counbtry exists but are incompatible
+   * @param city target city
+   * @param country target country
+   * @return
+   */
+  def getDirectFromCityCountryAreIncomptible(city: City, country: Country): Try[Location] = {
+    val cityRecords = cityDict.get(CityDirectory.projectCity(city))
+    if (countryDirectory.countryExists(country)) {
+      cityRecords match {
+        case Some(records) =>
+          if (records.nonEmpty && records.forall(r => countryDirectory.get(r.countryCode).exists(_.country != country))) {
+            Failure(CityCountryIncompatibilityException(city, country))
+          } else {
+            Failure(NoCityLocationException(city, country))
+          }
+        case _ => Failure(NoCityLocationException(city, country))
+      }
+    } else {
+      Failure(NoCityLocationException(city, country))
+    }
+  }
+
 
   def getDirectFromCityIsCountry(city: City, country: Country): Try[Location] = {
     val cityCountry = City(country.value)
     if (exists(cityCountry)) {
       getDirectFromCityCountryDirect(cityCountry, country)
     } else {
-      Failure(new Exception())
+      Failure(new NoCityLocationException(cityCountry, country))
     }
   }
 
@@ -70,7 +112,7 @@ class CityDirectory(records: Seq[CityRecord], countryDirectory: CountryDirectory
       (r, countryDirectory(r.countryCode))
     })
       .filter(x => countryDirectory.isSynonymous(x._1.countryCode, country))
-      .toList
+
 
     potentialCityRecords match {
       case Nil => Failure(NoCityLocationException(city, country))
@@ -80,15 +122,27 @@ class CityDirectory(records: Seq[CityRecord], countryDirectory: CountryDirectory
   }
 
   def getFromCityCountry(city: City, country: Country): Try[Location] = {
-    val lFunct = List(getUniqueFromCityAndUnknownCountry _, getDirectFromCityCountryDirect _, getDirectFromCityIsCountry _, getDirectFromCityCountrySynonymous _)
 
-    def getFromCityCountryHandler(fStill: List[(City, Country) => Try[Location]]): Try[Location] = fStill match {
-      case f :: Nil => f(city, country)
-      case f :: fs => f(city, country) match {
-        case Success(r) => Success(r)
-        case _ => getFromCityCountryHandler(fs)
+    val lFunct = List(
+      getDirectFromCityCountryDirect _,
+      getDirectFromCityCountryAreIncomptible _,
+      getUniqueFromCityAndUnknownCountry _,
+      getDirectFromCityIsCountry _,
+      getDirectFromCityCountrySynonymous _,
+      getUniqueFromCityLabeledAsCountry _
+    )
+
+    def getFromCityCountryHandler(fStill: List[(City, Country) => Try[Location]]): Try[Location] = {
+      fStill match {
+        case f :: Nil => f(city, country)
+        case f :: fs => f(city, country) match {
+          case Success(r) => Success(r)
+          case Failure(e: CityCountryIncompatibilityException) =>
+            Failure(e)
+          case _ => getFromCityCountryHandler(fs)
+        }
+        case Nil => Failure(new IllegalArgumentException("cannot provide no function, Dude"))
       }
-      case Nil => Failure(new IllegalArgumentException("cannot provide no function, Dude"))
     }
     getFromCityCountryHandler(lFunct)
   }
@@ -104,7 +158,7 @@ class CityDirectory(records: Seq[CityRecord], countryDirectory: CountryDirectory
   def apply(city: City, country: Country): Try[Location] = {
     getFromCityCountry(city, country) match {
       case Success(loc) => Success(loc)
-      case Failure(e) => {
+      case Failure(e) =>
         alternateNameDirectory.getSynonymousIds(city.value) match {
           case None => Failure(e)
           case Some(l) => l.map(idDictionary.get)
@@ -115,7 +169,6 @@ class CityDirectory(records: Seq[CityRecord], countryDirectory: CountryDirectory
             .find(_.isSuccess)
             .getOrElse(Failure(e))
         }
-      }
     }
   }
 }
@@ -133,14 +186,14 @@ object CityDirectory {
       .getLines()
       .map({ line =>
       val tmp = line.split("\t").toVector
-      CityRecord(GeoNameId(tmp(0).toInt), City(tmp(1)), CountryInfoIso(tmp(8)), GeoCoordinates(tmp(4).toDouble, tmp(5).toDouble))
+      CityRecord(GeoNameId(tmp.head.toInt), City(tmp(1)), CountryInfoIso(tmp(8)), GeoCoordinates(tmp(4).toDouble, tmp(5).toDouble))
     })
 
-    val mSyno= Source.fromFile(cityFilename)
-    .getLines()
-    .map({ line =>
+    val mSyno = Source.fromFile(cityFilename)
+      .getLines()
+      .map({ line =>
       val tmp = line.split("\t").toVector
-      val id = GeoNameId(tmp(0).toInt)
+      val id = GeoNameId(tmp.head.toInt)
       (id, tmp(3).split(",").toList)
     }).toMap
 

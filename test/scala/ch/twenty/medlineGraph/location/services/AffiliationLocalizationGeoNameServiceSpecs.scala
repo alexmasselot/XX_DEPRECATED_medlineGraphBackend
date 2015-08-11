@@ -1,6 +1,6 @@
 package ch.twenty.medlineGraph.location.services
 
-import ch.twenty.medlineGraph.location.LocationSamples
+import ch.twenty.medlineGraph.location.{CityCountryIncompatibilityException, LocationSamples}
 import ch.twenty.medlineGraph.models._
 import ch.twenty.medlineGraph.parsers.AffiliationInfoParser
 import org.specs2.mutable._
@@ -20,7 +20,7 @@ class AffiliationLocalizationGeoNameServiceSpecs extends Specification with Loca
 
       val loc = tLoc.get
       loc.city must beEqualTo(City("New York City"))
-      loc.country must beEqualTo(Country("-"))
+      loc.country must beEqualTo(Country(""))
       loc.coordinates.latitude must beEqualTo(40.71427)
       loc.coordinates.longitude must beEqualTo(-74.00597)
     }
@@ -31,7 +31,7 @@ class AffiliationLocalizationGeoNameServiceSpecs extends Specification with Loca
 
       val loc = tLoc.get
       loc.city must beEqualTo(City("New York City"))
-      loc.country must beEqualTo(Country("-"))
+      loc.country must beEqualTo(Country(""))
       loc.coordinates.latitude must beEqualTo(40.71427)
       loc.coordinates.longitude must beEqualTo(-74.00597)
     }
@@ -42,7 +42,7 @@ class AffiliationLocalizationGeoNameServiceSpecs extends Specification with Loca
 
       val loc = tLoc.get
       loc.city must beEqualTo(City("New York City"))
-      loc.country must beEqualTo(Country("-"))
+      loc.country must beEqualTo(Country(""))
       loc.coordinates.latitude must beEqualTo(40.71427)
       loc.coordinates.longitude must beEqualTo(-74.00597)
     }
@@ -53,7 +53,7 @@ class AffiliationLocalizationGeoNameServiceSpecs extends Specification with Loca
 
       val loc = tLoc.get
       loc.city must beEqualTo(City("Perrysburg"))
-      loc.country must beEqualTo(Country("-"))
+      loc.country must beEqualTo(Country(""))
       loc.coordinates.latitude must beEqualTo(41.557)
       loc.coordinates.longitude must beEqualTo(-83.62716)
     }
@@ -61,7 +61,7 @@ class AffiliationLocalizationGeoNameServiceSpecs extends Specification with Loca
 
     """College of Physicians and Surgeons, Columbia University, Shīnḏanḏ, Lebanon.""" in {
       val tLoc = service.locate(AffiliationInfoParser("College of Physicians and Surgeons, Columbia University, Shīnḏanḏ, Lebanon"))
-      tLoc must beAFailedTry
+      tLoc must beFailedTry.withThrowable[UnavailableCityCountryException]
     }
 
     """locate a list""" in {
