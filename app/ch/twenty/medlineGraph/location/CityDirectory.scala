@@ -19,9 +19,11 @@ case class CityCountryIncompatibilityException(city: City, country: Country) ext
 case class MultipleCityLocationException(city: City, country: Country, n: Int) extends Exception(s"[${city.value}], [${country.value}] ($n matches)")
 
 
-case class CityRecord(id: GeoNameId, city: City, countryCode: CountryInfoIso, coordinates: GeoCoordinates)
+case class CityRecord(id: GeoNameId, city: City, countryCode: CountryInfoIso, coordinates: GeoCoordinates, population:Int)
 
 class CityDirectory(records: Seq[CityRecord], countryDirectory: CountryDirectory, alternateNameDirectory: AlternateNameDirectory) {
+  val populationResolutionFactor=10.0
+
   val naCountry = Country("")
 
   def size = records.size
@@ -34,6 +36,20 @@ class CityDirectory(records: Seq[CityRecord], countryDirectory: CountryDirectory
   def get(city: City): Option[List[CityRecord]] = cityDict.get(CityDirectory.projectCity(city))
 
   def exists(city: City) = cityDict.get(CityDirectory.projectCity(city)).isDefined
+
+
+  /**
+   * from a list of cities, keep all of them where the population is >= max/populationResolutionFactor. The idea is to keep only one if there one way more popular than the other
+   * @param records citi records
+   * @return a subset of the input list. never empty
+   */
+  def keepMostPopulatedCities(records:List[CityRecord]): List[CityRecord] = records match {
+    case Nil => Nil
+    case _ =>
+      val sortedRecords = records.sortBy(-_.population)
+      val thres = sortedRecords.head.population/populationResolutionFactor
+      sortedRecords.filter (_.population >= thres)
+  }
 
   def getUniqueFromCityAndUnknownCountry(city: City, country: Country): Try[Location] = {
     (cityDict.get(CityDirectory.projectCity(city)), countryDirectory.countryExists(country)) match {
@@ -51,7 +67,8 @@ class CityDirectory(records: Seq[CityRecord], countryDirectory: CountryDirectory
    */
   def getUniqueFromCityLabeledAsCountry(city: City, country: Country): Try[Location] = {
     val cityFromCountryVal = City(country.value)
-    (cityDict.get(CityDirectory.projectCity(cityFromCountryVal)), countryDirectory.countryExists(country)) match {
+
+    (cityDict.get(CityDirectory.projectCity(cityFromCountryVal)).map(keepMostPopulatedCities), countryDirectory.countryExists(country)) match {
       case (Some(rec :: Nil), false) =>
         Success(Location(rec.city, naCountry, rec.coordinates))
       case _ => Failure(NoCityLocationException(cityFromCountryVal, Country("")))
@@ -114,10 +131,10 @@ class CityDirectory(records: Seq[CityRecord], countryDirectory: CountryDirectory
       .filter(x => countryDirectory.isSynonymous(x._1.countryCode, country))
 
 
-    potentialCityRecords match {
+    keepMostPopulatedCities(potentialCityRecords.map(_._1)) match {
       case Nil => Failure(NoCityLocationException(city, country))
-      case (x :: Nil) => Success(Location(x._1.city, country, x._1.coordinates))
-      case (x :: xs) => Failure(MultipleCityLocationException(x._1.city, country, xs.size + 1))
+      case (x :: Nil) => Success(Location(x.city, country, x.coordinates))
+      case (x :: xs) => Failure(MultipleCityLocationException(x.city, country, xs.size + 1))
     }
   }
 
@@ -186,7 +203,7 @@ object CityDirectory {
       .getLines()
       .map({ line =>
       val tmp = line.split("\t").toVector
-      CityRecord(GeoNameId(tmp.head.toInt), City(tmp(1)), CountryInfoIso(tmp(8)), GeoCoordinates(tmp(4).toDouble, tmp(5).toDouble))
+      CityRecord(GeoNameId(tmp.head.toInt), City(tmp(1)), CountryInfoIso(tmp(8)), GeoCoordinates(tmp(4).toDouble, tmp(5).toDouble), tmp(14).toInt)
     })
 
     val mSyno = Source.fromFile(cityFilename)

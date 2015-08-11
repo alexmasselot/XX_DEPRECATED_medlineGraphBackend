@@ -12,8 +12,18 @@ class CityDirectorySpecs extends Specification with LocationSamples {
   "CityDirectory" should {
     "check size" in {
       val dir = loadDir
-      dir.size must beEqualTo(124)
+      dir.size must beEqualTo(126)
     }
+
+    "check one record" in {
+      val dir = loadDir
+      val oCity = dir.get(City("Shīnḏanḏ"))
+      oCity must not beEmpty
+      val city = oCity.get.head
+      city.city must beEqualTo(City("Shīnḏanḏ"))
+      city.population must be equalTo(29264)
+    }
+
 
     "check Rome countryCodeIso" in {
       val oRec = loadDir.get(City("Rome"))

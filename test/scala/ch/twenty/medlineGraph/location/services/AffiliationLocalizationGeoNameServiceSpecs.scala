@@ -58,6 +58,32 @@ class AffiliationLocalizationGeoNameServiceSpecs extends Specification with Loca
       loc.coordinates.longitude must beEqualTo(-83.62716)
     }
 
+    """Department of Medicine, University of Washington, Seattle 98195""" in {
+      val tLoc = service.locate(AffiliationInfoParser("Department of Medicine, University of Washington, Seattle 98195"))
+      tLoc must beSuccessfulTry
+
+      val loc = tLoc.get
+      loc.city must beEqualTo(City("Seattle"))
+      loc.country must beEqualTo(Country(""))
+      loc.coordinates.latitude must beEqualTo(47.60621)
+      loc.coordinates.longitude must beEqualTo(-122.33207)
+    }
+
+    """multiple cities with same name, but one population is way higher: Department of Medicine, University of Washington, London""" in {
+      val tLoc = service.locate(AffiliationInfoParser("Department of Medicine, University of Washington, London"))
+      tLoc must beSuccessfulTry
+
+      val loc = tLoc.get
+      loc.city must beEqualTo(City("London"))
+      loc.country must beEqualTo(Country(""))
+      loc.coordinates.latitude must beEqualTo(51.50853)
+      loc.coordinates.longitude must beEqualTo(-0.12574)
+    }
+    """multiple cities with same name, population are no discriminant: Department of Medicine, University of Washington, Lonpaf""" in {
+      val tLoc = service.locate(AffiliationInfoParser("Department of Medicine, University of Washington, Lonpaf"))
+      tLoc must beAFailedTry
+    }
+
 
     """College of Physicians and Surgeons, Columbia University, Shīnḏanḏ, Lebanon.""" in {
       val tLoc = service.locate(AffiliationInfoParser("College of Physicians and Surgeons, Columbia University, Shīnḏanḏ, Lebanon"))
