@@ -47,6 +47,7 @@ class MedlineLoaderJsonOneLineOneFileActor extends Actor with ActorLogging {
       writer.close()
       log.info(s"$n\t$nbErrors\t${fileIn.getName()}")
       sender ! LoadSucceeded(n)
+    case x=> log.warning(s"unknown message $x")
   }
 }
 
@@ -73,9 +74,9 @@ class MedlineLoaderJsoneOneDirectoryActor extends Actor with ActorLogging {
       val dir = new File(fromDir)
       val files = dir.listFiles.filter(_.getName endsWith ".gz")
       nSubmitedFiles =files.size
-      val re = """(.*)\..*""".r
+      val re = """(.*)\..*\.gz""".r
       for {fileIn <- files} {
-        val outBasename = fileIn match{
+        val outBasename = fileIn.getName match{
           case re(p)=>p+".json"
           case x => x+".json"
         }
@@ -87,6 +88,7 @@ class MedlineLoaderJsoneOneDirectoryActor extends Actor with ActorLogging {
       if(nSubmitedFiles==0){
         context.system.shutdown()
       }
+    case x=> log.warning(s"unknown message $x")
   }
 }
 
@@ -96,7 +98,7 @@ object MedlineCitationToJsonSingleLines extends App with WithPrivateConfig {
   dataDir.mkdirs()
 
   // Create the 'greeter' actor
-  val dirLoader = system.actorOf(Props[MedlineLoaderJsonOneLineOneFileActor], "medline-dir-loader")
+  val dirLoader = system.actorOf(Props[MedlineLoaderJsoneOneDirectoryActor], "medline-dir-loader")
   dirLoader ! (config.getString("dir.resources.thirdparties") + "/medleasebaseline", dataDir.getAbsolutePath)
 
 }
