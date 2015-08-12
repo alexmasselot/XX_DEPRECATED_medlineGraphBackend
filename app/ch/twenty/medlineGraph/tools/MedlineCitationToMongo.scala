@@ -17,11 +17,11 @@ import scala.util.{Failure, Success}
  */
 
 
-object Go
-
-case class LoadFailed(file: File, e: Throwable)
-
-case class LoadSucceeded(n: Int)
+//object Go
+//
+//case class LoadFailed(file: File, e: Throwable)
+//
+//case class LoadSucceeded(n: Int)
 
 /**
  * takes one file and load it into mongo
