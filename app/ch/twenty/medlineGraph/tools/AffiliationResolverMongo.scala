@@ -17,7 +17,7 @@ object AffiliationResolverMongo extends App with WithPrivateConfig {
 
 
   //val resolverName = "google"
-  val resolverName = "geonames"
+  val resolverName = "google"
 
   def resolverService(rName: String): AffiliationLocalizationService = rName match {
     case "google" => AffiliationLocalizationGoogleGeoLocatingService

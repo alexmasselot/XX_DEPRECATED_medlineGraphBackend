@@ -1,5 +1,7 @@
 package ch.twenty.medlineGraph.tools
 
+import java.io.File
+
 import ch.twenty.medlineGraph.WithPrivateConfig
 import ch.twenty.medlineGraph.location.Location
 import ch.twenty.medlineGraph.location.services.{AffiliationLocalizationGeoNameService, AffiliationLocalizationGoogleGeoLocatingService, AffiliationLocalizationMapQuestService, AffiliationLocalizationService}
@@ -14,7 +16,8 @@ import scala.util.{Failure, Success, Try}
  */
 object MongoCollectionToFile extends App with WithPrivateConfig {
 
-  MongoCollectionToSingleLineJson.streamAll(MongoDbCitations.collection, "/tmp/citations.jsona")
+  val fname = config.getString("dir.spark.data")+"/affiliations/affiliations.json"
+  MongoCollectionToSingleLineJson.streamAll(MongoDbAffiliations.collection, fname)
     .onComplete({ _ => System.exit(0) })
 
 }
