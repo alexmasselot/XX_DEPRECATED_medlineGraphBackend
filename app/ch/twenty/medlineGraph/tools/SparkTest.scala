@@ -14,8 +14,8 @@ object SparkTest extends App{
 
   val sc = new SparkContext(conf)
   val sqlContext = new org.apache.spark.sql.SQLContext(sc)
-  val path = "/tmp/json"
-  val citations = sqlContext.read.json(path)
+  val path = "/Users/amasselo/private/dev/medline-graph/data/spark/processed/citations-with-coordinates-actual.parquet"
+  val citations = sqlContext.read.parquet("/Users/amasselo/private/dev/medline-graph/data/spark/processed/citations-with-coordinates-actual.parquet")
   citations.printSchema()
 
 
