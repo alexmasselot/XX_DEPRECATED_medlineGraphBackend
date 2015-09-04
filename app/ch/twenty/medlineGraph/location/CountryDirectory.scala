@@ -31,6 +31,8 @@ case class CountryDirectory(records: Seq[CountryInfoRecord], alternateNames: Alt
 
   def get(code: CountryInfoIso): Option[CountryInfoRecord] = isoDictionary.get(code)
 
+  def findById(id: GeoNameId): Option[CountryInfoRecord] = idDictionary.get(id)
+
   /**
    * check if the passed ISO code is synomous to the given country
    * @param code
