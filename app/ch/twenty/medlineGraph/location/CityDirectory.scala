@@ -24,8 +24,6 @@ case class CityRecord(id: GeoNameId, city: City, countryCode: CountryInfoIso, co
 class CityDirectory(records: Seq[CityRecord], countryDirectory: CountryDirectory, alternateNameDirectory: AlternateNameDirectory) {
   val populationResolutionFactor=10.0
 
-  val naCountry = Country("")
-
   def size = records.size
 
   lazy val cityDict = records.toList
@@ -54,7 +52,7 @@ class CityDirectory(records: Seq[CityRecord], countryDirectory: CountryDirectory
   def getUniqueFromCityAndUnknownCountry(city: City, country: Country): Try[Location] = {
     (cityDict.get(CityDirectory.projectCity(city)), countryDirectory.countryExists(country)) match {
       case (Some(rec :: Nil), false) =>
-        Success(Location(rec.city, naCountry, rec.coordinates))
+        Success(Location(Some(rec.city), Some(rec.countryCode), rec.coordinates))
       case _ => Failure(NoCityLocationException(city, country))
     }
   }
@@ -70,14 +68,14 @@ class CityDirectory(records: Seq[CityRecord], countryDirectory: CountryDirectory
 
     (cityDict.get(CityDirectory.projectCity(cityFromCountryVal)).map(keepMostPopulatedCities), countryDirectory.countryExists(country)) match {
       case (Some(rec :: Nil), false) =>
-        Success(Location(rec.city, naCountry, rec.coordinates))
+        Success(Location(Some(rec.city), Some(rec.countryCode), rec.coordinates))
       case _ => Failure(NoCityLocationException(cityFromCountryVal, Country("")))
     }
   }
 
   def getDirectFromCityCountryDirect(city: City, country: Country): Try[Location] = cityDict.get(CityDirectory.projectCity(city)) match {
     case Some(records) => records.filter(r => countryDirectory.get(r.countryCode).exists(_.country == country)) match {
-      case (rec :: Nil) => Success(Location(rec.city, country, rec.coordinates))
+      case (rec :: Nil) => Success(Location(Some(rec.city), Some(rec.countryCode), rec.coordinates))
       case _ => Failure(NoCityLocationException(city, country))
     }
     case _ => Failure(NoCityLocationException(city, country))
@@ -133,7 +131,7 @@ class CityDirectory(records: Seq[CityRecord], countryDirectory: CountryDirectory
 
     keepMostPopulatedCities(potentialCityRecords.map(_._1)) match {
       case Nil => Failure(NoCityLocationException(city, country))
-      case (x :: Nil) => Success(Location(x.city, country, x.coordinates))
+      case (x :: Nil) => Success(Location(Some(x.city), Some(x.countryCode), x.coordinates))
       case (x :: xs) => Failure(MultipleCityLocationException(x.city, country, xs.size + 1))
     }
   }

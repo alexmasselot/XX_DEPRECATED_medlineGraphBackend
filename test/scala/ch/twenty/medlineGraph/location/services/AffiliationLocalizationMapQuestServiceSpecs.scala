@@ -1,8 +1,7 @@
 package ch.twenty.medlineGraph.location.services
 
-import ch.twenty.medlineGraph.location.{GeoCoordinates, Location, LocationSamples}
+import ch.twenty.medlineGraph.location.{GeoCoordinates, CountryInfoIso, Location, LocationSamples}
 import ch.twenty.medlineGraph.models._
-import ch.twenty.medlineGraph.parsers.AffiliationInfoParser
 import org.specs2.mutable._
 
 import scala.io.Source
@@ -17,7 +16,7 @@ class AffiliationLocalizationMapQuestServiceSpecs extends Specification with Loc
 
     val service = new AffiliationLocalizationCacheService
 
-    def myLoc = Location(City("Saint George"), Country("Switzerland"), GeoCoordinates(-120, 90))
+    def myLoc = Location(Some(City("Saint George")), Some(CountryInfoIso("CH")), GeoCoordinates(-120, 90))
 
     """parseJson""" in {
       val str = """{
@@ -52,8 +51,8 @@ class AffiliationLocalizationMapQuestServiceSpecs extends Specification with Loc
       val tloc = AffiliationLocalizationMapQuestService.parseOneLocation(str)
       tloc must beASuccessfulTry
       val loc = tloc.get
-      loc.city must beEqualTo(City("Rohtak"))
-      loc.country must beEqualTo(Country("IN"))
+      loc.city must beEqualTo(Some(City("Rohtak")))
+      loc.countryIso must beEqualTo(Some(CountryInfoIso("IN")))
       loc.coordinates.latitude must beEqualTo(28.83878)
       loc.coordinates.longitude must beEqualTo(76.627252)
     }
@@ -79,7 +78,7 @@ class AffiliationLocalizationMapQuestServiceSpecs extends Specification with Loc
     tLoc must beASuccessfulTry
 
     val loc =tLoc.get
-    loc must beEqualTo(Location(City("Rohtak"), Country("IN"), GeoCoordinates(28.83878, 76.627252)))
+    loc must beEqualTo(Location(Some(City("Rohtak")), Some(CountryInfoIso("IN")), GeoCoordinates(28.83878, 76.627252)))
   }
 
   def sampleLocationMap: Map[String, Try[Location]] = {

@@ -188,8 +188,8 @@ object AffiliationLocalizationMapQuestService extends AffiliationLocalizationSer
 
     val loc = GeoCoordinates((json \ "latLng" \ "lat").as[Double], (json \ "latLng" \ "lng").as[Double])
     val city = City(getAdminArea(json, "City").getOrElse("-"))
-    val country = Country(getAdminArea(json, "Country").getOrElse("-"))
-    Success(Location(city, country, loc))
+    val countryIso = getAdminArea(json, "Country").map(CountryInfoIso.apply)
+    Success(Location(Some(city), countryIso, loc))
   }
   catch {
     case e: Throwable => Failure(e)

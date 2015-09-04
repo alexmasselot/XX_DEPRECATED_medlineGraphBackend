@@ -89,7 +89,7 @@ object MongoDbAffiliations extends MongoDbCommons {
   def storeAttemptInMongo(jsObj: JsObject, tLoc: Try[Location], resolverName: String, affString: String): Any = {
     tLoc match {
       case Success(loc) =>
-        println(s"$resolverName\t$loc\t$affString")
+        Logger.info(s"$resolverName\t$loc\t$affString")
         Await.result({
           collection.update(jsObj, Json.obj(
             "$set" -> Json.obj(
@@ -99,7 +99,7 @@ object MongoDbAffiliations extends MongoDbCommons {
           )
         }, 1 second)
       case Failure(e) =>
-        println(s"failed\t${e.getClass.getSimpleName}\t${e.getMessage}")
+        Logger.info(s"failed\t${e.getClass.getSimpleName}\t${e.getMessage}")
         Await.result({
           collection.update(jsObj, Json.obj(
             "$addToSet" -> Json.obj(

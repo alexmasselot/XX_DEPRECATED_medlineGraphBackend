@@ -1,6 +1,5 @@
 package ch.twenty.medlineGraph.location.countryLocation
 
-import ch.twenty.medlineGraph.location.countryLocation.{MultiPolygonDouble, Point, PolygonDouble}
 import ch.twenty.medlineGraph.location.GeoCoordinates
 import org.specs2.mutable.Specification
 

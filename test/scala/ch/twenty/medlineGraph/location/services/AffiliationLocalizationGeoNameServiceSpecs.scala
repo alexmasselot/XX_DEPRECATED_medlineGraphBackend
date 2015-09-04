@@ -1,6 +1,6 @@
 package ch.twenty.medlineGraph.location.services
 
-import ch.twenty.medlineGraph.location.{CityCountryIncompatibilityException, LocationSamples}
+import ch.twenty.medlineGraph.location.{CountryInfoIso, CityCountryIncompatibilityException, LocationSamples}
 import ch.twenty.medlineGraph.models._
 import ch.twenty.medlineGraph.parsers.AffiliationInfoParser
 import org.specs2.mutable._
@@ -19,8 +19,8 @@ class AffiliationLocalizationGeoNameServiceSpecs extends Specification with Loca
       tLoc must beSuccessfulTry
 
       val loc = tLoc.get
-      loc.city must beEqualTo(City("New York City"))
-      loc.country must beEqualTo(Country(""))
+      loc.city must beEqualTo(Some(City("New York City")))
+      loc.countryIso must beEqualTo(Some(CountryInfoIso("US")))
       loc.coordinates.latitude must beEqualTo(40.71427)
       loc.coordinates.longitude must beEqualTo(-74.00597)
     }
@@ -30,8 +30,8 @@ class AffiliationLocalizationGeoNameServiceSpecs extends Specification with Loca
       tLoc must beSuccessfulTry
 
       val loc = tLoc.get
-      loc.city must beEqualTo(City("New York City"))
-      loc.country must beEqualTo(Country(""))
+      loc.city must beEqualTo(Some(City("New York City")))
+      loc.countryIso must beEqualTo(Some(CountryInfoIso("US")))
       loc.coordinates.latitude must beEqualTo(40.71427)
       loc.coordinates.longitude must beEqualTo(-74.00597)
     }
@@ -41,8 +41,8 @@ class AffiliationLocalizationGeoNameServiceSpecs extends Specification with Loca
       tLoc must beSuccessfulTry
 
       val loc = tLoc.get
-      loc.city must beEqualTo(City("New York City"))
-      loc.country must beEqualTo(Country(""))
+      loc.city must beEqualTo(Some(City("New York City")))
+      loc.countryIso must beEqualTo(Some(CountryInfoIso("US")))
       loc.coordinates.latitude must beEqualTo(40.71427)
       loc.coordinates.longitude must beEqualTo(-74.00597)
     }
@@ -52,8 +52,8 @@ class AffiliationLocalizationGeoNameServiceSpecs extends Specification with Loca
       tLoc must beSuccessfulTry
 
       val loc = tLoc.get
-      loc.city must beEqualTo(City("Perrysburg"))
-      loc.country must beEqualTo(Country(""))
+      loc.city must beEqualTo(Some(City("Perrysburg")))
+      loc.countryIso must beEqualTo(Some(CountryInfoIso("US")))
       loc.coordinates.latitude must beEqualTo(41.557)
       loc.coordinates.longitude must beEqualTo(-83.62716)
     }
@@ -63,8 +63,8 @@ class AffiliationLocalizationGeoNameServiceSpecs extends Specification with Loca
       tLoc must beSuccessfulTry
 
       val loc = tLoc.get
-      loc.city must beEqualTo(City("Seattle"))
-      loc.country must beEqualTo(Country(""))
+      loc.city must beEqualTo(Some(City("Seattle")))
+      loc.countryIso must beEqualTo(Some(CountryInfoIso("US")))
       loc.coordinates.latitude must beEqualTo(47.60621)
       loc.coordinates.longitude must beEqualTo(-122.33207)
     }
@@ -74,8 +74,8 @@ class AffiliationLocalizationGeoNameServiceSpecs extends Specification with Loca
       tLoc must beSuccessfulTry
 
       val loc = tLoc.get
-      loc.city must beEqualTo(City("London"))
-      loc.country must beEqualTo(Country(""))
+      loc.city must beEqualTo(Some(City("London")))
+      loc.countryIso must beEqualTo(Some(CountryInfoIso("GB")))
       loc.coordinates.latitude must beEqualTo(51.50853)
       loc.coordinates.longitude must beEqualTo(-0.12574)
     }

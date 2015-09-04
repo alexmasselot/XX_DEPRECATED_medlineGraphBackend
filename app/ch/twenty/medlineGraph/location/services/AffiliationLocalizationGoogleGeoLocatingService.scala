@@ -68,7 +68,7 @@ object AffiliationLocalizationGoogleGeoLocatingService extends AffiliationLocali
     results match {
       case Nil => Failure(GoogleGeoLocatingNoMatchException(affiliationInfo))
       case x1 :: x2 :: Nil if LocationDistance.distance(x1, x2) > maxCloseDistance => Failure(GoogleGeoLocatingAmbivalentLocationException(x1, x2))
-      case x :: xs => Success(Location(City(""), Country(""), x))
+      case x :: xs => Success(Location(None, None, x))
     }
   }
 }

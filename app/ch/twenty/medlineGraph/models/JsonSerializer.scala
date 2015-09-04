@@ -1,6 +1,6 @@
 package ch.twenty.medlineGraph.models
 
-import ch.twenty.medlineGraph.location.{GeoCoordinates, Location}
+import ch.twenty.medlineGraph.location.{CountryInfoIso, GeoCoordinates, Location}
 import play.api.libs.json._
 import play.api.libs.json.Reads._
 import play.api.libs.functional.syntax._
@@ -53,6 +53,12 @@ object JsonSerializer {
 
     override def reads(json: JsValue): JsResult[Country] = JsSuccess(Country(json.as[String]))
   }
+  implicit val formatCountryInfoIso = new Format[CountryInfoIso] {
+    override def writes(o: CountryInfoIso): JsValue = JsString(o.value)
+
+    override def reads(json: JsValue): JsResult[CountryInfoIso] = JsSuccess(CountryInfoIso(json.as[String]))
+  }
+
   implicit val formatAbstractText = new Format[AbstractText] {
     override def writes(o: AbstractText): JsValue = JsString(o.value)
 

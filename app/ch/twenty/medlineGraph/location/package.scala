@@ -14,5 +14,5 @@ package object location {
   case class GeoCoordinates(latitude:Double, longitude:Double){
     override def toString = s"($latitude, $longitude)"
   }
-  case class Location(city: City, country: Country, coordinates: GeoCoordinates)
+  case class Location(city: Option[City], countryIso: Option[CountryInfoIso], coordinates: GeoCoordinates)
 }

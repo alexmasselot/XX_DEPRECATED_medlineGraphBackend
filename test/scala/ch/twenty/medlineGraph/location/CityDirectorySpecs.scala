@@ -43,8 +43,8 @@ class CityDirectorySpecs extends Specification with LocationSamples {
       tCityLoc must beSuccessfulTry
 
       val cityLoc = tCityLoc.get
-      cityLoc.city must beEqualTo(City("Shīnḏanḏ"))
-      cityLoc.country must beEqualTo(Country("Afghanistan"))
+      cityLoc.city must beEqualTo(Some(City("Shīnḏanḏ")))
+      cityLoc.countryIso must beEqualTo(Some(CountryInfoIso("AF")))
       cityLoc.coordinates.latitude must beEqualTo(33.30294)
       cityLoc.coordinates.longitude must beEqualTo(62.1474)
     }
@@ -55,8 +55,8 @@ class CityDirectorySpecs extends Specification with LocationSamples {
       tCityLoc must beSuccessfulTry
 
       val cityLoc = tCityLoc.get
-      cityLoc.city must beEqualTo(City("Shīnḏanḏ"))
-      cityLoc.country must beEqualTo(Country("Afghanistan"))
+      cityLoc.city must beEqualTo(Some(City("Shīnḏanḏ")))
+      cityLoc.countryIso must beEqualTo(Some(CountryInfoIso("AF")))
       cityLoc.coordinates.latitude must beEqualTo(33.30294)
       cityLoc.coordinates.longitude must beEqualTo(62.1474)
     }
@@ -67,8 +67,8 @@ class CityDirectorySpecs extends Specification with LocationSamples {
       tCityLoc must beSuccessfulTry
 
       val cityLoc = tCityLoc.get
-      cityLoc.city must beEqualTo(City("Shīnḏanḏ"))
-      cityLoc.country must beEqualTo(Country("Afghanistan"))
+      cityLoc.city must beEqualTo(Some(City("Shīnḏanḏ")))
+      cityLoc.countryIso must beEqualTo(Some(CountryInfoIso("AF")))
       cityLoc.coordinates.latitude must beEqualTo(33.30294)
       cityLoc.coordinates.longitude must beEqualTo(62.1474)
     }
@@ -79,7 +79,8 @@ class CityDirectorySpecs extends Specification with LocationSamples {
       tCityLoc must beSuccessfulTry
 
       val cityLoc = tCityLoc.get
-      cityLoc.city must beEqualTo(City("Shīnḏanḏ"))
+      cityLoc.city must beEqualTo(Some(City("Shīnḏanḏ")))
+      cityLoc.countryIso must beEqualTo(Some(CountryInfoIso("AF")))
       cityLoc.coordinates.latitude must beEqualTo(33.30294)
       cityLoc.coordinates.longitude must beEqualTo(62.1474)
     }
@@ -91,7 +92,8 @@ class CityDirectorySpecs extends Specification with LocationSamples {
       tCityLoc must beSuccessfulTry
 
       val cityLoc = tCityLoc.get
-      cityLoc.city must beEqualTo(City("Shīnḏanḏ"))
+      cityLoc.city must beEqualTo(Some(City("Shīnḏanḏ")))
+      cityLoc.countryIso must beEqualTo(Some(CountryInfoIso("AF")))
       cityLoc.coordinates.latitude must beEqualTo(33.30294)
       cityLoc.coordinates.longitude must beEqualTo(62.1474)
     }
@@ -115,8 +117,8 @@ class CityDirectorySpecs extends Specification with LocationSamples {
       tCityLoc must beSuccessfulTry
 
       val cityLoc = tCityLoc.get
-      cityLoc.city must beEqualTo(City("Tripoli"))
-      cityLoc.country must beEqualTo(Country("Lebanon"))
+      cityLoc.city must beEqualTo(Some(City("Tripoli")))
+      cityLoc.countryIso must beEqualTo(Some(CountryInfoIso("LB")))
       cityLoc.coordinates.latitude must beEqualTo(34.43667)
       cityLoc.coordinates.longitude must beEqualTo(35.84972)
     }
@@ -137,12 +139,20 @@ class CityDirectorySpecs extends Specification with LocationSamples {
       val dir = loadDir
       val tCityLoc = dir(City("Addison"), Country("United States"))
       tCityLoc must beSuccessfulTry
+
+      val cityLoc = tCityLoc.get
+      cityLoc.city must beEqualTo(Some(City("Addison")))
+      cityLoc.countryIso must beEqualTo(Some(CountryInfoIso("US")))
     }
 
     """one mach USA with synonym ("Addison", "USA")""" in {
       val dir = loadDir
       val tCityLoc = dir(City("Addison"), Country("USA"))
       tCityLoc must beSuccessfulTry
+
+      val cityLoc = tCityLoc.get
+      cityLoc.city must beEqualTo(Some(City("Addison")))
+      cityLoc.countryIso must beEqualTo(Some(CountryInfoIso("US")))
     }
 
     """New York (no 'City') ("New York", "USA")""" in {
@@ -150,7 +160,8 @@ class CityDirectorySpecs extends Specification with LocationSamples {
       val tCityLoc = dir(City("New York"), Country("USA"))
       tCityLoc must beSuccessfulTry
       val cityLoc = tCityLoc.get
-      cityLoc.city must beEqualTo(City("New York City"))
+      cityLoc.city must beEqualTo(Some(City("New York City")))
+      cityLoc.countryIso must beEqualTo(Some(CountryInfoIso("US")))
     }
 
 
@@ -167,8 +178,8 @@ class CityDirectorySpecs extends Specification with LocationSamples {
       tCityLoc must beSuccessfulTry
 
       val cityLoc = tCityLoc.get
-      cityLoc.city must beEqualTo(City("Hong Kong"))
-      cityLoc.country must beEqualTo(Country("Hong Kong"))
+      cityLoc.city must beEqualTo(Some(City("Hong Kong")))
+      cityLoc.countryIso must beEqualTo(Some(CountryInfoIso("HK")))
     }
     """ ("Roma", "Italy")""" in {
       val dir = loadDir
@@ -176,8 +187,8 @@ class CityDirectorySpecs extends Specification with LocationSamples {
       tCityLoc must beSuccessfulTry
 
       val cityLoc = tCityLoc.get
-      cityLoc.city must beEqualTo(City("Rome"))
-      cityLoc.country must beEqualTo(Country("Italy"))
+      cityLoc.city must beEqualTo(Some(City("Rome")))
+      cityLoc.countryIso must beEqualTo(Some(CountryInfoIso("IT")))
     }
 
     """uniquivocal city labeled as country ("University of Washington", "Seattle")""" in {
@@ -186,9 +197,10 @@ class CityDirectorySpecs extends Specification with LocationSamples {
       tCityLoc must beSuccessfulTry
 
       val cityLoc = tCityLoc.get
-      cityLoc.city must beEqualTo(City("Seattle"))
-      cityLoc.country must beEqualTo(Country(""))
+      cityLoc.city must beEqualTo(Some(City("Seattle")))
+      cityLoc.countryIso must beEqualTo(Some(CountryInfoIso("US")))
     }
+
     //    """("AF")""" in {
     //      loadDir(CountryInfoIso("AF")) must beEqualTo(CountryInfoRecord(CountryInfoIso("AF"), CountryInfoIso3("AfG"), Country("Afghanistan")))
     //    }

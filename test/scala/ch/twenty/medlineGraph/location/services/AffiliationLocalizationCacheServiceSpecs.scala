@@ -1,6 +1,6 @@
 package ch.twenty.medlineGraph.location.services
 
-import ch.twenty.medlineGraph.location.{GeoCoordinates, Location, LocationSamples}
+import ch.twenty.medlineGraph.location.{CountryInfoIso, GeoCoordinates, Location, LocationSamples}
 import ch.twenty.medlineGraph.models._
 import ch.twenty.medlineGraph.parsers.AffiliationInfoParser
 import org.specs2.mutable._
@@ -14,7 +14,7 @@ class AffiliationLocalizationCacheServiceSpecs extends Specification with Locati
 
     val service = new AffiliationLocalizationCacheService
 
-    def myLoc = Location(City("Saint George"), Country("Switzerland"), GeoCoordinates(-120, 90))
+    def myLoc = Location(Some(City("Saint George")), Some(CountryInfoIso("CH")), GeoCoordinates(-120, 90))
 
     """don't find""" in {
       val tLoc = service.locate(AffiliationInfoParser("College of Physicians and Surgeons, Columbia University, Saint George, Switzerland."))
